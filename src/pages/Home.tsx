@@ -3,16 +3,23 @@ import { ArrowRight, ArrowDown } from 'lucide-react';
 import styles from './Home.module.css';
 
 const Home = () => {
+  const photos = Array.from({ length: 12 }, (_, i) => ({
+    src: `https://ho516c37no6nnbga.public.blob.vercel-storage.com/Quest/QuestBooth/Photos/QuestBooth_${i + 1}.jpeg`,
+    alt: `QuestBooth photo ${i + 1}`,
+  }));
+
   return (
     <main className={styles.main}>
       {/* Hero */}
       <section className={styles.hero}>
         <div className={styles.heroContent}>
-          <p className="eyebrow">Photo Booth Hire</p>
-          <h1>
-            Say<br />
-            <span className={styles.cheese}>Cheese</span>
-          </h1>
+          <div className={styles.heroLeft}>
+            <p className="eyebrow">Photo Booth Hire</p>
+            <h1>
+              Say<br />
+              <span className={styles.cheese}>Cheese</span>
+            </h1>
+          </div>
           <div className={styles.heroRight}>
             <p>
               We bring premium photo booths to weddings, parties & events
@@ -27,6 +34,26 @@ const Home = () => {
         <div className={styles.scrollHint}>
           <span>Scroll</span>
           <ArrowDown size={16} />
+        </div>
+      </section>
+
+      {/* Photo Gallery - Marquee Style */}
+      <section className={styles.gallery}>
+        <div className={styles.galleryTrack}>
+          <div className={styles.gallerySlide}>
+            {photos.map((photo, idx) => (
+              <div key={idx} className={styles.galleryItem}>
+                <img src={photo.src} alt={photo.alt} loading="lazy" />
+              </div>
+            ))}
+          </div>
+          <div className={styles.gallerySlide} aria-hidden="true">
+            {photos.map((photo, idx) => (
+              <div key={`dup-${idx}`} className={styles.galleryItem}>
+                <img src={photo.src} alt={photo.alt} loading="lazy" />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -69,6 +96,33 @@ const Home = () => {
                 That means premium equipment, meticulous setup, and a genuine
                 passion for making your guests smile.
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Photos Grid */}
+      <section className={styles.featured}>
+        <div className="container">
+          <div className={styles.featuredHeader}>
+            <p className="eyebrow">Our Work</p>
+            <h2>Moments we've captured</h2>
+          </div>
+          <div className={styles.featuredGrid}>
+            <div className={styles.featuredLarge}>
+              <img src={photos[0].src} alt={photos[0].alt} loading="lazy" />
+            </div>
+            <div className={styles.featuredSmall}>
+              <img src={photos[1].src} alt={photos[1].alt} loading="lazy" />
+            </div>
+            <div className={styles.featuredSmall}>
+              <img src={photos[2].src} alt={photos[2].alt} loading="lazy" />
+            </div>
+            <div className={styles.featuredSmall}>
+              <img src={photos[3].src} alt={photos[3].alt} loading="lazy" />
+            </div>
+            <div className={styles.featuredLarge}>
+              <img src={photos[4].src} alt={photos[4].alt} loading="lazy" />
             </div>
           </div>
         </div>

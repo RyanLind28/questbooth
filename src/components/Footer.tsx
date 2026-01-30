@@ -10,7 +10,7 @@ const Footer = () => {
       <div className="container">
         <div className={styles.top}>
           <div className={styles.brand}>
-            <img src="/logo-gold.png" alt="QuestBooth" className={styles.logo} />
+            <img src="https://ho516c37no6nnbga.public.blob.vercel-storage.com/Quest/QuestBooth/Logo/Agold.webp" alt="QuestBooth" className={styles.logo} />
             <p>
               Premium photo booth hire for weddings, parties, and corporate events across the UK.
             </p>

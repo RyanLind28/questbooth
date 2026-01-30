@@ -30,7 +30,7 @@ const Navbar = () => {
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       <nav className={`container ${styles.nav}`}>
         <Link to="/" className={styles.logo}>
-          <img src="/logo-gold.png" alt="QuestBooth" />
+          <img src="https://ho516c37no6nnbga.public.blob.vercel-storage.com/Quest/QuestBooth/Logo/Agold.webp" alt="QuestBooth" />
         </Link>
 
         <div className={`${styles.menu} ${isOpen ? styles.open : ''}`}>
