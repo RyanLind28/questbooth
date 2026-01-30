@@ -1,0 +1,150 @@
+.footer {
+  background: var(--black-light);
+  border-top: 1px solid rgba(212, 168, 75, 0.2);
+  padding: 60px 0 30px;
+}
+
+.footerContainer {
+  max-width: 1200px;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footerBrand {
+  max-width: 300px;
+}
+
+.footerLogo {
+  height: 60px;
+  margin-bottom: 16px;
+}
+
+.footerTagline {
+  color: var(--gray);
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 16px;
+}
+
+.socialLinks a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--black-lighter);
+  color: var(--gold);
+  transition: all 0.3s ease;
+}
+
+.socialLinks a:hover {
+  background: var(--gold);
+  color: var(--black);
+  transform: translateY(-3px);
+}
+
+.footerLinks h4,
+.footerContact h4 {
+  color: var(--gold);
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.footerLinks ul,
+.footerContact ul {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footerLinks a {
+  color: var(--gray-light);
+  transition: color 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.footerLinks a:hover {
+  color: var(--gold);
+}
+
+.footerContact li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--gray-light);
+  font-size: 0.95rem;
+}
+
+.footerContact li svg {
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.footerContact a {
+  color: var(--gray-light);
+  transition: color 0.3s ease;
+}
+
+.footerContact a:hover {
+  color: var(--gold);
+}
+
+.footerBottom {
+  border-top: 1px solid rgba(212, 168, 75, 0.1);
+  padding-top: 30px;
+  text-align: center;
+}
+
+.footerBottom p {
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+
+.footerBottom p:first-child {
+  margin-bottom: 8px;
+}
+
+@media (max-width: 992px) {
+  .footerGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footerBrand {
+    max-width: none;
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 576px) {
+  .footerGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .footerBrand {
+    text-align: center;
+  }
+
+  .socialLinks {
+    justify-content: center;
+  }
+
+  .footerLinks,
+  .footerContact {
+    text-align: center;
+  }
+
+  .footerContact li {
+    justify-content: center;
+  }
+}

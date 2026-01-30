@@ -1,0 +1,140 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: transparent;
+  transition: all 0.4s var(--ease-out-expo);
+}
+
+.navbar.scrolled {
+  background: rgba(9, 9, 9, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.navContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0;
+  transition: padding 0.4s var(--ease-out-expo);
+}
+
+.navbar.scrolled .navContainer {
+  padding: 16px 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logoImage {
+  height: 44px;
+  width: auto;
+  transition: height 0.4s var(--ease-out-expo);
+}
+
+.navbar.scrolled .logoImage {
+  height: 36px;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+
+.navLink {
+  color: var(--gray-light);
+  font-weight: 400;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.4s var(--ease-out-expo);
+  position: relative;
+  padding: 8px 0;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.4s var(--ease-out-expo);
+}
+
+.navLink:hover {
+  color: var(--white);
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+.activeLink {
+  color: var(--white);
+}
+
+.activeLink::after {
+  width: 100%;
+}
+
+.navCta {
+  margin-left: 16px;
+}
+
+.menuToggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--white);
+  padding: 8px;
+  transition: color 0.3s ease;
+}
+
+.menuToggle:hover {
+  color: var(--gold);
+}
+
+@media (max-width: 900px) {
+  .menuToggle {
+    display: block;
+  }
+
+  .navLinks {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--black);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s var(--ease-out-expo);
+  }
+
+  .navLinks.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .navLink {
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+  }
+
+  .navCta {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+}

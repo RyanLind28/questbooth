@@ -1,0 +1,267 @@
+.pricing {
+  overflow-x: hidden;
+}
+
+/* ========== HERO ========== */
+.hero {
+  padding: 160px 0 100px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  margin-bottom: 20px;
+}
+
+.heroSub {
+  font-size: 1rem;
+  color: var(--gray);
+  font-weight: 300;
+}
+
+/* ========== PACKAGES ========== */
+.packages {
+  padding: clamp(80px, 12vw, 140px) 0;
+}
+
+.packagesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: rgba(255, 255, 255, 0.04);
+  margin-bottom: 40px;
+}
+
+.packageCard {
+  background: var(--black);
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: background 0.5s var(--ease-out-expo);
+}
+
+.packageCard:hover {
+  background: var(--black-light);
+}
+
+.packageCard.featured {
+  background: var(--black-light);
+}
+
+.packageCard.featured:hover {
+  background: var(--black-lighter);
+}
+
+.featuredTag {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 6px 12px;
+  border: 1px solid rgba(201, 169, 98, 0.3);
+}
+
+.packageHeader {
+  margin-bottom: 32px;
+}
+
+.packageTagline {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.packageHeader h2 {
+  margin-bottom: 12px;
+}
+
+.packageHeader p {
+  font-size: 0.9rem;
+  color: var(--gray);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.priceBlock {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.currency {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--white);
+}
+
+.amount {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  color: var(--white);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.period {
+  font-size: 0.85rem;
+  color: var(--gray);
+  margin-left: 8px;
+}
+
+.featureList {
+  flex-grow: 1;
+  margin-bottom: 32px;
+}
+
+.featureList li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--gray-light);
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  font-weight: 300;
+}
+
+.featureList li:last-child {
+  border-bottom: none;
+}
+
+.featureList li svg {
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.packageCard .btn {
+  width: 100%;
+  margin-top: auto;
+}
+
+.addOnNote {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--gray);
+  font-weight: 300;
+}
+
+/* ========== FAQ ========== */
+.faq {
+  padding: clamp(80px, 12vw, 140px) 0;
+  background: var(--black-light);
+}
+
+.faqHeader {
+  margin-bottom: 60px;
+}
+
+.faqHeader h2 {
+  margin-top: 8px;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.04);
+  max-width: 900px;
+}
+
+.faqItem {
+  background: var(--black-light);
+  padding: 32px;
+}
+
+.faqItem h3 {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+  color: var(--white);
+}
+
+.faqItem p {
+  font-size: 0.9rem;
+  color: var(--gray);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+/* ========== CTA ========== */
+.cta {
+  padding: clamp(100px, 15vw, 160px) 0;
+  position: relative;
+}
+
+.cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(201, 169, 98, 0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.ctaInner {
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.ctaInner h2 {
+  margin-bottom: 16px;
+}
+
+.ctaInner p {
+  font-size: 1rem;
+  color: var(--gray);
+  margin-bottom: 32px;
+  font-weight: 300;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1000px) {
+  .packagesGrid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .faqGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .packageCard {
+    padding: 36px 28px;
+  }
+
+  .amount {
+    font-size: 2.75rem;
+  }
+}
