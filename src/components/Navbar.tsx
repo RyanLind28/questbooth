@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
@@ -10,62 +10,61 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 20);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    document.body.style.overflow = isOpen ? 'hidden' : '';
   }, [isOpen]);
 
-  const navLinks = [
+  const links = [
     { path: '/', label: 'Home' },
     { path: '/pricing', label: 'Packages' },
     { path: '/booking', label: 'Contact' },
   ];
 
   return (
-    <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
-      <div className={`container ${styles.navContainer}`}>
+    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
+      <nav className={`container ${styles.nav}`}>
         <Link to="/" className={styles.logo}>
-          <img src="/logo-gold.png" alt="QuestBooth" className={styles.logoImage} />
+          <img src="/logo-gold.png" alt="QuestBooth" />
         </Link>
 
-        <div className={`${styles.navLinks} ${isOpen ? styles.active : ''}`}>
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={`${styles.navLink} ${location.pathname === link.path ? styles.activeLink : ''}`}
-              onClick={() => setIsOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <div className={styles.navCta}>
-            <Link to="/booking" className="btn btn-primary" onClick={() => setIsOpen(false)}>
-              Book Now
-              <ArrowRight size={18} />
-            </Link>
-          </div>
+        <div className={`${styles.menu} ${isOpen ? styles.open : ''}`}>
+          <ul className={styles.links}>
+            {links.map((link) => (
+              <li key={link.path}>
+                <Link
+                  to={link.path}
+                  className={location.pathname === link.path ? styles.active : ''}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <Link
+            to="/booking"
+            className={`btn btn--primary ${styles.cta}`}
+            onClick={() => setIsOpen(false)}
+          >
+            Book Your Booth
+          </Link>
         </div>
 
         <button
-          className={styles.menuToggle}
+          className={styles.toggle}
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 };
 

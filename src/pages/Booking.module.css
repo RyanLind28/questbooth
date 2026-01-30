@@ -1,77 +1,53 @@
-.booking {
-  overflow-x: hidden;
+.main {
+  padding-top: 100px;
 }
 
 /* ========== HERO ========== */
 .hero {
-  padding: 180px 0 80px;
-  text-align: center;
-  background: radial-gradient(ellipse at 50% 0%, rgba(201, 162, 39, 0.08) 0%, transparent 50%);
-}
-
-.heroTag {
-  display: inline-block;
-  color: var(--gold);
-  font-family: var(--font-display);
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 16px;
+  padding: var(--space-xl) 0 var(--space-lg);
 }
 
 .hero h1 {
-  margin-bottom: 16px;
+  font-size: clamp(3rem, 8vw, 5rem);
+  line-height: 0.95;
+  margin-bottom: var(--space-md);
 }
 
-.hero p {
-  font-size: 1.1rem;
-  color: var(--gray-light);
+.heroSub {
+  font-size: 1.15rem;
+  max-width: 500px;
 }
 
 /* ========== FORM SECTION ========== */
 .formSection {
-  padding: 60px 0 140px;
+  padding-bottom: var(--space-2xl);
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 360px;
-  gap: 48px;
+  grid-template-columns: 1fr 380px;
+  gap: var(--space-xl);
   align-items: start;
 }
 
-/* Form Card */
-.formCard {
-  background: var(--black-light);
-  border: 1px solid var(--black-lighter);
-  border-radius: 16px;
-  padding: 48px;
-  transition: border-color 0.4s ease;
+/* Form */
+.formWrapper {
+  background: var(--black-soft);
+  border: 1px solid var(--black-border);
+  border-radius: 20px;
+  padding: var(--space-lg);
 }
 
-.formCard:hover {
-  border-color: var(--gold-muted);
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
 }
 
-.formHeader {
-  margin-bottom: 40px;
-}
-
-.formHeader h2 {
-  font-size: 1.75rem;
-  margin-bottom: 8px;
-}
-
-.formHeader p {
-  color: var(--gray-light);
-  font-size: 1rem;
-}
-
-.formGrid {
+.formGroup {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-bottom: 24px;
+  gap: var(--space-md);
 }
 
 .field {
@@ -79,102 +55,48 @@
   flex-direction: column;
 }
 
-.fieldFull {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 32px;
-}
-
-.field label,
-.fieldFull label {
-  font-family: var(--font-display);
-  font-size: 0.9rem;
+.field label {
+  font-size: 14px;
+  font-weight: 500;
   color: var(--white);
   margin-bottom: 10px;
 }
 
-.field input,
-.field select,
-.fieldFull textarea {
+.submit {
   width: 100%;
-  padding: 16px 20px;
-  background: var(--black);
-  border: 1px solid var(--black-lighter);
-  border-radius: 8px;
-  color: var(--white);
-  font-size: 1rem;
-  transition: all 0.3s ease;
+  margin-top: var(--space-sm);
 }
 
-.field input::placeholder,
-.fieldFull textarea::placeholder {
-  color: var(--gray);
-}
-
-.field input:focus,
-.field select:focus,
-.fieldFull textarea:focus {
-  outline: none;
-  border-color: var(--gold);
-}
-
-.field select {
-  cursor: pointer;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23C9A227' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 16px center;
-  padding-right: 52px;
-}
-
-.field select option {
-  background: var(--black);
-  color: var(--white);
-  padding: 12px;
-}
-
-.fieldFull textarea {
-  resize: vertical;
-  min-height: 120px;
-}
-
-.submitBtn {
-  width: 100%;
-}
-
-.submitBtn:disabled {
+.submit:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-/* Success State */
+/* Success */
 .success {
   text-align: center;
-  padding: 60px 20px;
+  padding: var(--space-xl) var(--space-md);
 }
 
 .successIcon {
-  width: 80px;
-  height: 80px;
-  background: var(--gold-muted);
+  width: 72px;
+  height: 72px;
+  background: var(--gold);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--gold);
-  margin: 0 auto 24px;
+  color: var(--black);
+  margin: 0 auto var(--space-md);
 }
 
 .success h2 {
-  margin-bottom: 16px;
-  color: var(--white);
+  margin-bottom: var(--space-sm);
 }
 
 .success p {
-  font-size: 1.05rem;
-  color: var(--gray-light);
-  max-width: 380px;
-  margin: 0 auto 32px;
+  max-width: 400px;
+  margin: 0 auto var(--space-lg);
   line-height: 1.7;
 }
 
@@ -182,41 +104,34 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: var(--space-md);
   position: sticky;
   top: 120px;
 }
 
 .contactCard,
-.promiseCard {
-  background: var(--black-light);
-  border: 1px solid var(--black-lighter);
-  border-radius: 12px;
-  padding: 32px;
-  transition: all 0.4s ease;
-}
-
-.contactCard:hover,
-.promiseCard:hover {
-  border-color: var(--gold-muted);
+.infoCard {
+  background: var(--black-soft);
+  border: 1px solid var(--black-border);
+  border-radius: 16px;
+  padding: var(--space-md);
 }
 
 .contactCard h3,
-.promiseCard h3 {
-  font-size: 1.15rem;
+.infoCard h3 {
+  font-size: 1.1rem;
   margin-bottom: 8px;
 }
 
 .contactCard > p {
   font-size: 0.9rem;
-  color: var(--gray);
-  margin-bottom: 24px;
+  margin-bottom: var(--space-md);
 }
 
 .contactCard ul {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
 .contactCard li {
@@ -232,62 +147,68 @@
   flex-shrink: 0;
 }
 
-.contactCard li a {
-  transition: color 0.3s ease;
-}
-
 .contactCard li a:hover {
   color: var(--gold);
 }
 
-.promiseList {
+.infoCard ol {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  margin-top: 20px;
+  gap: 16px;
+  margin-top: var(--space-md);
 }
 
-.promiseList li {
+.infoCard li {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  font-size: 0.9rem;
-  color: var(--gray-light);
+  gap: 14px;
 }
 
-.promiseList svg {
-  color: var(--gold);
+.infoCard li span {
+  width: 28px;
+  height: 28px;
+  background: var(--gold);
+  color: var(--black);
+  font-family: var(--font-display);
+  font-size: 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-  margin-top: 2px;
+}
+
+.infoCard li p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  padding-top: 4px;
 }
 
 /* ========== RESPONSIVE ========== */
 @media (max-width: 1000px) {
   .grid {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: var(--space-lg);
   }
 
   .sidebar {
     position: static;
     flex-direction: row;
-    gap: 24px;
   }
 
   .contactCard,
-  .promiseCard {
+  .infoCard {
     flex: 1;
   }
 }
 
-@media (max-width: 700px) {
-  .formCard {
-    padding: 32px 24px;
+@media (max-width: 600px) {
+  .formWrapper {
+    padding: var(--space-md);
   }
 
-  .formGrid {
+  .formGroup {
     grid-template-columns: 1fr;
-    gap: 20px;
   }
 
   .sidebar {

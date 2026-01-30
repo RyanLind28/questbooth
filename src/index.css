@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
 
-/* AeroMaticsBold Font - add your font file to /public/fonts/ */
 @font-face {
   font-family: 'AeroMaticsBold';
   src: url('/fonts/AeroMaticsBold.woff2') format('woff2'),
@@ -12,34 +11,40 @@
 }
 
 :root {
-  /* Premium Gold Palette */
-  --gold: #C9A227;
-  --gold-light: #D4B445;
-  --gold-dark: #A68A1F;
-  --gold-muted: rgba(201, 162, 39, 0.12);
+  /* Core palette */
+  --gold: #d7b458;
+  --gold-light: #e5c97a;
+  --gold-dark: #b89838;
+  --gold-muted: rgba(215, 180, 88, 0.15);
 
-  /* Rich Blacks */
-  --black: #0A0A0A;
-  --black-light: #111111;
-  --black-lighter: #1A1A1A;
-  --black-card: #0F0F0F;
+  --black: #090909;
+  --black-rich: #0d0d0d;
+  --black-soft: #141414;
+  --black-border: #1f1f1f;
 
-  /* Neutrals */
-  --white: #FFFFFF;
+  --white: #fafafa;
+  --white-dim: #e8e8e8;
   --gray: #888888;
-  --gray-light: #AAAAAA;
-  --gray-dark: #444444;
-  --gray-muted: #666666;
+  --gray-light: #aaaaaa;
 
-  /* Fonts */
-  --font-display: 'AeroMaticsBold', 'Nunito', sans-serif;
-  --font-body: 'Nunito', -apple-system, sans-serif;
+  /* Typography */
+  --font-display: 'AeroMaticsBold', 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Spacing */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 48px;
+  --space-xl: 80px;
+  --space-2xl: 120px;
 
   /* Transitions */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-* {
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -47,25 +52,22 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   font-family: var(--font-body);
-  background-color: var(--black);
-  color: var(--white);
+  font-size: 17px;
   line-height: 1.6;
-  font-weight: 500;
-  -webkit-font-smoothing: antialiased;
+  color: var(--white);
+  background-color: var(--black);
   overflow-x: hidden;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-ul {
-  list-style: none;
+::selection {
+  background: var(--gold);
+  color: var(--black);
 }
 
 img {
@@ -74,97 +76,137 @@ img {
   display: block;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
 button {
-  cursor: pointer;
   font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
 }
 
 input, textarea, select {
   font-family: inherit;
+  font-size: inherit;
 }
 
-/* Container */
+/* ========== LAYOUT ========== */
 .container {
-  max-width: 1200px;
+  width: 100%;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--space-md);
 }
 
-/* Section */
-.section {
-  padding: 120px 0;
+.container--narrow {
+  max-width: 900px;
 }
 
-@media (max-width: 768px) {
-  .section {
-    padding: 80px 0;
-  }
+.container--wide {
+  max-width: 1440px;
 }
 
-/* Typography */
-h1, h2, h3, h4 {
+/* ========== TYPOGRAPHY ========== */
+h1, h2, h3, h4, h5 {
   font-family: var(--font-display);
   font-weight: 700;
   line-height: 1.1;
+  color: var(--white);
+  letter-spacing: -0.02em;
 }
 
-h1 { font-size: clamp(3rem, 8vw, 5.5rem); }
-h2 { font-size: clamp(2rem, 5vw, 3rem); }
-h3 { font-size: clamp(1.1rem, 2vw, 1.35rem); }
+h1 {
+  font-size: clamp(3rem, 8vw, 6rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+p {
+  color: var(--gray-light);
+}
 
 .text-gold {
   color: var(--gold);
 }
 
-/* Buttons */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+}
+
+/* ========== BUTTONS ========== */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 18px 44px;
-  border-radius: 100px;
   font-family: var(--font-display);
+  font-size: 15px;
   font-weight: 700;
-  font-size: 0.9rem;
+  padding: 18px 36px;
+  border-radius: 100px;
   transition: all 0.4s var(--ease-out);
-  border: none;
+  position: relative;
+  overflow: hidden;
 }
 
-.btn-primary {
+.btn--primary {
   background: var(--gold);
   color: var(--black);
 }
 
-.btn-primary:hover {
+.btn--primary:hover {
   background: var(--gold-light);
   transform: translateY(-2px);
-  box-shadow: 0 16px 40px -8px rgba(201, 162, 39, 0.35);
+  box-shadow: 0 20px 40px rgba(215, 180, 88, 0.3);
 }
 
-.btn-secondary {
+.btn--secondary {
   background: transparent;
   color: var(--white);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid var(--black-border);
 }
 
-.btn-secondary:hover {
+.btn--secondary:hover {
   border-color: var(--gold);
   color: var(--gold);
 }
 
-.btn-large {
-  padding: 22px 56px;
-  font-size: 1rem;
+.btn--ghost {
+  background: transparent;
+  color: var(--gold);
+  padding: 12px 0;
+  border-radius: 0;
+  border-bottom: 2px solid transparent;
 }
 
-/* Selection */
-::selection {
-  background: var(--gold);
-  color: var(--black);
+.btn--ghost:hover {
+  border-bottom-color: var(--gold);
 }
 
-/* Scrollbar */
+.btn--large {
+  padding: 22px 48px;
+  font-size: 16px;
+}
+
+/* ========== CUSTOM SCROLLBAR ========== */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -174,10 +216,88 @@ h3 { font-size: clamp(1.1rem, 2vw, 1.35rem); }
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--gray-dark);
+  background: var(--black-border);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--gold);
+  background: var(--gold-dark);
+}
+
+/* ========== FORM ELEMENTS ========== */
+input, textarea, select {
+  width: 100%;
+  padding: 18px 24px;
+  background: var(--black-soft);
+  border: 1px solid var(--black-border);
+  border-radius: 12px;
+  color: var(--white);
+  font-size: 16px;
+  transition: all 0.3s var(--ease-out);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--gray);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--gold);
+  background: var(--black-rich);
+}
+
+select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23d7b458' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  padding-right: 56px;
+}
+
+/* ========== UTILITIES ========== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.8s var(--ease-out) forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.6s var(--ease-out) forwards;
 }

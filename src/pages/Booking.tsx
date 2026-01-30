@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ArrowRight, Phone, Mail, MapPin, CheckCircle } from 'lucide-react';
+import { ArrowRight, Phone, Mail, MapPin, Check } from 'lucide-react';
 import styles from './Booking.module.css';
 
 const Booking = () => {
@@ -14,14 +14,13 @@ const Booking = () => {
     eventDate: '',
     eventType: '',
     eventLocation: '',
-    guestCount: '',
     packageType: preselectedPackage,
     duration: '3',
     message: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success'>('idle');
 
   useEffect(() => {
     if (preselectedPackage) {
@@ -58,19 +57,21 @@ const Booking = () => {
 
   const packageOptions = [
     { value: '', label: 'Not sure yet' },
-    { value: 'drop-off', label: 'Drop-Off Digital' },
-    { value: 'manned-digital', label: 'Manned Digital' },
-    { value: 'manned-prints', label: 'Manned + Prints' },
+    { value: 'drop-off', label: 'Drop-Off Digital — £199' },
+    { value: 'manned-digital', label: 'Manned Digital — £349' },
+    { value: 'manned-prints', label: 'Manned + Prints — £449' },
   ];
 
   return (
-    <main className={styles.booking}>
+    <main className={styles.main}>
       {/* Hero */}
       <section className={styles.hero}>
         <div className="container">
-          <span className={styles.heroTag}>Contact</span>
-          <h1>Get Your <span className="text-gold">Free Quote</span></h1>
-          <p>Fill out the form below and we will respond within 24 hours</p>
+          <p className="eyebrow">Contact</p>
+          <h1>Let's make it<br /><span className="text-gold">happen</span></h1>
+          <p className={styles.heroSub}>
+            Fill out the form and we'll get back to you within 24 hours with a quote.
+          </p>
         </div>
       </section>
 
@@ -79,19 +80,19 @@ const Booking = () => {
         <div className="container">
           <div className={styles.grid}>
             {/* Form */}
-            <div className={styles.formCard}>
+            <div className={styles.formWrapper}>
               {submitStatus === 'success' ? (
                 <div className={styles.success}>
                   <div className={styles.successIcon}>
-                    <CheckCircle size={48} />
+                    <Check size={32} />
                   </div>
-                  <h2>Thank You</h2>
+                  <h2>Message received</h2>
                   <p>
-                    Your enquiry has been received. We will review your details and
-                    get back to you with a personalized quote within 24 hours.
+                    Thank you for your enquiry. We'll review your details and
+                    respond within 24 hours with a personalized quote.
                   </p>
                   <button
-                    className="btn btn-primary"
+                    className="btn btn--secondary"
                     onClick={() => {
                       setSubmitStatus('idle');
                       setFormData({
@@ -101,26 +102,20 @@ const Booking = () => {
                         eventDate: '',
                         eventType: '',
                         eventLocation: '',
-                        guestCount: '',
                         packageType: '',
                         duration: '3',
                         message: '',
                       });
                     }}
                   >
-                    Submit Another Enquiry
+                    Send another enquiry
                   </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className={styles.form}>
-                  <div className={styles.formHeader}>
-                    <h2>Event Details</h2>
-                    <p>Tell us about your upcoming celebration</p>
-                  </div>
-
-                  <div className={styles.formGrid}>
+                  <div className={styles.formGroup}>
                     <div className={styles.field}>
-                      <label htmlFor="name">Full Name</label>
+                      <label htmlFor="name">Full name</label>
                       <input
                         type="text"
                         id="name"
@@ -133,7 +128,7 @@ const Booking = () => {
                     </div>
 
                     <div className={styles.field}>
-                      <label htmlFor="email">Email Address</label>
+                      <label htmlFor="email">Email</label>
                       <input
                         type="email"
                         id="email"
@@ -141,12 +136,14 @@ const Booking = () => {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        placeholder="your@email.com"
+                        placeholder="you@email.com"
                       />
                     </div>
+                  </div>
 
+                  <div className={styles.formGroup}>
                     <div className={styles.field}>
-                      <label htmlFor="phone">Phone Number</label>
+                      <label htmlFor="phone">Phone</label>
                       <input
                         type="tel"
                         id="phone"
@@ -159,7 +156,7 @@ const Booking = () => {
                     </div>
 
                     <div className={styles.field}>
-                      <label htmlFor="eventDate">Event Date</label>
+                      <label htmlFor="eventDate">Event date</label>
                       <input
                         type="date"
                         id="eventDate"
@@ -169,9 +166,11 @@ const Booking = () => {
                         required
                       />
                     </div>
+                  </div>
 
+                  <div className={styles.formGroup}>
                     <div className={styles.field}>
-                      <label htmlFor="eventType">Event Type</label>
+                      <label htmlFor="eventType">Event type</label>
                       <select
                         id="eventType"
                         name="eventType"
@@ -179,7 +178,7 @@ const Booking = () => {
                         onChange={handleChange}
                         required
                       >
-                        <option value="">Select event type</option>
+                        <option value="">Select type</option>
                         {eventTypes.map((type) => (
                           <option key={type.value} value={type.value}>
                             {type.label}
@@ -189,7 +188,7 @@ const Booking = () => {
                     </div>
 
                     <div className={styles.field}>
-                      <label htmlFor="eventLocation">Venue Location</label>
+                      <label htmlFor="eventLocation">Venue</label>
                       <input
                         type="text"
                         id="eventLocation"
@@ -197,12 +196,14 @@ const Booking = () => {
                         value={formData.eventLocation}
                         onChange={handleChange}
                         required
-                        placeholder="Venue name and postcode"
+                        placeholder="Venue name & postcode"
                       />
                     </div>
+                  </div>
 
+                  <div className={styles.formGroup}>
                     <div className={styles.field}>
-                      <label htmlFor="packageType">Preferred Package</label>
+                      <label htmlFor="packageType">Package</label>
                       <select
                         id="packageType"
                         name="packageType"
@@ -218,7 +219,7 @@ const Booking = () => {
                     </div>
 
                     <div className={styles.field}>
-                      <label htmlFor="duration">Duration Required</label>
+                      <label htmlFor="duration">Duration</label>
                       <select
                         id="duration"
                         name="duration"
@@ -234,21 +235,21 @@ const Booking = () => {
                     </div>
                   </div>
 
-                  <div className={styles.fieldFull}>
-                    <label htmlFor="message">Additional Information</label>
+                  <div className={styles.field}>
+                    <label htmlFor="message">Additional details (optional)</label>
                     <textarea
                       id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
                       rows={4}
-                      placeholder="Tell us more about your event or any special requirements"
+                      placeholder="Tell us more about your event, any special requests, or questions you have"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className={`btn btn-primary btn-large ${styles.submitBtn}`}
+                    className={`btn btn--primary btn--large ${styles.submit}`}
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? 'Sending...' : 'Request Quote'}
@@ -261,8 +262,8 @@ const Booking = () => {
             {/* Sidebar */}
             <aside className={styles.sidebar}>
               <div className={styles.contactCard}>
-                <h3>Contact Information</h3>
-                <p>Prefer to speak with us directly?</p>
+                <h3>Prefer to talk?</h3>
+                <p>We're happy to chat through your requirements.</p>
                 <ul>
                   <li>
                     <Phone size={18} />
@@ -279,26 +280,22 @@ const Booking = () => {
                 </ul>
               </div>
 
-              <div className={styles.promiseCard}>
-                <h3>Why QuestBooth</h3>
-                <ul className={styles.promiseList}>
+              <div className={styles.infoCard}>
+                <h3>What happens next?</h3>
+                <ol>
                   <li>
-                    <CheckCircle size={16} />
-                    <span>Professional equipment and service</span>
+                    <span>1</span>
+                    <p>We review your enquiry</p>
                   </li>
                   <li>
-                    <CheckCircle size={16} />
-                    <span>Family-run business with personal touch</span>
+                    <span>2</span>
+                    <p>You receive a tailored quote within 24 hours</p>
                   </li>
                   <li>
-                    <CheckCircle size={16} />
-                    <span>500+ successful events</span>
+                    <span>3</span>
+                    <p>Pay a 25% deposit to confirm your booking</p>
                   </li>
-                  <li>
-                    <CheckCircle size={16} />
-                    <span>Instant digital delivery to guests</span>
-                  </li>
-                </ul>
+                </ol>
               </div>
             </aside>
           </div>

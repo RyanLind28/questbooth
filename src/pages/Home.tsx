@@ -1,207 +1,174 @@
 import { Link } from 'react-router-dom';
-import { Camera, Sparkles, Users, Zap, Award, ArrowRight, Star, CheckCircle } from 'lucide-react';
+import { ArrowRight, ArrowDown } from 'lucide-react';
 import styles from './Home.module.css';
 
 const Home = () => {
-  const features = [
-    {
-      icon: <Camera size={32} />,
-      title: 'Professional Equipment',
-      description: 'Studio-grade cameras and lighting for flawless photos every time.',
-    },
-    {
-      icon: <Sparkles size={32} />,
-      title: 'Premium Props',
-      description: 'Curated collection of elegant and fun props for memorable shots.',
-    },
-    {
-      icon: <Users size={32} />,
-      title: 'Family Business',
-      description: 'Personal service and attention to detail at every event.',
-    },
-    {
-      icon: <Zap size={32} />,
-      title: 'Instant Delivery',
-      description: 'Photos sent directly to guests via text or WhatsApp.',
-    },
-  ];
-
-  const testimonials = [
-    {
-      name: 'Sarah & James',
-      event: 'Wedding Reception',
-      text: 'The booth was the highlight of our wedding. Everyone is still sharing the photos weeks later!',
-    },
-    {
-      name: 'TechCorp Ltd',
-      event: 'Corporate Event',
-      text: 'Professional setup and brilliant service. Even our CEO got involved with the props!',
-    },
-    {
-      name: 'The Williams Family',
-      event: 'Birthday Celebration',
-      text: 'Made mum\'s 50th absolutely unforgettable. So many precious memories captured.',
-    },
-  ];
-
   return (
-    <main className={styles.home}>
-      {/* Hero Section */}
+    <main className={styles.main}>
+      {/* Hero */}
       <section className={styles.hero}>
-        <div className={styles.heroOverlay} />
-        <div className={`container ${styles.heroContent}`}>
-          <div className={styles.heroBadge}>
-            <Award size={16} />
-            <span>Family-Run Excellence</span>
-          </div>
-
+        <div className={styles.heroContent}>
+          <p className="eyebrow">Photo Booth Hire</p>
           <h1>
-            Say Cheese.
-            <br />
-            <span className={styles.heroAccent}>Make Memories.</span>
+            Say<br />
+            <span className={styles.cheese}>Cheese</span>
           </h1>
-
-          <p className={styles.heroText}>
-            Premium photo booth experiences for weddings, parties, and corporate events.
-            Professional quality. Personal service. Unforgettable moments.
-          </p>
-
-          <div className={styles.heroCtas}>
-            <Link to="/booking" className="btn btn-primary btn-large">
-              Get Your Free Quote
+          <div className={styles.heroRight}>
+            <p>
+              We bring premium photo booths to weddings, parties & events
+              across the UK. Family-run, professionally delivered.
+            </p>
+            <Link to="/booking" className="btn btn--primary btn--large">
+              Get a Free Quote
               <ArrowRight size={20} />
             </Link>
-            <Link to="/pricing" className="btn btn-secondary btn-large">
-              View Packages
-            </Link>
           </div>
+        </div>
+        <div className={styles.scrollHint}>
+          <span>Scroll</span>
+          <ArrowDown size={16} />
+        </div>
+      </section>
 
-          <div className={styles.heroStats}>
+      {/* Stats Bar */}
+      <section className={styles.stats}>
+        <div className="container">
+          <div className={styles.statsGrid}>
             <div className={styles.stat}>
-              <span className={styles.statNum}>500+</span>
-              <span className={styles.statLabel}>Events</span>
+              <span className={styles.statNumber}>500+</span>
+              <span className={styles.statLabel}>Events Completed</span>
             </div>
-            <div className={styles.statDivider} />
             <div className={styles.stat}>
-              <span className={styles.statNum}>50K+</span>
-              <span className={styles.statLabel}>Photos</span>
+              <span className={styles.statNumber}>50k+</span>
+              <span className={styles.statLabel}>Photos Taken</span>
             </div>
-            <div className={styles.statDivider} />
             <div className={styles.stat}>
-              <span className={styles.statNum}>5</span>
-              <span className={styles.statLabel}>Star Rating</span>
+              <span className={styles.statNumber}>5.0</span>
+              <span className={styles.statLabel}>Star Reviews</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className={styles.features}>
+      {/* About Section */}
+      <section className={styles.about}>
         <div className="container">
-          <div className={styles.sectionHeader}>
-            <span className={styles.sectionTag}>Why Choose Us</span>
-            <h2>The QuestBooth <span className="text-gold">Difference</span></h2>
-            <p>What sets our photo booth experience apart</p>
-          </div>
-
-          <div className={styles.featuresGrid}>
-            {features.map((feature, index) => (
-              <div key={index} className={styles.featureCard}>
-                <div className={styles.featureIcon}>{feature.icon}</div>
-                <h3>{feature.title}</h3>
-                <p>{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section className={styles.howItWorks}>
-        <div className="container">
-          <div className={styles.sectionHeader}>
-            <span className={styles.sectionTag}>Simple Process</span>
-            <h2>Book in <span className="text-gold">Three Steps</span></h2>
-            <p>Getting your photo booth is effortless</p>
-          </div>
-
-          <div className={styles.stepsGrid}>
-            <div className={styles.step}>
-              <div className={styles.stepNumber}>01</div>
-              <h3>Choose Your Package</h3>
-              <p>Select from our range of options designed to suit every event and budget.</p>
+          <div className={styles.aboutGrid}>
+            <div className={styles.aboutLeft}>
+              <p className="eyebrow">Who We Are</p>
+              <h2>A family business that genuinely cares about your event</h2>
             </div>
-
-            <div className={styles.stepLine} />
-
-            <div className={styles.step}>
-              <div className={styles.stepNumber}>02</div>
-              <h3>Book Your Date</h3>
-              <p>Secure your preferred date with a simple booking process.</p>
-            </div>
-
-            <div className={styles.stepLine} />
-
-            <div className={styles.step}>
-              <div className={styles.stepNumber}>03</div>
-              <h3>Enjoy The Experience</h3>
-              <p>We handle everything. You focus on making memories.</p>
+            <div className={styles.aboutRight}>
+              <p>
+                We started QuestBooth because we believe every celebration deserves
+                to be remembered. Not with awkward posed photos, but with real moments
+                of joy, laughter, and maybe a few silly hats.
+              </p>
+              <p>
+                Every event we do, we treat like it's our own family's party.
+                That means premium equipment, meticulous setup, and a genuine
+                passion for making your guests smile.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Packages Preview */}
-      <section className={styles.packages}>
+      {/* Services */}
+      <section className={styles.services}>
         <div className="container">
-          <div className={styles.sectionHeader}>
-            <span className={styles.sectionTag}>Our Packages</span>
-            <h2>Find Your <span className="text-gold">Perfect Fit</span></h2>
-            <p>Tailored options for every occasion</p>
+          <div className={styles.servicesHeader}>
+            <p className="eyebrow">What We Offer</p>
+            <h2>Three ways to bring the fun</h2>
           </div>
 
-          <div className={styles.packagesGrid}>
-            <div className={styles.packageCard}>
+          <div className={styles.servicesGrid}>
+            <article className={styles.service}>
+              <span className={styles.serviceNum}>01</span>
               <h3>Drop-Off Digital</h3>
-              <p className={styles.packageDesc}>Self-service style with all the essentials</p>
-              <ul className={styles.packageFeatures}>
-                <li><CheckCircle size={16} /> Professional equipment</li>
-                <li><CheckCircle size={16} /> Digital delivery</li>
-                <li><CheckCircle size={16} /> Props included</li>
-              </ul>
-              <span className={styles.packagePrice}>From £199</span>
-              <Link to="/pricing#drop-off" className={styles.packageLink}>
-                Learn More <ArrowRight size={16} />
+              <p>
+                We deliver, set up, and leave you in control. Perfect for
+                intimate gatherings where you want a DIY vibe.
+              </p>
+              <div className={styles.servicePrice}>
+                <span>From</span>
+                <strong>£199</strong>
+              </div>
+              <Link to="/pricing#drop-off" className="btn--ghost">
+                Learn more <ArrowRight size={16} />
               </Link>
-            </div>
+            </article>
 
-            <div className={`${styles.packageCard} ${styles.packageFeatured}`}>
-              <div className={styles.popularTag}>Most Popular</div>
+            <article className={`${styles.service} ${styles.serviceFeatured}`}>
+              <div className={styles.featuredBadge}>Popular</div>
+              <span className={styles.serviceNum}>02</span>
               <h3>Manned Digital</h3>
-              <p className={styles.packageDesc}>Full service with our professional team</p>
-              <ul className={styles.packageFeatures}>
-                <li><CheckCircle size={16} /> Dedicated attendant</li>
-                <li><CheckCircle size={16} /> Instant sharing</li>
-                <li><CheckCircle size={16} /> Premium props</li>
-              </ul>
-              <span className={styles.packagePrice}>From £349</span>
-              <Link to="/pricing#manned-digital" className="btn btn-primary">
-                Choose This Package
+              <p>
+                Our team runs the show while you enjoy the party. Full service
+                with professional lighting and premium props.
+              </p>
+              <div className={styles.servicePrice}>
+                <span>From</span>
+                <strong>£349</strong>
+              </div>
+              <Link to="/pricing#manned-digital" className="btn btn--primary">
+                Choose this package
               </Link>
+            </article>
+
+            <article className={styles.service}>
+              <span className={styles.serviceNum}>03</span>
+              <h3>Manned + Prints</h3>
+              <p>
+                Everything above, plus instant prints your guests take home.
+                The complete photo booth experience.
+              </p>
+              <div className={styles.servicePrice}>
+                <span>From</span>
+                <strong>£449</strong>
+              </div>
+              <Link to="/pricing#manned-prints" className="btn--ghost">
+                Learn more <ArrowRight size={16} />
+              </Link>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* Process */}
+      <section className={styles.process}>
+        <div className="container container--narrow">
+          <div className={styles.processHeader}>
+            <p className="eyebrow">How It Works</p>
+            <h2>Booking is simple</h2>
+          </div>
+
+          <div className={styles.processSteps}>
+            <div className={styles.step}>
+              <div className={styles.stepLine} />
+              <span className={styles.stepNum}>1</span>
+              <div className={styles.stepContent}>
+                <h3>Tell us about your event</h3>
+                <p>Fill out our quick form with your date, venue, and package preference.</p>
+              </div>
             </div>
 
-            <div className={styles.packageCard}>
-              <h3>Manned + Prints</h3>
-              <p className={styles.packageDesc}>The complete experience with instant prints</p>
-              <ul className={styles.packageFeatures}>
-                <li><CheckCircle size={16} /> Everything in Manned</li>
-                <li><CheckCircle size={16} /> Instant photo prints</li>
-                <li><CheckCircle size={16} /> Custom templates</li>
-              </ul>
-              <span className={styles.packagePrice}>From £449</span>
-              <Link to="/pricing#manned-prints" className={styles.packageLink}>
-                Learn More <ArrowRight size={16} />
-              </Link>
+            <div className={styles.step}>
+              <div className={styles.stepLine} />
+              <span className={styles.stepNum}>2</span>
+              <div className={styles.stepContent}>
+                <h3>Get your quote</h3>
+                <p>We'll respond within 24 hours with a personalized quote.</p>
+              </div>
+            </div>
+
+            <div className={styles.step}>
+              <div className={styles.stepLine} />
+              <span className={styles.stepNum}>3</span>
+              <div className={styles.stepContent}>
+                <h3>We handle the rest</h3>
+                <p>Confirm your booking, then relax. We'll be there early to set up.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -210,39 +177,59 @@ const Home = () => {
       {/* Testimonials */}
       <section className={styles.testimonials}>
         <div className="container">
-          <div className={styles.sectionHeader}>
-            <span className={styles.sectionTag}>Testimonials</span>
-            <h2>What Our <span className="text-gold">Clients Say</span></h2>
-            <p>Real feedback from real celebrations</p>
+          <div className={styles.testimonialsHeader}>
+            <p className="eyebrow">Kind Words</p>
+            <h2>From our happy customers</h2>
           </div>
 
-          <div className={styles.testimonialGrid}>
-            {testimonials.map((item, index) => (
-              <div key={index} className={styles.testimonialCard}>
-                <div className={styles.stars}>
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={18} fill="var(--gold)" color="var(--gold)" />
-                  ))}
-                </div>
-                <p>"{item.text}"</p>
-                <div className={styles.testimonialAuthor}>
-                  <strong>{item.name}</strong>
-                  <span>{item.event}</span>
-                </div>
-              </div>
-            ))}
+          <div className={styles.testimonialsGrid}>
+            <blockquote className={styles.testimonial}>
+              <p>
+                "The booth was the highlight of our wedding reception. Our guests
+                are still sharing photos weeks later. Couldn't recommend more highly."
+              </p>
+              <footer>
+                <strong>Sarah & James</strong>
+                <span>Wedding, Manchester</span>
+              </footer>
+            </blockquote>
+
+            <blockquote className={styles.testimonial}>
+              <p>
+                "Professional from start to finish. The team were friendly, the
+                equipment was top quality, and everyone had an absolute blast."
+              </p>
+              <footer>
+                <strong>TechCorp Ltd</strong>
+                <span>Corporate Event, London</span>
+              </footer>
+            </blockquote>
+
+            <blockquote className={styles.testimonial}>
+              <p>
+                "Made my mum's 50th birthday absolutely unforgettable. So many
+                genuine laughing moments captured. Worth every penny."
+              </p>
+              <footer>
+                <strong>The Williams Family</strong>
+                <span>Birthday Party, Birmingham</span>
+              </footer>
+            </blockquote>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA */}
       <section className={styles.cta}>
         <div className="container">
           <div className={styles.ctaContent}>
-            <h2>Ready to Create <span className="text-gold">Memories?</span></h2>
-            <p>Let's make your event unforgettable</p>
-            <Link to="/booking" className="btn btn-primary btn-large">
-              Get Your Free Quote
+            <h2>Ready to make some memories?</h2>
+            <p>
+              Get in touch today for a free, no-obligation quote.
+              We'd love to be part of your celebration.
+            </p>
+            <Link to="/booking" className="btn btn--primary btn--large">
+              Start Your Booking
               <ArrowRight size={20} />
             </Link>
           </div>
