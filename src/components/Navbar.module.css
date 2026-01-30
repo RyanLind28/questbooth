@@ -5,55 +5,60 @@
   right: 0;
   z-index: 1000;
   background: transparent;
-  transition: all 0.4s var(--ease-out-expo);
+  transition: all 0.4s ease;
 }
 
 .navbar.scrolled {
-  background: rgba(9, 9, 9, 0.95);
+  background: rgba(13, 13, 13, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
 .navContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px 0;
-  transition: padding 0.4s var(--ease-out-expo);
+  padding: 20px 0;
+  transition: padding 0.4s ease;
 }
 
 .navbar.scrolled .navContainer {
-  padding: 16px 0;
+  padding: 14px 0;
 }
 
 .logo {
   display: flex;
   align-items: center;
+  transition: transform 0.3s var(--bounce);
+}
+
+.logo:hover {
+  transform: scale(1.05);
 }
 
 .logoImage {
-  height: 44px;
+  height: 50px;
   width: auto;
-  transition: height 0.4s var(--ease-out-expo);
+  transition: height 0.4s ease;
 }
 
 .navbar.scrolled .logoImage {
-  height: 36px;
+  height: 42px;
 }
 
 .navLinks {
   display: flex;
   align-items: center;
-  gap: 48px;
+  gap: 40px;
 }
 
 .navLink {
-  color: var(--gray-light);
-  font-weight: 400;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  transition: color 0.4s var(--ease-out-expo);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--white);
+  transition: all 0.3s ease;
   position: relative;
   padding: 8px 0;
 }
@@ -62,15 +67,17 @@
   content: '';
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 0;
-  height: 1px;
+  height: 3px;
   background: var(--gold);
-  transition: width 0.4s var(--ease-out-expo);
+  border-radius: 2px;
+  transition: width 0.3s var(--bounce);
 }
 
 .navLink:hover {
-  color: var(--white);
+  color: var(--gold);
 }
 
 .navLink:hover::after {
@@ -78,7 +85,7 @@
 }
 
 .activeLink {
-  color: var(--white);
+  color: var(--gold);
 }
 
 .activeLink::after {
@@ -86,20 +93,20 @@
 }
 
 .navCta {
-  margin-left: 16px;
+  margin-left: 20px;
 }
 
 .menuToggle {
   display: none;
   background: none;
   border: none;
-  color: var(--white);
+  color: var(--gold);
   padding: 8px;
-  transition: color 0.3s ease;
+  transition: transform 0.3s var(--bounce);
 }
 
 .menuToggle:hover {
-  color: var(--gold);
+  transform: rotate(90deg);
 }
 
 @media (max-width: 900px) {
@@ -117,10 +124,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 40px;
+    gap: 32px;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.5s var(--ease-out-expo);
+    transition: all 0.4s ease;
   }
 
   .navLinks.active {
@@ -129,8 +136,7 @@
   }
 
   .navLink {
-    font-size: 1rem;
-    letter-spacing: 0.15em;
+    font-size: 1.5rem;
   }
 
   .navCta {

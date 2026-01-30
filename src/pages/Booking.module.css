@@ -4,59 +4,72 @@
 
 /* ========== HERO ========== */
 .hero {
-  padding: 160px 0 100px;
+  padding: 160px 0 80px;
   text-align: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  background: radial-gradient(ellipse at 50% 0%, rgba(255, 215, 0, 0.15) 0%, transparent 50%);
 }
 
-.label {
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold);
+.heroEmoji {
   display: block;
+  font-size: 4rem;
   margin-bottom: 20px;
+  animation: float 3s ease-in-out infinite;
 }
 
 .hero h1 {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
-.heroSub {
-  font-size: 1rem;
-  color: var(--gray);
-  font-weight: 300;
+.hero p {
+  font-size: 1.15rem;
+  color: var(--gray-light);
 }
 
 /* ========== FORM SECTION ========== */
 .formSection {
-  padding: clamp(80px, 12vw, 140px) 0;
+  padding: 60px 0 120px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 80px;
+  grid-template-columns: 1fr 340px;
+  gap: 48px;
   align-items: start;
 }
 
-/* Form */
-.formWrapper {
+/* Form Card */
+.formCard {
   background: var(--black-light);
+  border: 3px solid var(--black-lighter);
+  border-radius: 28px;
   padding: 48px;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: border-color 0.4s ease;
 }
 
-.form {
+.formCard:hover {
+  border-color: rgba(255, 215, 0, 0.3);
+}
+
+.formHeader {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.formIcon {
+  color: var(--gold);
+  animation: wiggle 3s ease-in-out infinite;
+}
+
+.formHeader h2 {
+  font-size: 1.75rem;
 }
 
 .formGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px 32px;
+  gap: 24px;
   margin-bottom: 24px;
 }
 
@@ -73,11 +86,9 @@
 
 .field label,
 .fieldFull label {
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gray);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--white);
   margin-bottom: 10px;
 }
 
@@ -87,16 +98,16 @@
   width: 100%;
   padding: 16px 20px;
   background: var(--black);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 3px solid var(--black-lighter);
+  border-radius: 14px;
   color: var(--white);
-  font-size: 0.95rem;
-  font-weight: 300;
-  transition: all 0.4s var(--ease-out-expo);
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
 .field input::placeholder,
 .fieldFull textarea::placeholder {
-  color: var(--gray-dark);
+  color: var(--gray);
 }
 
 .field input:focus,
@@ -104,29 +115,32 @@
 .fieldFull textarea:focus {
   outline: none;
   border-color: var(--gold);
+  box-shadow: 0 0 20px var(--gold-glow);
 }
 
 .field select {
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B6B6B' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23FFD700' stroke-width='3'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 16px center;
-  padding-right: 48px;
+  padding-right: 52px;
 }
 
 .field select option {
   background: var(--black);
   color: var(--white);
+  padding: 12px;
 }
 
 .fieldFull textarea {
   resize: vertical;
   min-height: 120px;
+  border-radius: 14px;
 }
 
 .submitBtn {
-  align-self: flex-start;
+  width: 100%;
 }
 
 .submitBtn:disabled {
@@ -134,31 +148,27 @@
   cursor: not-allowed;
 }
 
-/* Success */
+/* Success State */
 .success {
   text-align: center;
   padding: 60px 20px;
 }
 
-.successIcon {
-  width: 80px;
-  height: 80px;
-  border: 1px solid var(--gold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--gold);
-  margin: 0 auto 32px;
+.successEmoji {
+  font-size: 5rem;
+  display: block;
+  margin-bottom: 24px;
+  animation: pop 0.5s ease-out;
 }
 
 .success h2 {
   margin-bottom: 16px;
+  color: var(--gold);
 }
 
 .success p {
-  color: var(--gray);
-  font-size: 1rem;
-  font-weight: 300;
+  font-size: 1.1rem;
+  color: var(--gray-light);
   max-width: 360px;
   margin: 0 auto 32px;
   line-height: 1.7;
@@ -166,94 +176,108 @@
 
 /* Sidebar */
 .sidebar {
-  position: sticky;
-  top: 120px;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
+  position: sticky;
+  top: 120px;
 }
 
-.contactBlock,
-.promiseBlock {
-  padding-bottom: 32px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+.contactCard,
+.promiseCard {
+  background: var(--black-light);
+  border: 3px solid var(--black-lighter);
+  border-radius: 24px;
+  padding: 32px;
+  text-align: center;
+  transition: all 0.4s var(--bounce);
 }
 
-.promiseBlock {
-  border-bottom: none;
-  padding-bottom: 0;
+.contactCard:hover,
+.promiseCard:hover {
+  border-color: var(--gold);
+  transform: translateY(-5px);
 }
 
-.contactBlock h3,
-.promiseBlock h3 {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--gold);
+.cardEmoji {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.contactCard h3,
+.promiseCard h3 {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+}
+
+.contactCard > p {
+  font-size: 0.95rem;
+  color: var(--gray);
   margin-bottom: 20px;
 }
 
-.contactBlock ul {
+.contactCard ul {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
-.contactBlock li {
+.contactCard li {
   display: flex;
   align-items: center;
-  gap: 14px;
-  font-size: 0.9rem;
+  justify-content: center;
+  gap: 12px;
+  font-size: 0.95rem;
   color: var(--gray-light);
-  font-weight: 300;
 }
 
-.contactBlock li svg {
+.contactCard li svg {
   color: var(--gold);
   flex-shrink: 0;
-  opacity: 0.7;
 }
 
-.contactBlock li a {
+.contactCard li a {
   transition: color 0.3s ease;
 }
 
-.contactBlock li a:hover {
+.contactCard li a:hover {
   color: var(--gold);
 }
 
-.promiseBlock p {
-  font-size: 0.9rem;
-  color: var(--gray);
-  font-weight: 300;
-  line-height: 1.8;
+.promiseCard p {
+  font-size: 0.95rem;
+  color: var(--gray-light);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.heartIcon {
+  color: var(--gold);
+  animation: pulse-glow 2s ease-in-out infinite;
 }
 
 /* ========== RESPONSIVE ========== */
 @media (max-width: 1000px) {
   .grid {
     grid-template-columns: 1fr;
-    gap: 60px;
+    gap: 40px;
   }
 
   .sidebar {
     position: static;
     flex-direction: row;
-    gap: 48px;
+    gap: 24px;
   }
 
-  .contactBlock,
-  .promiseBlock {
+  .contactCard,
+  .promiseCard {
     flex: 1;
-    padding-bottom: 0;
-    border-bottom: none;
   }
 }
 
 @media (max-width: 700px) {
-  .formWrapper {
+  .formCard {
     padding: 32px 24px;
   }
 
@@ -264,10 +288,14 @@
 
   .sidebar {
     flex-direction: column;
-    gap: 32px;
   }
 
-  .submitBtn {
-    width: 100%;
+  .formHeader {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .formHeader h2 {
+    font-size: 1.5rem;
   }
 }
