@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Sparkles } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
@@ -51,8 +51,8 @@ const Navbar = () => {
           ))}
           <div className={styles.navCta}>
             <Link to="/booking" className="btn btn-primary" onClick={() => setIsOpen(false)}>
-              Book Now!
-              <Sparkles size={18} />
+              Book Now
+              <ArrowRight size={18} />
             </Link>
           </div>
         </div>

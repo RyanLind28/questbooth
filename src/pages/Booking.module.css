@@ -4,16 +4,19 @@
 
 /* ========== HERO ========== */
 .hero {
-  padding: 160px 0 80px;
+  padding: 180px 0 80px;
   text-align: center;
-  background: radial-gradient(ellipse at 50% 0%, rgba(255, 215, 0, 0.15) 0%, transparent 50%);
+  background: radial-gradient(ellipse at 50% 0%, rgba(201, 162, 39, 0.08) 0%, transparent 50%);
 }
 
-.heroEmoji {
-  display: block;
-  font-size: 4rem;
-  margin-bottom: 20px;
-  animation: float 3s ease-in-out infinite;
+.heroTag {
+  display: inline-block;
+  color: var(--gold);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
 }
 
 .hero h1 {
@@ -21,18 +24,18 @@
 }
 
 .hero p {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   color: var(--gray-light);
 }
 
 /* ========== FORM SECTION ========== */
 .formSection {
-  padding: 60px 0 120px;
+  padding: 60px 0 140px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 340px;
+  grid-template-columns: 1fr 360px;
   gap: 48px;
   align-items: start;
 }
@@ -40,30 +43,28 @@
 /* Form Card */
 .formCard {
   background: var(--black-light);
-  border: 3px solid var(--black-lighter);
-  border-radius: 28px;
+  border: 1px solid var(--black-lighter);
+  border-radius: 16px;
   padding: 48px;
   transition: border-color 0.4s ease;
 }
 
 .formCard:hover {
-  border-color: rgba(255, 215, 0, 0.3);
+  border-color: var(--gold-muted);
 }
 
 .formHeader {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 36px;
-}
-
-.formIcon {
-  color: var(--gold);
-  animation: wiggle 3s ease-in-out infinite;
+  margin-bottom: 40px;
 }
 
 .formHeader h2 {
   font-size: 1.75rem;
+  margin-bottom: 8px;
+}
+
+.formHeader p {
+  color: var(--gray-light);
+  font-size: 1rem;
 }
 
 .formGrid {
@@ -87,7 +88,7 @@
 .field label,
 .fieldFull label {
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--white);
   margin-bottom: 10px;
 }
@@ -98,8 +99,8 @@
   width: 100%;
   padding: 16px 20px;
   background: var(--black);
-  border: 3px solid var(--black-lighter);
-  border-radius: 14px;
+  border: 1px solid var(--black-lighter);
+  border-radius: 8px;
   color: var(--white);
   font-size: 1rem;
   transition: all 0.3s ease;
@@ -115,13 +116,12 @@
 .fieldFull textarea:focus {
   outline: none;
   border-color: var(--gold);
-  box-shadow: 0 0 20px var(--gold-glow);
 }
 
 .field select {
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23FFD700' stroke-width='3'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23C9A227' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 16px center;
   padding-right: 52px;
@@ -136,7 +136,6 @@
 .fieldFull textarea {
   resize: vertical;
   min-height: 120px;
-  border-radius: 14px;
 }
 
 .submitBtn {
@@ -154,22 +153,27 @@
   padding: 60px 20px;
 }
 
-.successEmoji {
-  font-size: 5rem;
-  display: block;
-  margin-bottom: 24px;
-  animation: pop 0.5s ease-out;
+.successIcon {
+  width: 80px;
+  height: 80px;
+  background: var(--gold-muted);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  margin: 0 auto 24px;
 }
 
 .success h2 {
   margin-bottom: 16px;
-  color: var(--gold);
+  color: var(--white);
 }
 
 .success p {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: var(--gray-light);
-  max-width: 360px;
+  max-width: 380px;
   margin: 0 auto 32px;
   line-height: 1.7;
 }
@@ -186,47 +190,38 @@
 .contactCard,
 .promiseCard {
   background: var(--black-light);
-  border: 3px solid var(--black-lighter);
-  border-radius: 24px;
+  border: 1px solid var(--black-lighter);
+  border-radius: 12px;
   padding: 32px;
-  text-align: center;
-  transition: all 0.4s var(--bounce);
+  transition: all 0.4s ease;
 }
 
 .contactCard:hover,
 .promiseCard:hover {
-  border-color: var(--gold);
-  transform: translateY(-5px);
-}
-
-.cardEmoji {
-  font-size: 2.5rem;
-  display: block;
-  margin-bottom: 16px;
+  border-color: var(--gold-muted);
 }
 
 .contactCard h3,
 .promiseCard h3 {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   margin-bottom: 8px;
 }
 
 .contactCard > p {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--gray);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .contactCard ul {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
 .contactCard li {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 12px;
   font-size: 0.95rem;
   color: var(--gray-light);
@@ -245,16 +240,25 @@
   color: var(--gold);
 }
 
-.promiseCard p {
-  font-size: 0.95rem;
-  color: var(--gray-light);
-  line-height: 1.7;
-  margin-bottom: 16px;
+.promiseList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
 }
 
-.heartIcon {
+.promiseList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--gray-light);
+}
+
+.promiseList svg {
   color: var(--gold);
-  animation: pulse-glow 2s ease-in-out infinite;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 /* ========== RESPONSIVE ========== */
@@ -288,14 +292,5 @@
 
   .sidebar {
     flex-direction: column;
-  }
-
-  .formHeader {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .formHeader h2 {
-    font-size: 1.5rem;
   }
 }

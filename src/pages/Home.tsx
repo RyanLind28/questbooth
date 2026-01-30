@@ -1,53 +1,46 @@
 import { Link } from 'react-router-dom';
-import { Camera, Sparkles, PartyPopper, Heart, Star, Zap, Users } from 'lucide-react';
+import { Camera, Sparkles, Users, Zap, Award, ArrowRight, Star, CheckCircle } from 'lucide-react';
 import styles from './Home.module.css';
 
 const Home = () => {
   const features = [
     {
-      icon: <Camera size={36} />,
-      title: 'Top-Notch Gear',
-      description: 'Pro cameras & studio lighting for picture-perfect shots every time!',
-      emoji: '📸',
+      icon: <Camera size={32} />,
+      title: 'Professional Equipment',
+      description: 'Studio-grade cameras and lighting for flawless photos every time.',
     },
     {
-      icon: <Sparkles size={36} />,
-      title: 'Props Galore',
-      description: 'Hundreds of hilarious props to bring out everyone\'s silly side!',
-      emoji: '🎭',
+      icon: <Sparkles size={32} />,
+      title: 'Premium Props',
+      description: 'Curated collection of elegant and fun props for memorable shots.',
     },
     {
-      icon: <Users size={36} />,
-      title: 'Family Vibes',
-      description: 'We\'re a family biz that treats every event like our own party!',
-      emoji: '👨‍👩‍👧‍👦',
+      icon: <Users size={32} />,
+      title: 'Family Business',
+      description: 'Personal service and attention to detail at every event.',
     },
     {
-      icon: <Zap size={36} />,
-      title: 'Instant Magic',
-      description: 'Photos zapped to your phone in seconds via text or WhatsApp!',
-      emoji: '⚡',
+      icon: <Zap size={32} />,
+      title: 'Instant Delivery',
+      description: 'Photos sent directly to guests via text or WhatsApp.',
     },
   ];
 
   const testimonials = [
     {
       name: 'Sarah & James',
-      event: 'Wedding',
-      text: 'OMG the booth was the highlight of our wedding! Everyone\'s still sharing the photos!',
-      emoji: '💒',
+      event: 'Wedding Reception',
+      text: 'The booth was the highlight of our wedding. Everyone is still sharing the photos weeks later!',
     },
     {
       name: 'TechCorp Ltd',
-      event: 'Office Party',
-      text: 'Best team building ever! Even our CEO wore the silly glasses 😂',
-      emoji: '🏢',
+      event: 'Corporate Event',
+      text: 'Professional setup and brilliant service. Even our CEO got involved with the props!',
     },
     {
-      name: 'The Williams Fam',
-      event: 'Birthday Bash',
-      text: 'Mum\'s 50th was EPIC thanks to QuestBooth! So many memories captured!',
-      emoji: '🎂',
+      name: 'The Williams Family',
+      event: 'Birthday Celebration',
+      text: 'Made mum\'s 50th absolutely unforgettable. So many precious memories captured.',
     },
   ];
 
@@ -55,54 +48,48 @@ const Home = () => {
     <main className={styles.home}>
       {/* Hero Section */}
       <section className={styles.hero}>
-        <div className={styles.heroDecor}>
-          <span className={styles.floatingEmoji} style={{ top: '15%', left: '10%' }}>📸</span>
-          <span className={styles.floatingEmoji} style={{ top: '25%', right: '15%' }}>🎉</span>
-          <span className={styles.floatingEmoji} style={{ bottom: '30%', left: '8%' }}>⭐</span>
-          <span className={styles.floatingEmoji} style={{ bottom: '20%', right: '10%' }}>✨</span>
-        </div>
-
+        <div className={styles.heroOverlay} />
         <div className={`container ${styles.heroContent}`}>
           <div className={styles.heroBadge}>
-            <PartyPopper size={18} />
-            Family-Run Fun!
+            <Award size={16} />
+            <span>Family-Run Excellence</span>
           </div>
 
           <h1>
-            Say Cheese! <span className={styles.heroEmoji}>📸</span>
+            Say Cheese.
             <br />
-            <span className="text-gold">Epic Photos</span> Await!
+            <span className={styles.heroAccent}>Make Memories.</span>
           </h1>
 
           <p className={styles.heroText}>
-            We bring the party vibes with our premium photo booth! Amazing props,
-            pro-quality pics, and memories your guests will absolutely LOVE!
+            Premium photo booth experiences for weddings, parties, and corporate events.
+            Professional quality. Personal service. Unforgettable moments.
           </p>
 
           <div className={styles.heroCtas}>
             <Link to="/booking" className="btn btn-primary btn-large">
-              Book The Fun!
-              <PartyPopper size={20} />
+              Get Your Free Quote
+              <ArrowRight size={20} />
             </Link>
             <Link to="/pricing" className="btn btn-secondary btn-large">
-              See Packages
+              View Packages
             </Link>
           </div>
 
           <div className={styles.heroStats}>
             <div className={styles.stat}>
               <span className={styles.statNum}>500+</span>
-              <span className={styles.statLabel}>Epic Events</span>
+              <span className={styles.statLabel}>Events</span>
             </div>
-            <div className={styles.statDivider}>🎊</div>
+            <div className={styles.statDivider} />
             <div className={styles.stat}>
               <span className={styles.statNum}>50K+</span>
-              <span className={styles.statLabel}>Smiles Captured</span>
+              <span className={styles.statLabel}>Photos</span>
             </div>
-            <div className={styles.statDivider}>🎊</div>
+            <div className={styles.statDivider} />
             <div className={styles.stat}>
-              <span className={styles.statNum}>100%</span>
-              <span className={styles.statLabel}>Good Times</span>
+              <span className={styles.statNum}>5</span>
+              <span className={styles.statLabel}>Star Rating</span>
             </div>
           </div>
         </div>
@@ -112,15 +99,14 @@ const Home = () => {
       <section className={styles.features}>
         <div className="container">
           <div className={styles.sectionHeader}>
-            <span className={styles.sectionEmoji}>🌟</span>
-            <h2>Why We're <span className="text-gold">Awesome</span></h2>
-            <p>Here's why our booths are the life of the party!</p>
+            <span className={styles.sectionTag}>Why Choose Us</span>
+            <h2>The QuestBooth <span className="text-gold">Difference</span></h2>
+            <p>What sets our photo booth experience apart</p>
           </div>
 
           <div className={styles.featuresGrid}>
             {features.map((feature, index) => (
               <div key={index} className={styles.featureCard}>
-                <span className={styles.featureEmoji}>{feature.emoji}</span>
                 <div className={styles.featureIcon}>{feature.icon}</div>
                 <h3>{feature.title}</h3>
                 <p>{feature.description}</p>
@@ -134,41 +120,32 @@ const Home = () => {
       <section className={styles.howItWorks}>
         <div className="container">
           <div className={styles.sectionHeader}>
-            <span className={styles.sectionEmoji}>🎯</span>
-            <h2>Easy as <span className="text-gold">1-2-3!</span></h2>
-            <p>Getting your booth is super simple</p>
+            <span className={styles.sectionTag}>Simple Process</span>
+            <h2>Book in <span className="text-gold">Three Steps</span></h2>
+            <p>Getting your photo booth is effortless</p>
           </div>
 
           <div className={styles.stepsGrid}>
             <div className={styles.step}>
-              <div className={styles.stepBubble}>
-                <span>1</span>
-              </div>
-              <h3>Pick Your Package</h3>
-              <p>Choose from our awesome options - there's something for everyone!</p>
-              <span className={styles.stepEmoji}>🎁</span>
+              <div className={styles.stepNumber}>01</div>
+              <h3>Choose Your Package</h3>
+              <p>Select from our range of options designed to suit every event and budget.</p>
             </div>
 
-            <div className={styles.stepArrow}>→</div>
+            <div className={styles.stepLine} />
 
             <div className={styles.step}>
-              <div className={styles.stepBubble}>
-                <span>2</span>
-              </div>
+              <div className={styles.stepNumber}>02</div>
               <h3>Book Your Date</h3>
-              <p>Lock in your party date and leave the rest to us!</p>
-              <span className={styles.stepEmoji}>📅</span>
+              <p>Secure your preferred date with a simple booking process.</p>
             </div>
 
-            <div className={styles.stepArrow}>→</div>
+            <div className={styles.stepLine} />
 
             <div className={styles.step}>
-              <div className={styles.stepBubble}>
-                <span>3</span>
-              </div>
-              <h3>Party Time!</h3>
-              <p>We show up, set up, and make the magic happen!</p>
-              <span className={styles.stepEmoji}>🎉</span>
+              <div className={styles.stepNumber}>03</div>
+              <h3>Enjoy The Experience</h3>
+              <p>We handle everything. You focus on making memories.</p>
             </div>
           </div>
         </div>
@@ -178,40 +155,52 @@ const Home = () => {
       <section className={styles.packages}>
         <div className="container">
           <div className={styles.sectionHeader}>
-            <span className={styles.sectionEmoji}>💫</span>
-            <h2>Our <span className="text-gold">Packages</span></h2>
-            <p>Pick the perfect booth experience for your bash!</p>
+            <span className={styles.sectionTag}>Our Packages</span>
+            <h2>Find Your <span className="text-gold">Perfect Fit</span></h2>
+            <p>Tailored options for every occasion</p>
           </div>
 
           <div className={styles.packagesGrid}>
             <div className={styles.packageCard}>
-              <span className={styles.packageEmoji}>📱</span>
               <h3>Drop-Off Digital</h3>
-              <p>DIY style! We drop it off, you run the show</p>
+              <p className={styles.packageDesc}>Self-service style with all the essentials</p>
+              <ul className={styles.packageFeatures}>
+                <li><CheckCircle size={16} /> Professional equipment</li>
+                <li><CheckCircle size={16} /> Digital delivery</li>
+                <li><CheckCircle size={16} /> Props included</li>
+              </ul>
               <span className={styles.packagePrice}>From £199</span>
               <Link to="/pricing#drop-off" className={styles.packageLink}>
-                Learn More →
+                Learn More <ArrowRight size={16} />
               </Link>
             </div>
 
             <div className={`${styles.packageCard} ${styles.packageFeatured}`}>
-              <div className={styles.popularTag}>🔥 Most Popular!</div>
-              <span className={styles.packageEmoji}>🎪</span>
+              <div className={styles.popularTag}>Most Popular</div>
               <h3>Manned Digital</h3>
-              <p>Full service with our fun crew on-site!</p>
+              <p className={styles.packageDesc}>Full service with our professional team</p>
+              <ul className={styles.packageFeatures}>
+                <li><CheckCircle size={16} /> Dedicated attendant</li>
+                <li><CheckCircle size={16} /> Instant sharing</li>
+                <li><CheckCircle size={16} /> Premium props</li>
+              </ul>
               <span className={styles.packagePrice}>From £349</span>
               <Link to="/pricing#manned-digital" className="btn btn-primary">
-                Choose This!
+                Choose This Package
               </Link>
             </div>
 
             <div className={styles.packageCard}>
-              <span className={styles.packageEmoji}>🖨️</span>
               <h3>Manned + Prints</h3>
-              <p>Everything above PLUS instant photo prints!</p>
+              <p className={styles.packageDesc}>The complete experience with instant prints</p>
+              <ul className={styles.packageFeatures}>
+                <li><CheckCircle size={16} /> Everything in Manned</li>
+                <li><CheckCircle size={16} /> Instant photo prints</li>
+                <li><CheckCircle size={16} /> Custom templates</li>
+              </ul>
               <span className={styles.packagePrice}>From £449</span>
               <Link to="/pricing#manned-prints" className={styles.packageLink}>
-                Learn More →
+                Learn More <ArrowRight size={16} />
               </Link>
             </div>
           </div>
@@ -222,15 +211,14 @@ const Home = () => {
       <section className={styles.testimonials}>
         <div className="container">
           <div className={styles.sectionHeader}>
-            <span className={styles.sectionEmoji}>💬</span>
-            <h2>Happy <span className="text-gold">Party People</span></h2>
-            <p>Don't just take our word for it!</p>
+            <span className={styles.sectionTag}>Testimonials</span>
+            <h2>What Our <span className="text-gold">Clients Say</span></h2>
+            <p>Real feedback from real celebrations</p>
           </div>
 
           <div className={styles.testimonialGrid}>
             {testimonials.map((item, index) => (
               <div key={index} className={styles.testimonialCard}>
-                <div className={styles.testimonialEmoji}>{item.emoji}</div>
                 <div className={styles.stars}>
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} size={18} fill="var(--gold)" color="var(--gold)" />
@@ -251,16 +239,11 @@ const Home = () => {
       <section className={styles.cta}>
         <div className="container">
           <div className={styles.ctaContent}>
-            <div className={styles.ctaEmojis}>
-              <span>🎉</span>
-              <span>📸</span>
-              <span>🎊</span>
-            </div>
-            <h2>Ready to <span className="text-gold">Party?</span></h2>
-            <p>Let's make your event absolutely LEGENDARY!</p>
+            <h2>Ready to Create <span className="text-gold">Memories?</span></h2>
+            <p>Let's make your event unforgettable</p>
             <Link to="/booking" className="btn btn-primary btn-large">
-              Get Your Free Quote!
-              <Heart size={20} />
+              Get Your Free Quote
+              <ArrowRight size={20} />
             </Link>
           </div>
         </div>

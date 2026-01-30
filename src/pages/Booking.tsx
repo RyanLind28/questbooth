@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Send, Phone, Mail, MapPin, PartyPopper, Heart } from 'lucide-react';
+import { ArrowRight, Phone, Mail, MapPin, CheckCircle } from 'lucide-react';
 import styles from './Booking.module.css';
 
 const Booking = () => {
@@ -46,21 +46,21 @@ const Booking = () => {
   };
 
   const eventTypes = [
-    { value: 'wedding', label: '💒 Wedding' },
-    { value: 'corporate', label: '🏢 Corporate Event' },
-    { value: 'birthday', label: '🎂 Birthday Party' },
-    { value: 'engagement', label: '💍 Engagement Party' },
-    { value: 'christmas', label: '🎄 Christmas Party' },
-    { value: 'prom', label: '🎓 Prom / School Event' },
-    { value: 'festival', label: '🎪 Festival / Fair' },
-    { value: 'other', label: '🎉 Other Fun Event' },
+    { value: 'wedding', label: 'Wedding' },
+    { value: 'corporate', label: 'Corporate Event' },
+    { value: 'birthday', label: 'Birthday Party' },
+    { value: 'engagement', label: 'Engagement Party' },
+    { value: 'christmas', label: 'Christmas Party' },
+    { value: 'prom', label: 'Prom / School Event' },
+    { value: 'festival', label: 'Festival / Fair' },
+    { value: 'other', label: 'Other' },
   ];
 
   const packageOptions = [
-    { value: '', label: '🤔 Not sure yet!' },
-    { value: 'drop-off', label: '📱 Drop-Off Digital' },
-    { value: 'manned-digital', label: '🎪 Manned Digital' },
-    { value: 'manned-prints', label: '🖨️ Manned + Prints' },
+    { value: '', label: 'Not sure yet' },
+    { value: 'drop-off', label: 'Drop-Off Digital' },
+    { value: 'manned-digital', label: 'Manned Digital' },
+    { value: 'manned-prints', label: 'Manned + Prints' },
   ];
 
   return (
@@ -68,9 +68,9 @@ const Booking = () => {
       {/* Hero */}
       <section className={styles.hero}>
         <div className="container">
-          <span className={styles.heroEmoji}>📬</span>
-          <h1>Let's <span className="text-gold">Chat!</span></h1>
-          <p>Fill this out and we'll hit you back within 24 hours with your quote!</p>
+          <span className={styles.heroTag}>Contact</span>
+          <h1>Get Your <span className="text-gold">Free Quote</span></h1>
+          <p>Fill out the form below and we will respond within 24 hours</p>
         </div>
       </section>
 
@@ -82,11 +82,13 @@ const Booking = () => {
             <div className={styles.formCard}>
               {submitStatus === 'success' ? (
                 <div className={styles.success}>
-                  <span className={styles.successEmoji}>🎉</span>
-                  <h2>Woohoo!</h2>
+                  <div className={styles.successIcon}>
+                    <CheckCircle size={48} />
+                  </div>
+                  <h2>Thank You</h2>
                   <p>
-                    Your message is on its way! We'll get back to you super soon
-                    with your personalized quote.
+                    Your enquiry has been received. We will review your details and
+                    get back to you with a personalized quote within 24 hours.
                   </p>
                   <button
                     className="btn btn-primary"
@@ -106,19 +108,19 @@ const Booking = () => {
                       });
                     }}
                   >
-                    Send Another!
+                    Submit Another Enquiry
                   </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className={styles.form}>
                   <div className={styles.formHeader}>
-                    <PartyPopper size={32} className={styles.formIcon} />
-                    <h2>Tell Us About Your Event!</h2>
+                    <h2>Event Details</h2>
+                    <p>Tell us about your upcoming celebration</p>
                   </div>
 
                   <div className={styles.formGrid}>
                     <div className={styles.field}>
-                      <label htmlFor="name">Your Name ✨</label>
+                      <label htmlFor="name">Full Name</label>
                       <input
                         type="text"
                         id="name"
@@ -126,12 +128,12 @@ const Booking = () => {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        placeholder="What should we call you?"
+                        placeholder="Your name"
                       />
                     </div>
 
                     <div className={styles.field}>
-                      <label htmlFor="email">Email 📧</label>
+                      <label htmlFor="email">Email Address</label>
                       <input
                         type="email"
                         id="email"
@@ -144,7 +146,7 @@ const Booking = () => {
                     </div>
 
                     <div className={styles.field}>
-                      <label htmlFor="phone">Phone 📱</label>
+                      <label htmlFor="phone">Phone Number</label>
                       <input
                         type="tel"
                         id="phone"
@@ -157,7 +159,7 @@ const Booking = () => {
                     </div>
 
                     <div className={styles.field}>
-                      <label htmlFor="eventDate">Party Date 📅</label>
+                      <label htmlFor="eventDate">Event Date</label>
                       <input
                         type="date"
                         id="eventDate"
@@ -169,7 +171,7 @@ const Booking = () => {
                     </div>
 
                     <div className={styles.field}>
-                      <label htmlFor="eventType">What's the Occasion?</label>
+                      <label htmlFor="eventType">Event Type</label>
                       <select
                         id="eventType"
                         name="eventType"
@@ -177,7 +179,7 @@ const Booking = () => {
                         onChange={handleChange}
                         required
                       >
-                        <option value="">Pick one...</option>
+                        <option value="">Select event type</option>
                         {eventTypes.map((type) => (
                           <option key={type.value} value={type.value}>
                             {type.label}
@@ -187,7 +189,7 @@ const Booking = () => {
                     </div>
 
                     <div className={styles.field}>
-                      <label htmlFor="eventLocation">Where's the Party? 📍</label>
+                      <label htmlFor="eventLocation">Venue Location</label>
                       <input
                         type="text"
                         id="eventLocation"
@@ -195,12 +197,12 @@ const Booking = () => {
                         value={formData.eventLocation}
                         onChange={handleChange}
                         required
-                        placeholder="Venue name & postcode"
+                        placeholder="Venue name and postcode"
                       />
                     </div>
 
                     <div className={styles.field}>
-                      <label htmlFor="packageType">Interested In...</label>
+                      <label htmlFor="packageType">Preferred Package</label>
                       <select
                         id="packageType"
                         name="packageType"
@@ -216,7 +218,7 @@ const Booking = () => {
                     </div>
 
                     <div className={styles.field}>
-                      <label htmlFor="duration">How Long? ⏰</label>
+                      <label htmlFor="duration">Duration Required</label>
                       <select
                         id="duration"
                         name="duration"
@@ -227,20 +229,20 @@ const Booking = () => {
                         <option value="3">3 hours</option>
                         <option value="4">4 hours</option>
                         <option value="5">5 hours</option>
-                        <option value="6">6+ hours (Party animal!)</option>
+                        <option value="6">6+ hours</option>
                       </select>
                     </div>
                   </div>
 
                   <div className={styles.fieldFull}>
-                    <label htmlFor="message">Anything Else? 💬</label>
+                    <label htmlFor="message">Additional Information</label>
                     <textarea
                       id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
                       rows={4}
-                      placeholder="Tell us more about your event, special requests, or just say hi!"
+                      placeholder="Tell us more about your event or any special requirements"
                     />
                   </div>
 
@@ -249,8 +251,8 @@ const Booking = () => {
                     className={`btn btn-primary btn-large ${styles.submitBtn}`}
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? 'Sending...' : 'Send It!'}
-                    {!isSubmitting && <Send size={20} />}
+                    {isSubmitting ? 'Sending...' : 'Request Quote'}
+                    {!isSubmitting && <ArrowRight size={20} />}
                   </button>
                 </form>
               )}
@@ -259,34 +261,44 @@ const Booking = () => {
             {/* Sidebar */}
             <aside className={styles.sidebar}>
               <div className={styles.contactCard}>
-                <span className={styles.cardEmoji}>📞</span>
-                <h3>Prefer to Chat?</h3>
-                <p>We love hearing from you!</p>
+                <h3>Contact Information</h3>
+                <p>Prefer to speak with us directly?</p>
                 <ul>
                   <li>
-                    <Phone size={20} />
+                    <Phone size={18} />
                     <a href="tel:+447123456789">07123 456 789</a>
                   </li>
                   <li>
-                    <Mail size={20} />
+                    <Mail size={18} />
                     <a href="mailto:hello@questbooth.co.uk">hello@questbooth.co.uk</a>
                   </li>
                   <li>
-                    <MapPin size={20} />
-                    <span>Serving all of UK!</span>
+                    <MapPin size={18} />
+                    <span>Serving all of UK</span>
                   </li>
                 </ul>
               </div>
 
               <div className={styles.promiseCard}>
-                <span className={styles.cardEmoji}>💛</span>
-                <h3>Our Promise</h3>
-                <p>
-                  We're a family business that genuinely cares about making your
-                  event AMAZING. Premium gear, endless props, and memories your
-                  guests will cherish forever!
-                </p>
-                <Heart className={styles.heartIcon} size={24} />
+                <h3>Why QuestBooth</h3>
+                <ul className={styles.promiseList}>
+                  <li>
+                    <CheckCircle size={16} />
+                    <span>Professional equipment and service</span>
+                  </li>
+                  <li>
+                    <CheckCircle size={16} />
+                    <span>Family-run business with personal touch</span>
+                  </li>
+                  <li>
+                    <CheckCircle size={16} />
+                    <span>500+ successful events</span>
+                  </li>
+                  <li>
+                    <CheckCircle size={16} />
+                    <span>Instant digital delivery to guests</span>
+                  </li>
+                </ul>
               </div>
             </aside>
           </div>

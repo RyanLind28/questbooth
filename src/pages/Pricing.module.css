@@ -4,16 +4,19 @@
 
 /* ========== HERO ========== */
 .hero {
-  padding: 160px 0 80px;
+  padding: 180px 0 80px;
   text-align: center;
-  background: radial-gradient(ellipse at 50% 0%, rgba(255, 215, 0, 0.15) 0%, transparent 50%);
+  background: radial-gradient(ellipse at 50% 0%, rgba(201, 162, 39, 0.08) 0%, transparent 50%);
 }
 
-.heroEmoji {
-  display: block;
-  font-size: 4rem;
-  margin-bottom: 20px;
-  animation: float 3s ease-in-out infinite;
+.heroTag {
+  display: inline-block;
+  color: var(--gold);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
 }
 
 .hero h1 {
@@ -21,79 +24,73 @@
 }
 
 .hero p {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   color: var(--gray-light);
 }
 
 /* ========== PACKAGES ========== */
 .packages {
-  padding: 80px 0 100px;
+  padding: 80px 0 120px;
 }
 
 .packagesGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  gap: 32px;
   align-items: stretch;
 }
 
 .packageCard {
   background: var(--black-light);
-  border: 3px solid var(--black-lighter);
-  border-radius: 28px;
-  padding: 44px 32px;
+  border: 1px solid var(--black-lighter);
+  border-radius: 16px;
+  padding: 48px 32px;
   text-align: center;
   position: relative;
   display: flex;
   flex-direction: column;
-  transition: all 0.4s var(--bounce);
+  transition: all 0.4s ease;
 }
 
 .packageCard:hover {
-  border-color: var(--gold);
-  transform: translateY(-10px);
-  box-shadow: 0 25px 60px rgba(255, 215, 0, 0.15);
+  border-color: var(--gold-muted);
+  transform: translateY(-8px);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.3);
 }
 
 .featured {
   border-color: var(--gold);
-  background: linear-gradient(180deg, rgba(255, 215, 0, 0.12) 0%, var(--black-light) 40%);
-  transform: scale(1.05);
+  background: linear-gradient(180deg, rgba(201, 162, 39, 0.08) 0%, var(--black-light) 40%);
 }
 
 .featured:hover {
-  transform: scale(1.08) translateY(-10px);
+  border-color: var(--gold);
+  box-shadow: 0 24px 48px rgba(201, 162, 39, 0.15);
 }
 
 .popularTag {
   position: absolute;
-  top: -18px;
+  top: -14px;
   left: 50%;
   transform: translateX(-50%);
   background: var(--gold);
   color: var(--black);
-  padding: 10px 28px;
+  padding: 8px 24px;
   border-radius: 50px;
   font-family: var(--font-display);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 700;
   white-space: nowrap;
-  box-shadow: 0 8px 30px var(--gold-glow);
-}
-
-.packageEmoji {
-  font-size: 4rem;
-  display: block;
-  margin-bottom: 16px;
+  letter-spacing: 0.5px;
 }
 
 .tagline {
   font-family: var(--font-display);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--gold);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 8px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
 }
 
 .packageCard h2 {
@@ -104,8 +101,8 @@
 .description {
   font-size: 0.95rem;
   color: var(--gray-light);
-  margin-bottom: 28px;
-  line-height: 1.6;
+  margin-bottom: 32px;
+  line-height: 1.7;
 }
 
 .priceBlock {
@@ -113,10 +110,10 @@
   align-items: baseline;
   justify-content: center;
   gap: 4px;
-  margin-bottom: 28px;
-  padding: 20px;
+  margin-bottom: 32px;
+  padding: 24px;
   background: var(--black);
-  border-radius: 16px;
+  border-radius: 12px;
 }
 
 .currency {
@@ -129,19 +126,18 @@
   font-family: var(--font-display);
   font-size: 3.5rem;
   color: var(--gold);
-  text-shadow: 0 0 30px var(--gold-glow);
   line-height: 1;
 }
 
 .period {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: var(--gray);
   margin-left: 8px;
 }
 
 .features {
   flex-grow: 1;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
   text-align: left;
 }
 
@@ -150,7 +146,7 @@
   align-items: center;
   gap: 12px;
   padding: 12px 0;
-  border-bottom: 2px solid var(--black-lighter);
+  border-bottom: 1px solid var(--black-lighter);
   font-size: 0.95rem;
   color: var(--gray-light);
 }
@@ -171,18 +167,22 @@
 
 /* ========== ADD-ONS ========== */
 .addOns {
-  padding: 80px 0;
+  padding: 100px 0;
   background: var(--black-light);
+}
+
+.addOnsHeader {
   text-align: center;
+  margin-bottom: 48px;
 }
 
-.addOns h2 {
-  margin-bottom: 40px;
+.addOnsHeader h2 {
+  margin-bottom: 12px;
 }
 
-.addOnEmoji {
-  display: inline-block;
-  animation: float 2s ease-in-out infinite;
+.addOnsHeader p {
+  font-size: 1.05rem;
+  color: var(--gray-light);
 }
 
 .addOnsGrid {
@@ -194,28 +194,40 @@
 
 .addOnCard {
   background: var(--black);
-  border: 3px solid var(--black-lighter);
-  border-radius: 20px;
-  padding: 32px 40px;
+  border: 1px solid var(--black-lighter);
+  border-radius: 12px;
+  padding: 32px 48px;
   text-align: center;
-  transition: all 0.4s var(--bounce);
+  transition: all 0.4s ease;
   min-width: 180px;
 }
 
 .addOnCard:hover {
-  border-color: var(--gold);
-  transform: translateY(-8px) rotate(2deg);
+  border-color: var(--gold-muted);
+  transform: translateY(-6px);
 }
 
-.addOnCardEmoji {
-  font-size: 2.5rem;
-  display: block;
-  margin-bottom: 12px;
+.addOnIcon {
+  width: 56px;
+  height: 56px;
+  background: var(--gold-muted);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  margin: 0 auto 20px;
+  transition: all 0.3s ease;
+}
+
+.addOnCard:hover .addOnIcon {
+  background: var(--gold);
+  color: var(--black);
 }
 
 .addOnCard h3 {
   font-size: 1.1rem;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .addOnPrice {
@@ -226,22 +238,20 @@
 
 /* ========== FAQ ========== */
 .faq {
-  padding: 100px 0;
+  padding: 120px 0;
 }
 
 .faqHeader {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 64px;
 }
 
-.faqIcon {
-  color: var(--gold);
-  margin-bottom: 16px;
-  animation: wiggle 3s ease-in-out infinite;
+.faqHeader h2 {
+  margin-bottom: 12px;
 }
 
 .faqHeader p {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   color: var(--gray-light);
 }
 
@@ -255,32 +265,32 @@
 
 .faqCard {
   background: var(--black-light);
-  border: 3px solid var(--black-lighter);
-  border-radius: 20px;
+  border: 1px solid var(--black-lighter);
+  border-radius: 12px;
   padding: 28px;
-  transition: all 0.4s var(--bounce);
+  transition: all 0.4s ease;
 }
 
 .faqCard:hover {
-  border-color: var(--gold);
-  transform: translateY(-5px);
+  border-color: var(--gold-muted);
+  transform: translateY(-4px);
 }
 
 .faqCard h3 {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   margin-bottom: 12px;
-  color: var(--gold);
+  color: var(--white);
 }
 
 .faqCard p {
   font-size: 0.95rem;
   color: var(--gray-light);
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 /* ========== CTA ========== */
 .cta {
-  padding: 100px 0;
+  padding: 120px 0;
   background: var(--black-light);
 }
 
@@ -290,13 +300,6 @@
   margin: 0 auto;
 }
 
-.ctaEmoji {
-  font-size: 4rem;
-  display: block;
-  margin-bottom: 20px;
-  animation: float 3s ease-in-out infinite;
-}
-
 .cta h2 {
   margin-bottom: 16px;
 }
@@ -304,23 +307,15 @@
 .cta p {
   font-size: 1.1rem;
   color: var(--gray-light);
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 }
 
 /* ========== RESPONSIVE ========== */
 @media (max-width: 1000px) {
   .packagesGrid {
     grid-template-columns: 1fr;
-    max-width: 420px;
+    max-width: 450px;
     margin: 0 auto;
-  }
-
-  .featured {
-    transform: none;
-  }
-
-  .featured:hover {
-    transform: translateY(-10px);
   }
 
   .faqGrid {
@@ -336,6 +331,6 @@
 
   .addOnCard {
     width: 100%;
-    max-width: 280px;
+    max-width: 300px;
   }
 }
