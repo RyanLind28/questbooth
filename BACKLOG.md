@@ -3,10 +3,13 @@
 ## Design Tasks (For Designer)
 
 ### 1. Logo Positioning
-- [ ] Redesign logo layout: icon on left, wordmark on right
-- [ ] Current: Full logo image used in header and footer
-- [ ] Consider: Separate icon and text components for more flexible positioning
-- [ ] Files affected: `Navbar.tsx`, `Footer.tsx`
+- [x] Horizontal lockup done: icon left, wordmark right
+- [x] Built as a reusable `<Logo iconHeight wordHeight gap />` component
+      (`src/components/Logo.tsx`). It crops the icon and wordmark out of the
+      single stacked `Agold.webp` via measured background offsets, so no new
+      asset was needed.
+- [ ] Nice to have: separate icon / wordmark exports, so the crop offsets in
+      `Logo.module.css` are no longer coupled to that one file's composition
 
 ---
 
@@ -19,22 +22,27 @@
   - URL pattern: `https://ho516c37no6nnbga.public.blob.vercel-storage.com/Quest/QuestBooth/Photos/QuestBooth_[1-12].jpeg`
 - [ ] Currently used in:
   - Scrolling gallery (all 12)
-  - Featured grid (5 images)
+  - Bento grid (6: photos 1, 5, 2, 3, 8, 4)
+  - Hero background (photo 6 — gold sequin wall)
+  - About section (photo 9 — the booth itself)
+  - Closing CTA background (photo 5 — silver sequin wall)
 - [ ] Consider adding more images to Pricing or Booking pages
+- [ ] **Worth knowing:** all 12 photos are portrait or square, and none show
+      people. They are equipment and backdrop shots. Landscape shots of guests
+      actually using the booth would do more for the hero and the gallery than
+      any layout change.
 
 ### 3. Improve "Moments We've Captured" Photo Grid
-- [ ] Current: 2 large + 3 small asymmetric grid
-- [ ] Options to consider:
-  - Masonry layout
-  - Bento grid style
-  - Lightbox/modal for full-size viewing
-  - Add more photos to the grid
-- [ ] File: `Home.tsx`, `Home.module.css` (`.featured` section)
+- [x] Rebuilt as a bento grid that tiles exactly at every breakpoint
+  (4 cols desktop / 2 cols tablet + mobile) — the old grid orphaned its
+  last image into a half-empty implicit row below 1024px
+- [ ] Still open: lightbox / modal for full-size viewing
+- [ ] Still open: surface the remaining photos (6 of 12 are in the bento)
+- [ ] File: `Home.tsx`, `Home.module.css` (`.bento`)
 
 ### 4. Add "Choose This Package" to What We Offer Section
-- [ ] Add CTA button to each package card in the services section
-- [ ] Currently only the featured (Manned Digital) has a primary button
-- [ ] Make all three packages have consistent "Choose This Package" buttons
+- [x] All three service cards now have a full-width "Choose this package"
+      button (primary on the featured card, secondary on the others)
 - [ ] File: `Home.tsx` (`.services` section)
 
 ### 5. SEO & AI SEO
@@ -94,8 +102,22 @@
 
 ## Priority Order
 1. ⬜ README File (documentation)
-2. ⬜ Add "Choose This Package" buttons
-3. ⬜ Use all images
-4. ⬜ Improve photo grid layout
+2. ✅ Add "Choose This Package" buttons
+3. 🟡 Use all images (12 in the gallery; 8 distinct across hero/about/bento/CTA)
+4. ✅ Improve photo grid layout
 5. ⬜ SEO implementation
-6. ⬜ Logo positioning (designer task)
+6. ✅ Logo positioning
+
+---
+
+## Known Gaps (found during the UI/UX pass)
+
+- **The booking form does not submit anywhere.** `handleSubmit` in
+  `Booking.tsx` waits 1.5s, `console.log`s the payload and shows the success
+  state. Enquiries are silently lost — this needs a real endpoint before launch.
+- **Placeholder contact details** — `07123 456 789` and
+  `hello@questbooth.co.uk` appear in the footer, booking sidebar and mobile menu.
+- **`AeroMaticsBold` was never shipped.** The `@font-face` pointed at
+  `/fonts/`, which does not exist, so the display font silently fell back.
+  The dead rule has been removed and `Space Grotesk` is now named directly —
+  add the real font files and restore the `@font-face` if that font is wanted.

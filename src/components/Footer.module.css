@@ -6,19 +6,18 @@
 
 .top {
   display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: var(--space-xl);
+  grid-template-columns: minmax(240px, 300px) 1fr;
+  gap: var(--space-lg) var(--space-xl);
   padding-bottom: var(--space-lg);
   border-bottom: 1px solid var(--black-border);
 }
 
 .brand {
-  max-width: 280px;
+  max-width: 300px;
 }
 
 .logo {
-  height: 40px;
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-sm);
   opacity: 0.9;
 }
 
@@ -31,23 +30,30 @@
 .nav {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-lg);
+  gap: var(--space-md) var(--space-lg);
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
 }
 
 .col h4 {
   font-family: var(--font-display);
   font-size: 0.9rem;
   color: var(--white);
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-xs);
   letter-spacing: 0.02em;
 }
 
 .col a,
 .col span {
-  display: block;
+  display: flex;
+  align-items: center;
   font-size: 0.9rem;
   color: var(--gray);
-  padding: 6px 0;
+  /* 44px minimum touch target */
+  min-height: 44px;
   transition: color 0.3s ease;
 }
 
@@ -59,7 +65,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: var(--space-lg);
+  gap: var(--space-md);
+  padding-top: var(--space-md);
 }
 
 .bottom p {
@@ -76,13 +83,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
   background: var(--black-soft);
   border: 1px solid var(--black-border);
   color: var(--gray);
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .social a:hover {
@@ -94,26 +101,28 @@
 @media (max-width: 900px) {
   .top {
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
   }
 
   .brand {
     max-width: none;
   }
-
-  .nav {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 
 @media (max-width: 600px) {
   .nav {
-    grid-template-columns: 1fr;
+    /* two columns beats one long stack on a phone */
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-md);
   }
 
+  /* contact column spans the row rather than sitting half-width */
+  .col:last-child {
+    grid-column: span 2;
+  }
+
   .bottom {
-    flex-direction: column;
+    flex-direction: column-reverse;
+    align-items: center;
     gap: var(--space-md);
     text-align: center;
   }

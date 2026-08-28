@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ArrowRight, Phone, Mail, MapPin, Check } from 'lucide-react';
 import styles from './Booking.module.css';
@@ -22,11 +22,15 @@ const Booking = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success'>('idle');
 
-  useEffect(() => {
+  // Sync the ?package= query param into the form without an effect.
+  // https://react.dev/learn/you-might-not-need-an-effect
+  const [lastPackageParam, setLastPackageParam] = useState(preselectedPackage);
+  if (preselectedPackage !== lastPackageParam) {
+    setLastPackageParam(preselectedPackage);
     if (preselectedPackage) {
       setFormData((prev) => ({ ...prev, packageType: preselectedPackage }));
     }
-  }, [preselectedPackage]);
+  }
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -63,14 +67,13 @@ const Booking = () => {
   ];
 
   return (
-    <main className={styles.main}>
+    <main className={styles.main} id="main">
       {/* Hero */}
       <section className={styles.hero}>
         <div className="container">
-          <p className="eyebrow">Contact</p>
-          <h1>Let's make it<br /><span className="text-gold">happen</span></h1>
+          <h1>Let's make it <span className="text-gold">happen</span></h1>
           <p className={styles.heroSub}>
-            Fill out the form and we'll get back to you within 24 hours with a quote.
+            Fill in the form and we'll get back to you within 24 hours with a quote.
           </p>
         </div>
       </section>
@@ -89,7 +92,7 @@ const Booking = () => {
                   <h2>Message received</h2>
                   <p>
                     Thank you for your enquiry. We'll review your details and
-                    respond within 24 hours with a personalized quote.
+                    respond within 24 hours with a personalised quote.
                   </p>
                   <button
                     className="btn btn--secondary"
@@ -249,7 +252,7 @@ const Booking = () => {
 
                   <button
                     type="submit"
-                    className={`btn btn--primary btn--large ${styles.submit}`}
+                    className={`btn btn--primary btn--large btn--block ${styles.submit}`}
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? 'Sending...' : 'Request Quote'}
@@ -275,7 +278,7 @@ const Booking = () => {
                   </li>
                   <li>
                     <MapPin size={18} />
-                    <span>Serving all of UK</span>
+                    <span>Serving all of the UK</span>
                   </li>
                 </ul>
               </div>

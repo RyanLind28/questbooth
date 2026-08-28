@@ -1,0 +1,40 @@
+/*
+ * The source logo is a 1000x1000 stacked lockup (icon above wordmark) with
+ * generous padding, so using it whole makes the wordmark unreadable at header
+ * sizes. These two elements crop the icon and the wordmark out of that single
+ * asset and set them side by side. Crop boxes measured from the asset:
+ *   icon     left 346  top 139  391 x 480
+ *   wordmark left 111  top 677  777 x 183
+ */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--logo-gap, 12px);
+}
+
+.icon,
+.word {
+  display: block;
+  background-image: url('https://ho516c37no6nnbga.public.blob.vercel-storage.com/Quest/QuestBooth/Logo/Agold.webp');
+  background-repeat: no-repeat;
+  flex-shrink: 0;
+}
+
+.icon {
+  height: var(--icon-h);
+  width: calc(var(--icon-h) * 391 / 480);
+  background-size: calc(var(--icon-h) * 1000 / 480) auto;
+  background-position: calc(var(--icon-h) * -346 / 480) calc(var(--icon-h) * -139 / 480);
+}
+
+.word {
+  height: var(--word-h);
+  width: calc(var(--word-h) * 777 / 183);
+  background-size: calc(var(--word-h) * 1000 / 183) auto;
+  background-position: calc(var(--word-h) * -111 / 183) calc(var(--word-h) * -677 / 183);
+}
+
+/* Icon only — used where the full lockup would be too wide */
+.iconOnly .word {
+  display: none;
+}

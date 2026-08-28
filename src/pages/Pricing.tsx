@@ -6,7 +6,6 @@ const Pricing = () => {
   const packages = [
     {
       id: 'drop-off',
-      number: '01',
       name: 'Drop-Off Digital',
       tagline: 'Self-Service',
       description: 'We deliver and set up, you run the show. Ideal for intimate gatherings where you want full control.',
@@ -21,7 +20,6 @@ const Pricing = () => {
     },
     {
       id: 'manned-digital',
-      number: '02',
       name: 'Manned Digital',
       tagline: 'Full Service',
       description: 'Our team handles everything while you enjoy the party. The most popular choice for weddings and large events.',
@@ -37,7 +35,6 @@ const Pricing = () => {
     },
     {
       id: 'manned-prints',
-      number: '03',
       name: 'Manned + Prints',
       tagline: 'Complete Experience',
       description: 'The ultimate package with instant prints your guests can take home as keepsakes.',
@@ -62,7 +59,7 @@ const Pricing = () => {
       a: 'Approximately 8ft x 8ft for the complete setup. We can work with your venue to find the perfect spot.',
     },
     {
-      q: 'Can photos be customized?',
+      q: 'Can photos be customised?',
       a: 'Yes. Custom branding, names, dates, and colour schemes are included at no extra cost.',
     },
     {
@@ -80,12 +77,11 @@ const Pricing = () => {
   ];
 
   return (
-    <main className={styles.main}>
+    <main className={styles.main} id="main">
       {/* Hero */}
       <section className={styles.hero}>
         <div className="container">
-          <p className="eyebrow">Pricing</p>
-          <h1>Choose your<br /><span className="text-gold">package</span></h1>
+          <h1>Choose your <span className="text-gold">package</span></h1>
           <p className={styles.heroSub}>
             All packages include delivery, setup, and collection within 25 miles.
           </p>
@@ -105,7 +101,6 @@ const Pricing = () => {
                 {pkg.featured && <div className={styles.badge}>Most Popular</div>}
 
                 <div className={styles.packageHeader}>
-                  <span className={styles.packageNum}>{pkg.number}</span>
                   <span className={styles.packageTag}>{pkg.tagline}</span>
                   <h2>{pkg.name}</h2>
                   <p>{pkg.description}</p>
@@ -131,7 +126,9 @@ const Pricing = () => {
 
                 <Link
                   to={`/booking?package=${pkg.id}`}
-                  className={`btn ${pkg.featured ? 'btn--primary' : 'btn--secondary'}`}
+                  className={`btn btn--block ${
+                    pkg.featured ? 'btn--primary' : 'btn--secondary'
+                  }`}
                 >
                   Select Package
                   <ArrowRight size={18} />
@@ -145,10 +142,7 @@ const Pricing = () => {
       {/* Add-ons */}
       <section className={styles.addons}>
         <div className="container container--narrow">
-          <div className={styles.addonsHeader}>
-            <p className="eyebrow">Extras</p>
-            <h2>Enhance your experience</h2>
-          </div>
+          <h2 className={styles.sectionTitle}>Enhance your experience</h2>
           <div className={styles.addonsGrid}>
             <div className={styles.addon}>
               <h3>Extra Hour</h3>
@@ -169,10 +163,7 @@ const Pricing = () => {
       {/* FAQ */}
       <section className={styles.faq}>
         <div className="container container--narrow">
-          <div className={styles.faqHeader}>
-            <p className="eyebrow">FAQ</p>
-            <h2>Common questions</h2>
-          </div>
+          <h2 className={styles.sectionTitle}>Common questions</h2>
           <div className={styles.faqGrid}>
             {faqs.map((faq, idx) => (
               <div key={idx} className={styles.faqItem}>

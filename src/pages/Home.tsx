@@ -1,91 +1,179 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowDown } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { useParallax } from '../hooks/useParallax';
 import styles from './Home.module.css';
 
+const PHOTO_BASE =
+  'https://ho516c37no6nnbga.public.blob.vercel-storage.com/Quest/QuestBooth/Photos/QuestBooth_';
+
+const photo = (n: number) => `${PHOTO_BASE}${n}.jpeg`;
+
+const photos = Array.from({ length: 12 }, (_, i) => ({
+  src: photo(i + 1),
+  alt: `QuestBooth photo booth setup at a UK event ${i + 1}`,
+}));
+
+/**
+ * Tile sizes are chosen so the bento tiles perfectly at every breakpoint —
+ * see the grid rules in Home.module.css. Order matters.
+ */
+const featured = [
+  { photo: photos[0], size: 'feature' },
+  { photo: photos[4], size: 'wide' },
+  { photo: photos[1], size: 'small' },
+  { photo: photos[2], size: 'small' },
+  { photo: photos[7], size: 'wide' },
+  { photo: photos[3], size: 'wide' },
+] as const;
+
+const services = [
+  {
+    num: '01',
+    name: 'Drop-Off Digital',
+    href: '/pricing#drop-off',
+    price: '199',
+    copy: 'We deliver, set up, and leave you in control. Perfect for intimate gatherings where you want a DIY vibe.',
+  },
+  {
+    num: '02',
+    name: 'Manned Digital',
+    href: '/pricing#manned-digital',
+    price: '349',
+    featured: true,
+    copy: 'Our team runs the show while you enjoy the party. Full service with professional lighting and premium props.',
+  },
+  {
+    num: '03',
+    name: 'Manned + Prints',
+    href: '/pricing#manned-prints',
+    price: '449',
+    copy: 'Everything above, plus instant prints your guests take home. The complete photo booth experience.',
+  },
+];
+
+const steps = [
+  {
+    title: 'Tell us about your event',
+    copy: 'Fill in our quick form with your date, venue, and package preference.',
+  },
+  {
+    title: 'Get your quote',
+    copy: "We'll respond within 24 hours with a personalised quote.",
+  },
+  {
+    title: 'We handle the rest',
+    copy: "Confirm your booking, then relax. We'll be there early to set up.",
+  },
+];
+
+const testimonials = [
+  {
+    quote:
+      "The booth was the highlight of our wedding reception. Our guests are still sharing photos weeks later. Couldn't recommend more highly.",
+    name: 'Sarah & James',
+    event: 'Wedding, Manchester',
+  },
+  {
+    quote:
+      'Professional from start to finish. The team were friendly, the equipment was top quality, and everyone had an absolute blast.',
+    name: 'TechCorp Ltd',
+    event: 'Corporate Event, London',
+  },
+  {
+    quote:
+      "Made my mum's 50th birthday absolutely unforgettable. So many genuine laughing moments captured. Worth every penny.",
+    name: 'The Williams Family',
+    event: 'Birthday Party, Birmingham',
+  },
+];
+
 const Home = () => {
-  const photos = Array.from({ length: 12 }, (_, i) => ({
-    src: `https://ho516c37no6nnbga.public.blob.vercel-storage.com/Quest/QuestBooth/Photos/QuestBooth_${i + 1}.jpeg`,
-    alt: `QuestBooth photo ${i + 1}`,
-  }));
+  const heroBg = useParallax<HTMLDivElement>(0.18);
+  const aboutImg = useParallax<HTMLImageElement>(0.06);
 
   return (
-    <main className={styles.main}>
+    <main className={styles.main} id="main">
       {/* Hero */}
       <section className={styles.hero}>
-        <div className={styles.heroContent}>
-          <div className={styles.heroLeft}>
-            <p className="eyebrow">Photo Booth Hire</p>
-            <h1>
-              Say<br />
-              <span className={styles.cheese}>Cheese</span>
-            </h1>
-          </div>
-          <div className={styles.heroRight}>
-            <p>
-              We bring premium photo booths to weddings, parties & events
-              across the UK. Family-run, professionally delivered.
-            </p>
-            <Link to="/booking" className="btn btn--primary btn--large">
-              Get a Free Quote
-              <ArrowRight size={20} />
-            </Link>
+        <div className={styles.heroMedia} aria-hidden="true">
+          <div ref={heroBg} className={styles.heroMediaInner}>
+            <img src={photo(6)} alt="" fetchPriority="high" />
           </div>
         </div>
-        <div className={styles.scrollHint}>
-          <span>Scroll</span>
-          <ArrowDown size={16} />
+
+        <div className={`container ${styles.heroContent}`}>
+          <div className={styles.heroLeft}>
+            <h1>
+              Say{' '}
+              <span className={styles.cheese}>
+                <span className={styles.cheeseText}>Cheese</span>
+              </span>
+            </h1>
+            <p className={styles.heroLede}>
+              Premium photo booths for weddings, parties &amp; events across the
+              UK. Family-run, professionally delivered.
+            </p>
+            <div className={styles.heroActions}>
+              <Link to="/booking" className="btn btn--primary btn--large">
+                Get a Free Quote
+                <ArrowRight size={20} />
+              </Link>
+              <Link to="/pricing" className="btn btn--secondary btn--large">
+                See Packages
+              </Link>
+            </div>
+          </div>
+
+          <dl className={styles.heroStats}>
+            <div>
+              <dt>500+</dt>
+              <dd>Events completed</dd>
+            </div>
+            <div>
+              <dt>50k+</dt>
+              <dd>Photos taken</dd>
+            </div>
+            <div>
+              <dt>5.0</dt>
+              <dd>Star reviews</dd>
+            </div>
+          </dl>
         </div>
       </section>
 
       {/* Photo Gallery - Marquee Style */}
-      <section className={styles.gallery}>
+      <section className={styles.gallery} aria-label="Photo gallery">
         <div className={styles.galleryTrack}>
-          <div className={styles.gallerySlide}>
-            {photos.map((photo, idx) => (
-              <div key={idx} className={styles.galleryItem}>
-                <img src={photo.src} alt={photo.alt} loading="lazy" />
-              </div>
-            ))}
-          </div>
-          <div className={styles.gallerySlide} aria-hidden="true">
-            {photos.map((photo, idx) => (
-              <div key={`dup-${idx}`} className={styles.galleryItem}>
-                <img src={photo.src} alt={photo.alt} loading="lazy" />
-              </div>
-            ))}
-          </div>
+          {[0, 1].map((slide) => (
+            <div
+              key={slide}
+              className={styles.gallerySlide}
+              aria-hidden={slide === 1 ? 'true' : undefined}
+            >
+              {photos.map((p, idx) => (
+                <div key={`${slide}-${idx}`} className={styles.galleryItem}>
+                  <img src={p.src} alt={slide === 0 ? p.alt : ''} loading="lazy" />
+                </div>
+              ))}
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Stats Bar */}
-      <section className={styles.stats}>
-        <div className="container">
-          <div className={styles.statsGrid}>
-            <div className={styles.stat}>
-              <span className={styles.statNumber}>500+</span>
-              <span className={styles.statLabel}>Events Completed</span>
-            </div>
-            <div className={styles.stat}>
-              <span className={styles.statNumber}>50k+</span>
-              <span className={styles.statLabel}>Photos Taken</span>
-            </div>
-            <div className={styles.stat}>
-              <span className={styles.statNumber}>5.0</span>
-              <span className={styles.statLabel}>Star Reviews</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* About Section */}
+      {/* About */}
       <section className={styles.about}>
         <div className="container">
           <div className={styles.aboutGrid}>
-            <div className={styles.aboutLeft}>
-              <p className="eyebrow">Who We Are</p>
-              <h2>A family business that genuinely cares about your event</h2>
+            <div className={styles.aboutMedia}>
+              <img
+                ref={aboutImg}
+                src={photo(9)}
+                alt="A QuestBooth photo booth set up on a red carpet at a venue"
+                loading="lazy"
+              />
             </div>
-            <div className={styles.aboutRight}>
+            <div className={styles.aboutBody}>
+              <h2>A family business that genuinely cares about your event</h2>
               <p>
                 We started QuestBooth because we believe every celebration deserves
                 to be remembered. Not with awkward posed photos, but with real moments
@@ -96,6 +184,9 @@ const Home = () => {
                 That means premium equipment, meticulous setup, and a genuine
                 passion for making your guests smile.
               </p>
+              <Link to="/booking" className="btn--ghost">
+                Talk to us <ArrowRight size={16} />
+              </Link>
             </div>
           </div>
         </div>
@@ -104,26 +195,13 @@ const Home = () => {
       {/* Featured Photos Grid */}
       <section className={styles.featured}>
         <div className="container">
-          <div className={styles.featuredHeader}>
-            <p className="eyebrow">Our Work</p>
-            <h2>Moments we've captured</h2>
-          </div>
-          <div className={styles.featuredGrid}>
-            <div className={styles.featuredLarge}>
-              <img src={photos[0].src} alt={photos[0].alt} loading="lazy" />
-            </div>
-            <div className={styles.featuredSmall}>
-              <img src={photos[1].src} alt={photos[1].alt} loading="lazy" />
-            </div>
-            <div className={styles.featuredSmall}>
-              <img src={photos[2].src} alt={photos[2].alt} loading="lazy" />
-            </div>
-            <div className={styles.featuredSmall}>
-              <img src={photos[3].src} alt={photos[3].alt} loading="lazy" />
-            </div>
-            <div className={styles.featuredLarge}>
-              <img src={photos[4].src} alt={photos[4].alt} loading="lazy" />
-            </div>
+          <h2 className={styles.sectionTitle}>Moments we've captured</h2>
+          <div className={styles.bento}>
+            {featured.map((tile, idx) => (
+              <figure key={idx} className={`${styles.tile} ${styles[tile.size]}`}>
+                <img src={tile.photo.src} alt={tile.photo.alt} loading="lazy" />
+              </figure>
+            ))}
           </div>
         </div>
       </section>
@@ -131,150 +209,81 @@ const Home = () => {
       {/* Services */}
       <section className={styles.services}>
         <div className="container">
-          <div className={styles.servicesHeader}>
-            <p className="eyebrow">What We Offer</p>
-            <h2>Three ways to bring the fun</h2>
-          </div>
+          <h2 className={styles.sectionTitle}>Three ways to bring the fun</h2>
 
           <div className={styles.servicesGrid}>
-            <article className={styles.service}>
-              <span className={styles.serviceNum}>01</span>
-              <h3>Drop-Off Digital</h3>
-              <p>
-                We deliver, set up, and leave you in control. Perfect for
-                intimate gatherings where you want a DIY vibe.
-              </p>
-              <div className={styles.servicePrice}>
-                <span>From</span>
-                <strong>£199</strong>
-              </div>
-              <Link to="/pricing#drop-off" className="btn--ghost">
-                Learn more <ArrowRight size={16} />
-              </Link>
-            </article>
-
-            <article className={`${styles.service} ${styles.serviceFeatured}`}>
-              <div className={styles.featuredBadge}>Popular</div>
-              <span className={styles.serviceNum}>02</span>
-              <h3>Manned Digital</h3>
-              <p>
-                Our team runs the show while you enjoy the party. Full service
-                with professional lighting and premium props.
-              </p>
-              <div className={styles.servicePrice}>
-                <span>From</span>
-                <strong>£349</strong>
-              </div>
-              <Link to="/pricing#manned-digital" className="btn btn--primary">
-                Choose this package
-              </Link>
-            </article>
-
-            <article className={styles.service}>
-              <span className={styles.serviceNum}>03</span>
-              <h3>Manned + Prints</h3>
-              <p>
-                Everything above, plus instant prints your guests take home.
-                The complete photo booth experience.
-              </p>
-              <div className={styles.servicePrice}>
-                <span>From</span>
-                <strong>£449</strong>
-              </div>
-              <Link to="/pricing#manned-prints" className="btn--ghost">
-                Learn more <ArrowRight size={16} />
-              </Link>
-            </article>
+            {services.map((service) => (
+              <article
+                key={service.num}
+                className={`${styles.service} ${
+                  service.featured ? styles.serviceFeatured : ''
+                }`}
+              >
+                {service.featured && (
+                  <div className={styles.featuredBadge}>Popular</div>
+                )}
+                <h3>{service.name}</h3>
+                <p>{service.copy}</p>
+                <div className={styles.servicePrice}>
+                  <span>From</span>
+                  <strong>£{service.price}</strong>
+                </div>
+                <Link
+                  to={service.href}
+                  className={`btn btn--block ${
+                    service.featured ? 'btn--primary' : 'btn--secondary'
+                  }`}
+                >
+                  Choose this package
+                </Link>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Process */}
       <section className={styles.process}>
-        <div className="container container--narrow">
-          <div className={styles.processHeader}>
-            <p className="eyebrow">How It Works</p>
-            <h2>Booking is simple</h2>
-          </div>
+        <div className="container">
+          <h2 className={`${styles.sectionTitle} ${styles.sectionTitleCenter}`}>
+            Booking is simple
+          </h2>
 
-          <div className={styles.processSteps}>
-            <div className={styles.step}>
-              <div className={styles.stepLine} />
-              <span className={styles.stepNum}>1</span>
-              <div className={styles.stepContent}>
-                <h3>Tell us about your event</h3>
-                <p>Fill out our quick form with your date, venue, and package preference.</p>
-              </div>
-            </div>
-
-            <div className={styles.step}>
-              <div className={styles.stepLine} />
-              <span className={styles.stepNum}>2</span>
-              <div className={styles.stepContent}>
-                <h3>Get your quote</h3>
-                <p>We'll respond within 24 hours with a personalized quote.</p>
-              </div>
-            </div>
-
-            <div className={styles.step}>
-              <div className={styles.stepLine} />
-              <span className={styles.stepNum}>3</span>
-              <div className={styles.stepContent}>
-                <h3>We handle the rest</h3>
-                <p>Confirm your booking, then relax. We'll be there early to set up.</p>
-              </div>
-            </div>
-          </div>
+          <ol className={styles.processSteps}>
+            {steps.map((step) => (
+              <li key={step.title} className={styles.step}>
+                <h3>{step.title}</h3>
+                <p>{step.copy}</p>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
       {/* Testimonials */}
       <section className={styles.testimonials}>
         <div className="container">
-          <div className={styles.testimonialsHeader}>
-            <p className="eyebrow">Kind Words</p>
-            <h2>From our happy customers</h2>
-          </div>
+          <h2 className={styles.sectionTitle}>From our happy customers</h2>
 
           <div className={styles.testimonialsGrid}>
-            <blockquote className={styles.testimonial}>
-              <p>
-                "The booth was the highlight of our wedding reception. Our guests
-                are still sharing photos weeks later. Couldn't recommend more highly."
-              </p>
-              <footer>
-                <strong>Sarah & James</strong>
-                <span>Wedding, Manchester</span>
-              </footer>
-            </blockquote>
-
-            <blockquote className={styles.testimonial}>
-              <p>
-                "Professional from start to finish. The team were friendly, the
-                equipment was top quality, and everyone had an absolute blast."
-              </p>
-              <footer>
-                <strong>TechCorp Ltd</strong>
-                <span>Corporate Event, London</span>
-              </footer>
-            </blockquote>
-
-            <blockquote className={styles.testimonial}>
-              <p>
-                "Made my mum's 50th birthday absolutely unforgettable. So many
-                genuine laughing moments captured. Worth every penny."
-              </p>
-              <footer>
-                <strong>The Williams Family</strong>
-                <span>Birthday Party, Birmingham</span>
-              </footer>
-            </blockquote>
+            {testimonials.map((item) => (
+              <blockquote key={item.name} className={styles.testimonial}>
+                <p>"{item.quote}"</p>
+                <footer>
+                  <strong>{item.name}</strong>
+                  <span>{item.event}</span>
+                </footer>
+              </blockquote>
+            ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
       <section className={styles.cta}>
+        <div className={styles.ctaMedia} aria-hidden="true">
+          <img src={photo(5)} alt="" loading="lazy" />
+        </div>
         <div className="container">
           <div className={styles.ctaContent}>
             <h2>Ready to make some memories?</h2>

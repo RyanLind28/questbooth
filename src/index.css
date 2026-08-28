@@ -1,14 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
-
-@font-face {
-  font-family: 'AeroMaticsBold';
-  src: url('/fonts/AeroMaticsBold.woff2') format('woff2'),
-       url('/fonts/AeroMaticsBold.woff') format('woff'),
-       url('/fonts/AeroMaticsBold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
+/* Fonts are loaded once, in index.html (@import here would block rendering). */
 
 :root {
   /* Core palette */
@@ -28,16 +18,20 @@
   --gray-light: #aaaaaa;
 
   /* Typography */
-  --font-display: 'AeroMaticsBold', 'Space Grotesk', sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', -apple-system, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* Spacing */
+  /* Spacing — fluid, so mobile is not padded like a 1440px desktop */
   --space-xs: 8px;
   --space-sm: 16px;
-  --space-md: 24px;
-  --space-lg: 48px;
-  --space-xl: 80px;
-  --space-2xl: 120px;
+  --space-md: clamp(16px, 3vw, 24px);
+  --space-lg: clamp(28px, 5vw, 48px);
+  --space-xl: clamp(48px, 7vw, 80px);
+  --space-2xl: clamp(56px, 8vw, 96px);
+
+  /* Layout */
+  --header-height: 88px;
+  --gutter: clamp(20px, 5vw, 40px);
 
   /* Transitions */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -54,6 +48,8 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Keeps hash targets clear of the fixed header */
+  scroll-padding-top: calc(var(--header-height) + 24px);
 }
 
 body {
@@ -90,6 +86,7 @@ button {
   cursor: pointer;
   border: none;
   background: none;
+  color: inherit;
 }
 
 input, textarea, select {
@@ -97,12 +94,42 @@ input, textarea, select {
   font-size: inherit;
 }
 
+/* Anything scrolled to via a hash clears the fixed header */
+[id] {
+  scroll-margin-top: calc(var(--header-height) + 24px);
+}
+
+/* ========== FOCUS ========== */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2000;
+  padding: 12px 20px;
+  background: var(--gold);
+  color: var(--black);
+  font-weight: 600;
+  border-radius: 8px;
+  transform: translateY(-200%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
 /* ========== LAYOUT ========== */
 .container {
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 var(--space-md);
+  padding: 0 var(--gutter);
 }
 
 .container--narrow {
@@ -120,6 +147,7 @@ h1, h2, h3, h4, h5 {
   line-height: 1.1;
   color: var(--white);
   letter-spacing: -0.02em;
+  text-wrap: balance;
 }
 
 h1 {
@@ -127,7 +155,7 @@ h1 {
 }
 
 h2 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(1.875rem, 5vw, 3.5rem);
 }
 
 h3 {
@@ -136,18 +164,10 @@ h3 {
 
 p {
   color: var(--gray-light);
+  text-wrap: pretty;
 }
 
 .text-gold {
-  color: var(--gold);
-}
-
-.eyebrow {
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
   color: var(--gold);
 }
 
@@ -160,11 +180,14 @@ p {
   font-family: var(--font-display);
   font-size: 15px;
   font-weight: 700;
-  padding: 18px 36px;
+  min-height: 48px;
+  padding: 16px 32px;
   border-radius: 100px;
-  transition: all 0.4s var(--ease-out);
+  transition: background 0.3s var(--ease-out), color 0.3s var(--ease-out),
+    border-color 0.3s var(--ease-out), transform 0.3s var(--ease-out),
+    box-shadow 0.3s var(--ease-out);
   position: relative;
-  overflow: hidden;
+  text-align: center;
 }
 
 .btn--primary {
@@ -181,7 +204,9 @@ p {
 .btn--secondary {
   background: transparent;
   color: var(--white);
-  border: 2px solid var(--black-border);
+  /* translucent white so the outline survives over photography as well as
+     over the dark cards */
+  border: 2px solid rgba(250, 250, 250, 0.28);
 }
 
 .btn--secondary:hover {
@@ -190,20 +215,36 @@ p {
 }
 
 .btn--ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
   background: transparent;
   color: var(--gold);
-  padding: 12px 0;
-  border-radius: 0;
+  min-height: 44px;
+  padding: 10px 0;
   border-bottom: 2px solid transparent;
+  transition: border-color 0.3s var(--ease-out), gap 0.3s var(--ease-out);
 }
 
 .btn--ghost:hover {
   border-bottom-color: var(--gold);
+  gap: 14px;
 }
 
 .btn--large {
-  padding: 22px 48px;
+  min-height: 56px;
+  padding: 18px 40px;
   font-size: 16px;
+}
+
+.btn--block {
+  width: 100%;
+  /* width comes from the container, so trim the side padding that
+     would otherwise force the label to wrap inside a narrow card */
+  padding-inline: 16px;
 }
 
 /* ========== CUSTOM SCROLLBAR ========== */
@@ -227,13 +268,15 @@ p {
 /* ========== FORM ELEMENTS ========== */
 input, textarea, select {
   width: 100%;
-  padding: 18px 24px;
+  min-height: 52px;
+  padding: 15px 20px;
   background: var(--black-soft);
   border: 1px solid var(--black-border);
   border-radius: 12px;
   color: var(--white);
+  /* 16px minimum stops iOS Safari zooming on focus */
   font-size: 16px;
-  transition: all 0.3s var(--ease-out);
+  transition: border-color 0.3s var(--ease-out), background 0.3s var(--ease-out);
 }
 
 input::placeholder,
@@ -249,13 +292,25 @@ select:focus {
   background: var(--black-rich);
 }
 
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
 select {
   cursor: pointer;
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23d7b458' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 20px center;
-  padding-right: 56px;
+  background-position: right 18px center;
+  padding-right: 52px;
 }
 
 /* ========== UTILITIES ========== */
@@ -300,4 +355,18 @@ select {
 
 .animate-scale-in {
   animation: scaleIn 0.6s var(--ease-out) forwards;
+}
+
+/* ========== REDUCED MOTION ========== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

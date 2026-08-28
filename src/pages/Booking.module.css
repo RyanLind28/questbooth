@@ -1,5 +1,5 @@
 .main {
-  padding-top: 100px;
+  padding-top: var(--header-height);
 }
 
 /* ========== HERO ========== */
@@ -8,14 +8,15 @@
 }
 
 .hero h1 {
-  font-size: clamp(3rem, 8vw, 5rem);
-  line-height: 0.95;
+  font-size: clamp(2.75rem, 8vw, 5rem);
+  line-height: 1;
   margin-bottom: var(--space-md);
+  max-width: 14ch;
 }
 
 .heroSub {
-  font-size: 1.15rem;
-  max-width: 500px;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  max-width: 50ch;
 }
 
 /* ========== FORM SECTION ========== */
@@ -25,8 +26,8 @@
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: var(--space-xl);
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: var(--space-lg);
   align-items: start;
 }
 
@@ -53,29 +54,31 @@
 .field {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .field label {
   font-size: 14px;
   font-weight: 500;
   color: var(--white);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .submit {
-  width: 100%;
-  margin-top: var(--space-sm);
+  margin-top: var(--space-xs);
 }
 
 .submit:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 /* Success */
 .success {
   text-align: center;
-  padding: var(--space-xl) var(--space-md);
+  padding: var(--space-xl) var(--space-sm);
 }
 
 .successIcon {
@@ -91,11 +94,12 @@
 }
 
 .success h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
   margin-bottom: var(--space-sm);
 }
 
 .success p {
-  max-width: 400px;
+  max-width: 44ch;
   margin: 0 auto var(--space-lg);
   line-height: 1.7;
 }
@@ -106,7 +110,7 @@
   flex-direction: column;
   gap: var(--space-md);
   position: sticky;
-  top: 120px;
+  top: calc(var(--header-height) + var(--space-md));
 }
 
 .contactCard,
@@ -125,13 +129,12 @@
 
 .contactCard > p {
   font-size: 0.9rem;
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-sm);
 }
 
 .contactCard ul {
   display: flex;
   flex-direction: column;
-  gap: 14px;
 }
 
 .contactCard li {
@@ -140,6 +143,15 @@
   gap: 12px;
   font-size: 0.95rem;
   color: var(--gray-light);
+}
+
+.contactCard li a,
+.contactCard li span {
+  display: flex;
+  align-items: center;
+  /* full-height touch target */
+  min-height: 44px;
+  transition: color 0.3s ease;
 }
 
 .contactCard li svg {
@@ -155,7 +167,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-top: var(--space-md);
+  margin-top: var(--space-sm);
 }
 
 .infoCard li {
@@ -171,6 +183,7 @@
   color: var(--black);
   font-family: var(--font-display);
   font-size: 14px;
+  font-weight: 700;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -188,21 +201,18 @@
 @media (max-width: 1000px) {
   .grid {
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
   }
 
+  /* the two cards sit side by side once the sidebar unstacks */
   .sidebar {
     position: static;
-    flex-direction: row;
-  }
-
-  .contactCard,
-  .infoCard {
-    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .formWrapper {
     padding: var(--space-md);
   }
@@ -212,6 +222,6 @@
   }
 
   .sidebar {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 }

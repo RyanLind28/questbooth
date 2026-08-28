@@ -1,21 +1,22 @@
 .main {
-  padding-top: 100px;
+  padding-top: var(--header-height);
 }
 
 /* ========== HERO ========== */
 .hero {
-  padding: var(--space-xl) 0 var(--space-2xl);
+  padding: var(--space-xl) 0 var(--space-lg);
 }
 
 .hero h1 {
-  font-size: clamp(3rem, 8vw, 5rem);
-  line-height: 0.95;
+  font-size: clamp(2.75rem, 8vw, 5rem);
+  line-height: 1;
   margin-bottom: var(--space-md);
+  max-width: 14ch;
 }
 
 .heroSub {
-  font-size: 1.15rem;
-  max-width: 500px;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  max-width: 50ch;
 }
 
 /* ========== PACKAGES ========== */
@@ -27,6 +28,9 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-md);
+  /* room for the badge that overhangs the card's top edge */
+  padding-top: 14px;
+  align-items: stretch;
 }
 
 .package {
@@ -37,7 +41,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  transition: all 0.4s var(--ease-out);
+  transition: border-color 0.4s var(--ease-out), transform 0.4s var(--ease-out);
 }
 
 .package:hover {
@@ -56,30 +60,17 @@
   left: var(--space-lg);
   background: var(--gold);
   color: var(--black);
-  font-size: 12px;
-  font-weight: 600;
-  padding: 8px 20px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 8px 18px;
   border-radius: 100px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
 }
 
 .packageHeader {
   margin-bottom: var(--space-md);
-}
-
-.packageNum {
-  font-family: var(--font-display);
-  font-size: 3rem;
-  color: var(--black-border);
-  line-height: 1;
-  display: block;
-  margin-bottom: var(--space-sm);
-}
-
-.featured .packageNum {
-  color: var(--gold);
-  opacity: 0.3;
 }
 
 .packageTag {
@@ -93,7 +84,7 @@
 }
 
 .packageHeader h2 {
-  font-size: 1.75rem;
+  font-size: clamp(1.5rem, 2.5vw, 1.75rem);
   margin-bottom: 12px;
 }
 
@@ -118,15 +109,17 @@
 
 .amount {
   font-family: var(--font-display);
-  font-size: 3.5rem;
+  font-size: clamp(2.75rem, 5vw, 3.5rem);
   color: var(--white);
   line-height: 1;
 }
 
 .currency {
-  font-size: 1.5rem;
+  font-size: 0.45em;
   vertical-align: top;
   margin-right: 2px;
+  position: relative;
+  top: 0.35em;
 }
 
 .period {
@@ -148,6 +141,7 @@
   padding: 12px 0;
   border-bottom: 1px solid var(--black-border);
   font-size: 0.95rem;
+  line-height: 1.5;
   color: var(--gray-light);
 }
 
@@ -158,26 +152,21 @@
 .features svg {
   color: var(--gold);
   flex-shrink: 0;
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
-.package .btn {
-  width: 100%;
+/* Shared centred section heading */
+.sectionTitle {
+  font-size: clamp(1.875rem, 4vw, 2.75rem);
+  text-align: center;
+  max-width: 20ch;
+  margin: 0 auto var(--space-lg);
 }
 
 /* ========== ADD-ONS ========== */
 .addons {
   padding: var(--space-2xl) 0;
   background: var(--black-rich);
-}
-
-.addonsHeader {
-  text-align: center;
-  margin-bottom: var(--space-lg);
-}
-
-.addonsHeader h2 {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
 }
 
 .addonsGrid {
@@ -189,10 +178,16 @@
 .addon {
   background: var(--black-soft);
   border: 1px solid var(--black-border);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 120px;
   text-align: center;
-  transition: all 0.3s var(--ease-out);
+  transition: border-color 0.3s var(--ease-out);
 }
 
 .addon:hover {
@@ -201,7 +196,6 @@
 
 .addon h3 {
   font-size: 1rem;
-  margin-bottom: 8px;
 }
 
 .addonPrice {
@@ -215,15 +209,6 @@
   padding: var(--space-2xl) 0;
 }
 
-.faqHeader {
-  text-align: center;
-  margin-bottom: var(--space-xl);
-}
-
-.faqHeader h2 {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-}
-
 .faqGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -233,7 +218,7 @@
 .faqItem {
   padding: var(--space-md);
   border: 1px solid var(--black-border);
-  border-radius: 12px;
+  border-radius: 14px;
   transition: border-color 0.3s ease;
 }
 
@@ -242,7 +227,7 @@
 }
 
 .faqItem h3 {
-  font-size: 1rem;
+  font-size: 1.05rem;
   margin-bottom: 8px;
 }
 
@@ -259,7 +244,7 @@
 
 .ctaContent {
   text-align: center;
-  max-width: 500px;
+  max-width: 560px;
   margin: 0 auto;
 }
 
@@ -269,22 +254,61 @@
 }
 
 .ctaContent p {
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 1.4vw, 1.1rem);
   margin-bottom: var(--space-lg);
+  max-width: 44ch;
+  margin-inline: auto;
 }
 
 /* ========== RESPONSIVE ========== */
+
+/* Tablet: two columns rather than one stranded 500px column */
 @media (max-width: 1000px) {
   .packagesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* third card spans the row, so no card is orphaned beside a gap
+     and the 01 / 02 / 03 reading order is preserved */
+  .packagesGrid .package:last-child {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 700px) {
+  .packagesGrid {
     grid-template-columns: 1fr;
-    max-width: 500px;
-    margin: 0 auto;
+    gap: var(--space-lg);
+  }
+
+  .packagesGrid .package:last-child {
+    grid-column: span 1;
+  }
+
+  .package {
+    padding: var(--space-md);
+  }
+
+  /* the card's padding shrinks here, so the featured card needs extra
+     headroom or the number rides up under the overhanging badge */
+  .featured {
+    padding-top: calc(var(--space-md) + 16px);
+  }
+
+  .badge {
+    left: var(--space-md);
   }
 
   .addonsGrid {
     grid-template-columns: 1fr;
-    max-width: 300px;
-    margin: 0 auto;
+    gap: var(--space-sm);
+  }
+
+  .addon {
+    flex-direction: row;
+    justify-content: space-between;
+    min-height: 72px;
+    text-align: left;
   }
 
   .faqGrid {
