@@ -61,9 +61,8 @@ const Booking = () => {
 
   const packageOptions = [
     { value: '', label: 'Not sure yet' },
-    { value: 'drop-off', label: 'Drop-Off Digital — £199' },
-    { value: 'manned-digital', label: 'Manned Digital — £349' },
-    { value: 'manned-prints', label: 'Manned + Prints — £449' },
+    { value: 'manned-digital', label: 'Manned Digital' },
+    { value: 'manned-prints', label: 'Manned Digital + Instant Prints' },
   ];
 
   return (
@@ -278,7 +277,7 @@ const Booking = () => {
                   </li>
                   <li>
                     <MapPin size={18} />
-                    <span>Serving all of the UK</span>
+                    <span>Within 30 minutes of SO31 — further afield may incur a small travel fee</span>
                   </li>
                 </ul>
               </div>

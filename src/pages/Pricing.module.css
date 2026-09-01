@@ -26,7 +26,10 @@
 
 .packagesGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  /* two cards would stretch uncomfortably wide on a large desktop */
+  max-width: 900px;
+  margin-inline: auto;
   gap: var(--space-md);
   /* room for the badge that overhangs the card's top edge */
   padding-top: 14px;
@@ -34,10 +37,12 @@
 }
 
 .package {
+  /* the media block bleeds to the card edge by negating this */
+  --card-pad: var(--space-lg);
   background: var(--black-soft);
   border: 1px solid var(--black-border);
   border-radius: 20px;
-  padding: var(--space-lg);
+  padding: var(--card-pad);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -56,6 +61,7 @@
 
 .badge {
   position: absolute;
+  z-index: 2;
   top: -14px;
   left: var(--space-lg);
   background: var(--gold);
@@ -67,6 +73,37 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   white-space: nowrap;
+}
+
+.packageMedia {
+  position: relative;
+  margin: calc(var(--card-pad) * -1) calc(var(--card-pad) * -1) var(--space-md);
+  height: 200px;
+  overflow: hidden;
+  /* 1px inside the card's own border */
+  border-radius: 19px 19px 0 0;
+}
+
+.packageMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* the source photos are portrait, so bias the crop off dead centre */
+  object-position: center 42%;
+  display: block;
+}
+
+/* keeps the gold badge legible wherever it lands on the photo */
+.packageMedia::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(9, 9, 9, 0.5) 0%,
+    rgba(9, 9, 9, 0) 45%,
+    rgba(9, 9, 9, 0.55) 100%
+  );
 }
 
 .packageHeader {
@@ -93,45 +130,12 @@
   line-height: 1.7;
 }
 
-.packagePrice {
-  padding: var(--space-md) 0;
-  margin-bottom: var(--space-md);
-  border-top: 1px solid var(--black-border);
-  border-bottom: 1px solid var(--black-border);
-}
-
-.from {
-  display: block;
-  font-size: 13px;
-  color: var(--gray);
-  margin-bottom: 4px;
-}
-
-.amount {
-  font-family: var(--font-display);
-  font-size: clamp(2.75rem, 5vw, 3.5rem);
-  color: var(--white);
-  line-height: 1;
-}
-
-.currency {
-  font-size: 0.45em;
-  vertical-align: top;
-  margin-right: 2px;
-  position: relative;
-  top: 0.35em;
-}
-
-.period {
-  display: block;
-  font-size: 14px;
-  color: var(--gray);
-  margin-top: 8px;
-}
-
 .features {
   flex-grow: 1;
   margin-bottom: var(--space-md);
+  /* the price block used to draw this divider under the header */
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--black-border);
 }
 
 .features li {
@@ -185,7 +189,7 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  min-height: 120px;
+  min-height: 96px;
   text-align: center;
   transition: border-color 0.3s var(--ease-out);
 }
@@ -196,12 +200,6 @@
 
 .addon h3 {
   font-size: 1rem;
-}
-
-.addonPrice {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  color: var(--gold);
 }
 
 /* ========== FAQ ========== */
@@ -262,37 +260,18 @@
 
 /* ========== RESPONSIVE ========== */
 
-/* Tablet: two columns rather than one stranded 500px column */
-@media (max-width: 1000px) {
-  .packagesGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* third card spans the row, so no card is orphaned beside a gap
-     and the 01 / 02 / 03 reading order is preserved */
-  .packagesGrid .package:last-child {
-    grid-column: span 2;
-  }
-}
-
 @media (max-width: 700px) {
   .packagesGrid {
     grid-template-columns: 1fr;
     gap: var(--space-lg);
   }
 
-  .packagesGrid .package:last-child {
-    grid-column: span 1;
-  }
-
   .package {
-    padding: var(--space-md);
+    --card-pad: var(--space-md);
   }
 
-  /* the card's padding shrinks here, so the featured card needs extra
-     headroom or the number rides up under the overhanging badge */
-  .featured {
-    padding-top: calc(var(--space-md) + 16px);
+  .packageMedia {
+    height: 170px;
   }
 
   .badge {

@@ -7,6 +7,7 @@ import styles from './Navbar.module.css';
 const links = [
   { path: '/', label: 'Home' },
   { path: '/pricing', label: 'Packages' },
+  { path: '/gallery', label: 'Gallery' },
   { path: '/booking', label: 'Contact' },
 ];
 

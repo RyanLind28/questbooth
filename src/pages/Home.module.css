@@ -156,7 +156,7 @@
 .galleryTrack {
   display: flex;
   width: fit-content;
-  animation: scroll 40s linear infinite;
+  animation: scroll 60s linear infinite;
 }
 
 .galleryTrack:hover {
@@ -175,6 +175,10 @@
 }
 
 .galleryItem {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
   flex-shrink: 0;
   width: clamp(200px, 26vw, 300px);
   aspect-ratio: 4 / 3;
@@ -265,6 +269,16 @@
   overflow: hidden;
   border-radius: clamp(10px, 1.2vw, 18px);
   background: var(--black-soft);
+  /* rendered as a <button> so the lightbox is keyboard reachable */
+  padding: 0;
+  border: 0;
+  cursor: zoom-in;
+}
+
+.tile:focus-visible,
+.galleryItem:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
 }
 
 .tile img {
@@ -300,7 +314,7 @@
 
 .servicesGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-md);
   align-items: stretch;
 }
@@ -352,28 +366,11 @@
 .service > p {
   color: var(--gray-light);
   line-height: 1.7;
+  /* the price block used to draw this divider above the button */
+  padding-bottom: var(--space-md);
   margin-bottom: var(--space-md);
+  border-bottom: 1px solid var(--black-border);
   flex-grow: 1;
-}
-
-.servicePrice {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: var(--space-md);
-  padding-top: var(--space-md);
-  border-top: 1px solid var(--black-border);
-}
-
-.servicePrice span {
-  font-size: 14px;
-  color: var(--gray);
-}
-
-.servicePrice strong {
-  font-family: var(--font-display);
-  font-size: clamp(1.75rem, 3vw, 2rem);
-  color: var(--white);
 }
 
 /* ========== PROCESS ========== */
@@ -537,13 +534,11 @@
     grid-column: span 2;
   }
 
-  .servicesGrid,
   .testimonialsGrid,
   .processSteps {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .servicesGrid .service:last-child,
   .testimonialsGrid .testimonial:last-child,
   .processSteps .step:last-child {
     grid-column: span 2;
@@ -597,7 +592,6 @@
     grid-template-columns: 1fr;
   }
 
-  .servicesGrid .service:last-child,
   .testimonialsGrid .testimonial:last-child,
   .processSteps .step:last-child {
     grid-column: span 1;

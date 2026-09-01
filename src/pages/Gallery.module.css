@@ -1,0 +1,121 @@
+.main {
+  padding-top: var(--header-height);
+}
+
+/* ========== HERO ========== */
+.hero {
+  padding: var(--space-xl) 0 var(--space-lg);
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  line-height: 1.05;
+  margin-bottom: var(--space-sm);
+}
+
+.heroSub {
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
+  color: var(--gray-light);
+  max-width: 52ch;
+}
+
+/* ========== GRID ========== */
+.grid {
+  padding-bottom: var(--space-2xl);
+}
+
+/*
+ * The photos are a mix of portrait, square and landscape. A fixed-ratio grid
+ * would centre-crop every one of them; masonry columns let each keep its own
+ * shape, which matters when half the set is backdrops you're selling.
+ */
+.tiles {
+  columns: 4;
+  column-gap: clamp(10px, 1.2vw, 20px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tiles li {
+  break-inside: avoid;
+  margin-bottom: clamp(10px, 1.2vw, 20px);
+}
+
+.tile {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: var(--black-soft);
+  border-radius: clamp(10px, 1.2vw, 16px);
+  overflow: hidden;
+  cursor: zoom-in;
+  position: relative;
+}
+
+.tile img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.6s var(--ease-out), opacity 0.4s var(--ease-out);
+}
+
+.tile:hover img,
+.tile:focus-visible img {
+  transform: scale(1.04);
+  opacity: 0.88;
+}
+
+.tile:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+@media (max-width: 1000px) {
+  .tiles {
+    columns: 3;
+  }
+}
+
+@media (max-width: 700px) {
+  .tiles {
+    columns: 2;
+  }
+}
+
+@media (max-width: 420px) {
+  .tiles {
+    columns: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile img {
+    transition: none;
+  }
+}
+
+/* ========== CTA ========== */
+.cta {
+  padding: var(--space-2xl) 0;
+  background: var(--black-rich);
+  border-top: 1px solid var(--black-border);
+}
+
+.ctaContent {
+  text-align: center;
+}
+
+.ctaContent h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  margin-bottom: var(--space-sm);
+}
+
+.ctaContent p {
+  font-size: clamp(1rem, 1.4vw, 1.1rem);
+  color: var(--gray-light);
+  margin-bottom: var(--space-lg);
+  max-width: 44ch;
+  margin-inline: auto;
+}

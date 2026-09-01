@@ -1,50 +1,42 @@
 import { Link } from 'react-router-dom';
 import { Check, ArrowRight } from 'lucide-react';
+import { photoByName } from '../data/photos';
 import styles from './Pricing.module.css';
 
 const Pricing = () => {
   const packages = [
     {
-      id: 'drop-off',
-      name: 'Drop-Off Digital',
-      tagline: 'Self-Service',
-      description: 'We deliver and set up, you run the show. Ideal for intimate gatherings where you want full control.',
-      price: '199',
-      features: [
-        'Professional booth delivered & set up',
-        'Unlimited digital photos',
-        'Easy touchscreen interface',
-        'QR code instant sharing',
-        'Online gallery for all guests',
-      ],
-    },
-    {
       id: 'manned-digital',
       name: 'Manned Digital',
       tagline: 'Full Service',
-      description: 'Our team handles everything while you enjoy the party. The most popular choice for weddings and large events.',
-      price: '349',
-      featured: true,
+      image: photoByName('QuestBooth_15').src,
+      imageAlt: photoByName('QuestBooth_15').alt,
+      description: 'Our team runs the booth from start to finish while your guests share their photos straight to their phones.',
       features: [
-        'Everything in Drop-Off, plus:',
-        'Dedicated on-site attendant',
-        'Professional studio lighting',
-        'Premium props collection',
-        'Backdrop & red carpet setup',
+        'Digital booth — photos sent straight to guests by text, WhatsApp, QR code or email',
+        'Customised photo templates to match your event and colour scheme',
+        'Props — a vast array of hats, masks, glasses and more',
+        'Professional overhead LED lighting for a better look with no glare',
+        'A member of staff on hand to help with props and anything else',
+        'A link after the event to download every picture from the night',
       ],
     },
     {
       id: 'manned-prints',
-      name: 'Manned + Prints',
+      name: 'Manned Digital + Instant Prints',
       tagline: 'Complete Experience',
-      description: 'The ultimate package with instant prints your guests can take home as keepsakes.',
-      price: '449',
+      image: photoByName('QuestBooth_8').src,
+      imageAlt: photoByName('QuestBooth_8').alt,
+      featured: true,
+      description: 'Everything in our manned digital package, plus instant prints your guests take home as keepsakes.',
       features: [
-        'Everything in Manned, plus:',
-        'Unlimited instant prints',
-        'Premium 6x4" print quality',
-        'Custom photo strip designs',
-        'Choice of print finishes',
+        'Instant prints — the latest technology gets pictures in guests\u2019 hands in as little as 8 seconds',
+        'Digital booth — photos sent straight to guests by text, WhatsApp, QR code or email',
+        'Customised photo templates to match your event and colour scheme',
+        'Props — a vast array of hats, masks, glasses and more',
+        'Professional overhead LED lighting for a better look with no glare',
+        'A member of staff on hand to help with props and anything else',
+        'A link after the event to download every picture from the night',
       ],
     },
   ];
@@ -52,7 +44,7 @@ const Pricing = () => {
   const faqs = [
     {
       q: 'How far do you travel?',
-      a: 'We cover most of the UK. Delivery is free within 25 miles, with a small fee for further distances.',
+      a: 'We cover a 30 minute drive of SO31 as standard, which takes in Southampton, Fareham, Portsmouth and the surrounding area. Anywhere further afield may incur a small travel fee — just ask.',
     },
     {
       q: 'How much space is needed?',
@@ -64,7 +56,7 @@ const Pricing = () => {
     },
     {
       q: 'How do guests get their photos?',
-      a: 'Instantly via text, WhatsApp, or email. Plus access to an online gallery after the event.',
+      a: 'Instantly via text, WhatsApp, QR code, or email. Plus a link to download every photo after the event.',
     },
     {
       q: 'What deposit is required?',
@@ -83,7 +75,8 @@ const Pricing = () => {
         <div className="container">
           <h1>Choose your <span className="text-gold">package</span></h1>
           <p className={styles.heroSub}>
-            All packages include delivery, setup, and collection within 25 miles.
+            Available within a 30 minute drive of SO31. Travelling further may incur a
+            small travel fee.
           </p>
         </div>
       </section>
@@ -100,19 +93,14 @@ const Pricing = () => {
               >
                 {pkg.featured && <div className={styles.badge}>Most Popular</div>}
 
+                <div className={styles.packageMedia}>
+                  <img src={pkg.image} alt={pkg.imageAlt} loading="lazy" />
+                </div>
+
                 <div className={styles.packageHeader}>
                   <span className={styles.packageTag}>{pkg.tagline}</span>
                   <h2>{pkg.name}</h2>
                   <p>{pkg.description}</p>
-                </div>
-
-                <div className={styles.packagePrice}>
-                  <span className={styles.from}>From</span>
-                  <span className={styles.amount}>
-                    <span className={styles.currency}>£</span>
-                    {pkg.price}
-                  </span>
-                  <span className={styles.period}>for 3 hours</span>
                 </div>
 
                 <ul className={styles.features}>
@@ -146,15 +134,12 @@ const Pricing = () => {
           <div className={styles.addonsGrid}>
             <div className={styles.addon}>
               <h3>Extra Hour</h3>
-              <span className={styles.addonPrice}>+£75</span>
             </div>
             <div className={styles.addon}>
               <h3>Custom Backdrop</h3>
-              <span className={styles.addonPrice}>+£50</span>
             </div>
             <div className={styles.addon}>
               <h3>Guest Book</h3>
-              <span className={styles.addonPrice}>+£45</span>
             </div>
           </div>
         </div>

@@ -22,21 +22,21 @@ const Footer = () => {
               <h4>Navigate</h4>
               <Link to="/">Home</Link>
               <Link to="/pricing">Packages</Link>
+              <Link to="/gallery">Gallery</Link>
               <Link to="/booking">Contact</Link>
             </div>
 
             <div className={styles.col}>
               <h4>Packages</h4>
-              <Link to="/pricing#drop-off">Drop-Off Digital</Link>
               <Link to="/pricing#manned-digital">Manned Digital</Link>
-              <Link to="/pricing#manned-prints">Manned + Prints</Link>
+              <Link to="/pricing#manned-prints">Manned + Instant Prints</Link>
             </div>
 
             <div className={styles.col}>
               <h4>Get in Touch</h4>
               <a href="tel:+447123456789">07123 456 789</a>
               <a href="mailto:hello@questbooth.co.uk">hello@questbooth.co.uk</a>
-              <span>Serving all of the UK</span>
+              <span>Within 30 minutes of SO31</span>
             </div>
           </nav>
         </div>
@@ -53,7 +53,7 @@ const Footer = () => {
               <Instagram size={20} />
             </a>
             <a
-              href="https://facebook.com/questbooth"
+              href="https://www.facebook.com/share/1DXfcrfxt3/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"

@@ -1,53 +1,37 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useParallax } from '../hooks/useParallax';
+import Lightbox from '../components/Lightbox';
+import { photos, photoByName } from '../data/photos';
 import styles from './Home.module.css';
-
-const PHOTO_BASE =
-  'https://ho516c37no6nnbga.public.blob.vercel-storage.com/Quest/QuestBooth/Photos/QuestBooth_';
-
-const photo = (n: number) => `${PHOTO_BASE}${n}.jpeg`;
-
-const photos = Array.from({ length: 12 }, (_, i) => ({
-  src: photo(i + 1),
-  alt: `QuestBooth photo booth setup at a UK event ${i + 1}`,
-}));
 
 /**
  * Tile sizes are chosen so the bento tiles perfectly at every breakpoint —
  * see the grid rules in Home.module.css. Order matters.
  */
 const featured = [
-  { photo: photos[0], size: 'feature' },
-  { photo: photos[4], size: 'wide' },
-  { photo: photos[1], size: 'small' },
-  { photo: photos[2], size: 'small' },
-  { photo: photos[7], size: 'wide' },
-  { photo: photos[3], size: 'wide' },
+  { photo: photoByName('QuestBooth_1'), size: 'feature' },
+  { photo: photoByName('QuestBooth_5'), size: 'wide' },
+  { photo: photoByName('QuestBooth_2'), size: 'small' },
+  { photo: photoByName('QuestBooth_3'), size: 'small' },
+  { photo: photoByName('QuestBooth_8'), size: 'wide' },
+  { photo: photoByName('QuestBooth_4'), size: 'wide' },
 ] as const;
 
 const services = [
   {
     num: '01',
-    name: 'Drop-Off Digital',
-    href: '/pricing#drop-off',
-    price: '199',
-    copy: 'We deliver, set up, and leave you in control. Perfect for intimate gatherings where you want a DIY vibe.',
+    name: 'Manned Digital',
+    href: '/pricing#manned-digital',
+    copy: 'A member of our team runs the booth all night. Professional lighting, custom templates, a mountain of props, and photos sent straight to your guests\u2019 phones.',
   },
   {
     num: '02',
-    name: 'Manned Digital',
-    href: '/pricing#manned-digital',
-    price: '349',
-    featured: true,
-    copy: 'Our team runs the show while you enjoy the party. Full service with professional lighting and premium props.',
-  },
-  {
-    num: '03',
-    name: 'Manned + Prints',
+    name: 'Manned Digital + Instant Prints',
     href: '/pricing#manned-prints',
-    price: '449',
-    copy: 'Everything above, plus instant prints your guests take home. The complete photo booth experience.',
+    featured: true,
+    copy: 'Everything in our manned digital package, plus instant prints in as little as 8 seconds so your guests go home with the photo in their hand.',
   },
 ];
 
@@ -88,6 +72,7 @@ const testimonials = [
 ];
 
 const Home = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
   const heroBg = useParallax<HTMLDivElement>(0.18);
   const aboutImg = useParallax<HTMLImageElement>(0.06);
 
@@ -97,7 +82,7 @@ const Home = () => {
       <section className={styles.hero}>
         <div className={styles.heroMedia} aria-hidden="true">
           <div ref={heroBg} className={styles.heroMediaInner}>
-            <img src={photo(6)} alt="" fetchPriority="high" />
+            <img src={photoByName('QuestBooth_6').src} alt="" fetchPriority="high" />
           </div>
         </div>
 
@@ -151,9 +136,18 @@ const Home = () => {
               aria-hidden={slide === 1 ? 'true' : undefined}
             >
               {photos.map((p, idx) => (
-                <div key={`${slide}-${idx}`} className={styles.galleryItem}>
-                  <img src={p.src} alt={slide === 0 ? p.alt : ''} loading="lazy" />
-                </div>
+                <button
+                  type="button"
+                  key={`${slide}-${idx}`}
+                  className={styles.galleryItem}
+                  onClick={() => setOpenIndex(idx)}
+                  /* the duplicated track is only there to make the loop
+                     seamless — it stays clickable but out of the tab order */
+                  tabIndex={slide === 1 ? -1 : undefined}
+                  aria-label={slide === 0 ? `Open photo ${idx + 1}: ${p.alt}` : undefined}
+                >
+                  <img src={p.src} alt="" loading="lazy" />
+                </button>
               ))}
             </div>
           ))}
@@ -167,7 +161,7 @@ const Home = () => {
             <div className={styles.aboutMedia}>
               <img
                 ref={aboutImg}
-                src={photo(9)}
+                src={photoByName('QuestBooth_9').src}
                 alt="A QuestBooth photo booth set up on a red carpet at a venue"
                 loading="lazy"
               />
@@ -197,10 +191,20 @@ const Home = () => {
         <div className="container">
           <h2 className={styles.sectionTitle}>Moments we've captured</h2>
           <div className={styles.bento}>
-            {featured.map((tile, idx) => (
-              <figure key={idx} className={`${styles.tile} ${styles[tile.size]}`}>
+            {featured.map((tile) => (
+              <button
+                type="button"
+                key={tile.photo.name}
+                className={`${styles.tile} ${styles[tile.size]}`}
+                /* index into the whole set, so opening a bento tile lets you
+                   browse every photo rather than just these six */
+                onClick={() =>
+                  setOpenIndex(photos.findIndex((p) => p.name === tile.photo.name))
+                }
+                aria-label={`Open photo: ${tile.photo.alt}`}
+              >
                 <img src={tile.photo.src} alt={tile.photo.alt} loading="lazy" />
-              </figure>
+              </button>
             ))}
           </div>
         </div>
@@ -209,7 +213,7 @@ const Home = () => {
       {/* Services */}
       <section className={styles.services}>
         <div className="container">
-          <h2 className={styles.sectionTitle}>Three ways to bring the fun</h2>
+          <h2 className={styles.sectionTitle}>Two ways to bring the fun</h2>
 
           <div className={styles.servicesGrid}>
             {services.map((service) => (
@@ -224,10 +228,6 @@ const Home = () => {
                 )}
                 <h3>{service.name}</h3>
                 <p>{service.copy}</p>
-                <div className={styles.servicePrice}>
-                  <span>From</span>
-                  <strong>£{service.price}</strong>
-                </div>
                 <Link
                   to={service.href}
                   className={`btn btn--block ${
@@ -282,7 +282,7 @@ const Home = () => {
       {/* CTA */}
       <section className={styles.cta}>
         <div className={styles.ctaMedia} aria-hidden="true">
-          <img src={photo(5)} alt="" loading="lazy" />
+          <img src={photoByName('QuestBooth_5').src} alt="" loading="lazy" />
         </div>
         <div className="container">
           <div className={styles.ctaContent}>
@@ -298,6 +298,12 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <Lightbox
+        photos={photos}
+        index={openIndex}
+        onClose={() => setOpenIndex(null)}
+        onIndexChange={setOpenIndex}
+      />
     </main>
   );
 };

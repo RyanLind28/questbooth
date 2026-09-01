@@ -16,17 +16,20 @@
 ## Development Tasks
 
 ### 2. Use All Provided Images
-- [ ] Ensure all 12 images are displayed on the website
+- [x] Every photo in `src/assets/photos/` is displayed (gallery page + marquee)
 - [ ] Current images available:
   - `QuestBooth_1.jpeg` through `QuestBooth_12.jpeg`
-  - URL pattern: `https://ho516c37no6nnbga.public.blob.vercel-storage.com/Quest/QuestBooth/Photos/QuestBooth_[1-12].jpeg`
+  - Stored in the repo at `src/assets/photos/`, loaded by `src/data/photos.ts`.
+    Drop a new file in that folder and it joins the gallery automatically;
+    fixed slots reference photos by filename, so nothing reshuffles.
 - [ ] Currently used in:
   - Scrolling gallery (all 12)
   - Bento grid (6: photos 1, 5, 2, 3, 8, 4)
+  - Pricing package cards (2: photos 7, 10)
   - Hero background (photo 6 — gold sequin wall)
   - About section (photo 9 — the booth itself)
   - Closing CTA background (photo 5 — silver sequin wall)
-- [ ] Consider adding more images to Pricing or Booking pages
+- [x] Pricing package cards now carry a photo banner each
 - [ ] **Worth knowing:** all 12 photos are portrait or square, and none show
       people. They are equipment and backdrop shots. Landscape shots of guests
       actually using the booth would do more for the hero and the gallery than
@@ -36,13 +39,14 @@
 - [x] Rebuilt as a bento grid that tiles exactly at every breakpoint
   (4 cols desktop / 2 cols tablet + mobile) — the old grid orphaned its
   last image into a half-empty implicit row below 1024px
-- [ ] Still open: lightbox / modal for full-size viewing
-- [ ] Still open: surface the remaining photos (6 of 12 are in the bento)
+- [x] Lightbox / modal for full-size viewing — `src/components/Lightbox.tsx`,
+      shared by the gallery page, the bento grid and the marquee strip
+- [x] All photos are surfaced on the `/gallery` page
 - [ ] File: `Home.tsx`, `Home.module.css` (`.bento`)
 
 ### 4. Add "Choose This Package" to What We Offer Section
-- [x] All three service cards now have a full-width "Choose this package"
-      button (primary on the featured card, secondary on the others)
+- [x] Both service cards now have a full-width "Choose this package"
+      button (primary on the featured card, secondary on the other)
 - [ ] File: `Home.tsx` (`.services` section)
 
 ### 5. SEO & AI SEO

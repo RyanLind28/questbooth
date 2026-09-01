@@ -1,0 +1,148 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  /* above the sticky navbar (1000-1002), below the skip link (2000) —
+     otherwise the header covers the close button */
+  z-index: 1500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: clamp(48px, 6vw, 72px) clamp(12px, 4vw, 48px);
+  background: rgba(6, 6, 6, 0.94);
+  backdrop-filter: blur(6px);
+  animation: fade 0.25s var(--ease-out);
+}
+
+.overlay:focus {
+  outline: none;
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  max-width: min(1100px, 100%);
+  min-width: 0;
+}
+
+.figure img {
+  max-width: 100%;
+  /* leaves room for the caption under it and the padding above */
+  max-height: min(78vh, 900px);
+  width: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  animation: rise 0.3s var(--ease-out);
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: scale(0.985); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.figure figcaption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.caption {
+  font-size: 14px;
+  color: var(--gray-light);
+  max-width: 60ch;
+}
+
+.counter {
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+}
+
+/* ---------- controls ---------- */
+.close,
+.nav {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.25s var(--ease-out), border-color 0.25s var(--ease-out);
+}
+
+.close:hover,
+.nav:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--black);
+}
+
+.close:focus-visible,
+.nav:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.close {
+  position: absolute;
+  top: clamp(12px, 2vw, 24px);
+  right: clamp(12px, 2vw, 24px);
+  width: 44px;
+  height: 44px;
+}
+
+.nav {
+  width: 52px;
+  height: 52px;
+}
+
+/* Phones: the side chevrons would squeeze the photo, so float them over the
+   bottom of the image instead, still a comfortable tap target. */
+@media (max-width: 700px) {
+  .overlay {
+    gap: 0;
+  }
+
+  .nav {
+    position: absolute;
+    bottom: clamp(16px, 5vw, 32px);
+    width: 48px;
+    height: 48px;
+  }
+
+  .prev {
+    left: 18%;
+  }
+
+  .next {
+    right: 18%;
+  }
+
+  .figure img {
+    max-height: 66vh;
+  }
+
+  .caption {
+    font-size: 13px;
+    padding: 0 var(--space-sm);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .figure img {
+    animation: none;
+  }
+}
