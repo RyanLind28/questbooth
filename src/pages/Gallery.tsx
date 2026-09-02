@@ -3,21 +3,44 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import Lightbox from '../components/Lightbox';
 import { photos } from '../data/photos';
+import { useSeo } from '../hooks/useSeo';
 import styles from './Gallery.module.css';
 
 const Gallery = () => {
+  useSeo({
+    title: 'Photo Booth Gallery | QuestBooth Hampshire',
+    description:
+      'Photos from real events across Hampshire. Sequin walls, themed backdrops, prop tables and our booths set up and ready to go.',
+    path: '/gallery',
+  });
+
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <main className={styles.main} id="main">
       <section className={styles.hero}>
         <div className="container">
-          <h1>
-            Our <span className="text-gold">gallery</span>
-          </h1>
-          <p className={styles.heroSub}>
-            Backdrops, props and booths from real events. Tap any photo to see it full size.
-          </p>
+          <div className={styles.heroRow}>
+            <div>
+              <h1>
+                Our <span className="text-gold">gallery</span>
+              </h1>
+              <p className={styles.heroSub}>
+                Backdrops, props and booths from real events. Tap any photo to see it
+                full size.
+              </p>
+            </div>
+
+            {/* Guests land here looking for their own night's photos. */}
+            <aside className={styles.guestNote}>
+              <h2>Looking for your event photos?</h2>
+              <p>
+                The person who booked gets a link to every photo from the night. Ask
+                them for it, or <Link to="/booking">get in touch</Link> and we'll dig
+                it out.
+              </p>
+            </aside>
+          </div>
         </div>
       </section>
 

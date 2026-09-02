@@ -2,38 +2,25 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useParallax } from '../hooks/useParallax';
+import { useSeo } from '../hooks/useSeo';
 import Lightbox from '../components/Lightbox';
+import PackageCard from '../components/PackageCard';
+import { packages } from '../data/packages';
 import { photos, photoByName } from '../data/photos';
 import styles from './Home.module.css';
 
 /**
- * Tile sizes are chosen so the bento tiles perfectly at every breakpoint —
+ * Tile sizes are chosen so the bento tiles perfectly at every breakpoint,
  * see the grid rules in Home.module.css. Order matters.
  */
 const featured = [
-  { photo: photoByName('QuestBooth_1'), size: 'feature' },
-  { photo: photoByName('QuestBooth_5'), size: 'wide' },
-  { photo: photoByName('QuestBooth_2'), size: 'small' },
-  { photo: photoByName('QuestBooth_3'), size: 'small' },
-  { photo: photoByName('QuestBooth_8'), size: 'wide' },
-  { photo: photoByName('QuestBooth_4'), size: 'wide' },
+  { photo: photoByName('QuestBooth_14'), size: 'feature' },
+  { photo: photoByName('QuestBooth_12'), size: 'wide' },
+  { photo: photoByName('QuestBooth_13'), size: 'small' },
+  { photo: photoByName('QuestBooth_17'), size: 'small' },
+  { photo: photoByName('QuestBooth_7'), size: 'wide' },
+  { photo: photoByName('QuestBooth_10'), size: 'wide' },
 ] as const;
-
-const services = [
-  {
-    num: '01',
-    name: 'Manned Digital',
-    href: '/pricing#manned-digital',
-    copy: 'A member of our team runs the booth all night. Professional lighting, custom templates, a mountain of props, and photos sent straight to your guests\u2019 phones.',
-  },
-  {
-    num: '02',
-    name: 'Manned Digital + Instant Prints',
-    href: '/pricing#manned-prints',
-    featured: true,
-    copy: 'Everything in our manned digital package, plus instant prints in as little as 8 seconds so your guests go home with the photo in their hand.',
-  },
-];
 
 const steps = [
   {
@@ -50,28 +37,23 @@ const steps = [
   },
 ];
 
-const testimonials = [
-  {
-    quote:
-      "The booth was the highlight of our wedding reception. Our guests are still sharing photos weeks later. Couldn't recommend more highly.",
-    name: 'Sarah & James',
-    event: 'Wedding, Manchester',
-  },
-  {
-    quote:
-      'Professional from start to finish. The team were friendly, the equipment was top quality, and everyone had an absolute blast.',
-    name: 'TechCorp Ltd',
-    event: 'Corporate Event, London',
-  },
-  {
-    quote:
-      "Made my mum's 50th birthday absolutely unforgettable. So many genuine laughing moments captured. Worth every penny.",
-    name: 'The Williams Family',
-    event: 'Birthday Party, Birmingham',
-  },
-];
+/**
+ * Real customer reviews only. Add them here, from Google or Facebook, with
+ * the reviewer's permission, and the section renders itself. While this is
+ * empty the whole section is hidden, because an invented testimonial is worse
+ * than none (and fake reviews are illegal in the UK).
+ */
+const testimonials: { quote: string; name: string; event: string }[] = [];
+
 
 const Home = () => {
+  useSeo({
+    title: 'Photo Booth Hire Southampton & Hampshire | QuestBooth',
+    description:
+      'Family-run photo booth hire across Southampton, Fareham, Portsmouth and Hampshire. Manned digital booths and instant prints, with props, backdrops and professional lighting.',
+    path: '/',
+  });
+
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const heroBg = useParallax<HTMLDivElement>(0.18);
   const aboutImg = useParallax<HTMLImageElement>(0.06);
@@ -82,7 +64,7 @@ const Home = () => {
       <section className={styles.hero}>
         <div className={styles.heroMedia} aria-hidden="true">
           <div ref={heroBg} className={styles.heroMediaInner}>
-            <img src={photoByName('QuestBooth_6').src} alt="" fetchPriority="high" />
+            <img src={photoByName('QuestBooth_18').src} alt="" fetchPriority="high" />
           </div>
         </div>
 
@@ -95,8 +77,8 @@ const Home = () => {
               </span>
             </h1>
             <p className={styles.heroLede}>
-              Premium photo booths for weddings, parties &amp; events across the
-              UK. Family-run, professionally delivered.
+              Premium photo booths for weddings, parties &amp; events across
+              Hampshire. Family-run, professionally delivered.
             </p>
             <div className={styles.heroActions}>
               <Link to="/booking" className="btn btn--primary btn--large">
@@ -108,21 +90,6 @@ const Home = () => {
               </Link>
             </div>
           </div>
-
-          <dl className={styles.heroStats}>
-            <div>
-              <dt>500+</dt>
-              <dd>Events completed</dd>
-            </div>
-            <div>
-              <dt>50k+</dt>
-              <dd>Photos taken</dd>
-            </div>
-            <div>
-              <dt>5.0</dt>
-              <dd>Star reviews</dd>
-            </div>
-          </dl>
         </div>
       </section>
 
@@ -142,7 +109,7 @@ const Home = () => {
                   className={styles.galleryItem}
                   onClick={() => setOpenIndex(idx)}
                   /* the duplicated track is only there to make the loop
-                     seamless — it stays clickable but out of the tab order */
+                     seamless. It stays clickable but out of the tab order */
                   tabIndex={slide === 1 ? -1 : undefined}
                   aria-label={slide === 0 ? `Open photo ${idx + 1}: ${p.alt}` : undefined}
                 >
@@ -210,33 +177,14 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Services */}
+      {/* Packages */}
       <section className={styles.services}>
         <div className="container">
           <h2 className={styles.sectionTitle}>Two ways to bring the fun</h2>
 
-          <div className={styles.servicesGrid}>
-            {services.map((service) => (
-              <article
-                key={service.num}
-                className={`${styles.service} ${
-                  service.featured ? styles.serviceFeatured : ''
-                }`}
-              >
-                {service.featured && (
-                  <div className={styles.featuredBadge}>Popular</div>
-                )}
-                <h3>{service.name}</h3>
-                <p>{service.copy}</p>
-                <Link
-                  to={service.href}
-                  className={`btn btn--block ${
-                    service.featured ? 'btn--primary' : 'btn--secondary'
-                  }`}
-                >
-                  Choose this package
-                </Link>
-              </article>
+          <div className={styles.packagesGrid}>
+            {packages.map((pkg) => (
+              <PackageCard key={pkg.id} pkg={pkg} headingLevel={3} />
             ))}
           </div>
         </div>
@@ -261,6 +209,7 @@ const Home = () => {
       </section>
 
       {/* Testimonials */}
+      {testimonials.length > 0 && (
       <section className={styles.testimonials}>
         <div className="container">
           <h2 className={styles.sectionTitle}>From our happy customers</h2>
@@ -278,11 +227,12 @@ const Home = () => {
           </div>
         </div>
       </section>
+      )}
 
       {/* CTA */}
       <section className={styles.cta}>
         <div className={styles.ctaMedia} aria-hidden="true">
-          <img src={photoByName('QuestBooth_5').src} alt="" loading="lazy" />
+          <img src={photoByName('QuestBooth_16').src} alt="" loading="lazy" />
         </div>
         <div className="container">
           <div className={styles.ctaContent}>

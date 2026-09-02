@@ -19,7 +19,7 @@ const SWIPE_THRESHOLD = 50;
 
 /**
  * Full-screen photo viewer. Shared by the gallery page, the home bento grid
- * and the home marquee — each of those only has to track which index is open.
+ * and the home marquee. Each of those only has to track which index is open.
  *
  * Navigation wraps at both ends, so there is no dead "next" button on the last
  * photo. Arrow keys and swipes do the same thing as the on-screen chevrons.
@@ -126,8 +126,8 @@ const Lightbox = ({ photos, index, onClose, onIndexChange }: Props) => {
       aria-modal="true"
       aria-label={`Photo ${index + 1} of ${photos.length}`}
       tabIndex={-1}
-      // a click that lands on the overlay itself — not on the figure or a
-      // control inside it — is a click on the backdrop
+      // a click that lands on the overlay itself, not on the figure or a
+      // control inside it, is a click on the backdrop
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}

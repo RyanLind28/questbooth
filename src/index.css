@@ -21,7 +21,7 @@
   --font-display: 'Space Grotesk', 'Inter', -apple-system, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* Spacing — fluid, so mobile is not padded like a 1440px desktop */
+  /* Spacing: fluid, so mobile is not padded like a 1440px desktop */
   --space-xs: 8px;
   --space-sm: 16px;
   --space-md: clamp(16px, 3vw, 24px);

@@ -1,9 +1,28 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ArrowRight, Phone, Mail, MapPin, Check } from 'lucide-react';
+import { ArrowRight, Phone, Mail, MapPin, Check, AlertCircle } from 'lucide-react';
+import { useSeo } from '../hooks/useSeo';
 import styles from './Booking.module.css';
 
+/**
+ * Web3Forms access key. Paste yours from https://web3forms.com (free, takes a
+ * minute, no account needed: enter the address enquiries should land in and
+ * they email you the key). These keys are designed to be public, so it lives
+ * here rather than in an env var, so no rebuild or dashboard change to update it.
+ *
+ * While this is empty, the form refuses to submit and says so, rather than
+ * pretending to send.
+ */
+const FORM_ACCESS_KEY = '';
+
 const Booking = () => {
+  useSeo({
+    title: 'Get a Quote | QuestBooth Photo Booth Hire',
+    description:
+      'Tell us about your event and we will come back with a quote. Photo booth hire for weddings, parties and corporate events across Hampshire.',
+    path: '/booking',
+  });
+
   const [searchParams] = useSearchParams();
   const preselectedPackage = searchParams.get('package') || '';
 
@@ -21,6 +40,9 @@ const Booking = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success'>('idle');
+  const [error, setError] = useState<string | null>(null);
+  /** honeypot: a real person never fills this in, bots fill everything */
+  const [website, setWebsite] = useState('');
 
   // Sync the ?package= query param into the form without an effect.
   // https://react.dev/learn/you-might-not-need-an-effect
@@ -41,11 +63,53 @@ const Booking = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // A bot filled the hidden field. Show the success state so it doesn't
+    // retry, but send nothing.
+    if (website) {
+      setSubmitStatus('success');
+      return;
+    }
+
+    if (!FORM_ACCESS_KEY) {
+      setError(
+        'This form is not connected yet, so your enquiry was not sent. Please call or email us using the details on this page.'
+      );
+      return;
+    }
+
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log('Form submitted:', formData);
-    setSubmitStatus('success');
-    setIsSubmitting(false);
+    setError(null);
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: FORM_ACCESS_KEY,
+          subject: `Photo booth enquiry from ${formData.name || 'the website'}`,
+          from_name: 'QuestBooth website',
+          // so the reply button in the notification email goes to the customer
+          replyto: formData.email,
+          ...formData,
+        }),
+      });
+
+      const result = await response.json();
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || `Request failed (${response.status})`);
+      }
+
+      setSubmitStatus('success');
+    } catch (err) {
+      setError(
+        err instanceof Error && err.message
+          ? `We could not send your enquiry: ${err.message}. Please call or email us instead.`
+          : 'We could not send your enquiry. Please call or email us instead.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const eventTypes = [
@@ -97,6 +161,7 @@ const Booking = () => {
                     className="btn btn--secondary"
                     onClick={() => {
                       setSubmitStatus('idle');
+                      setError(null);
                       setFormData({
                         name: '',
                         email: '',
@@ -249,6 +314,28 @@ const Booking = () => {
                     />
                   </div>
 
+                  {/* honeypot: off-screen and out of the tab order, so only
+                      a bot ever fills it in */}
+                  <div className={styles.honeypot} aria-hidden="true">
+                    <label htmlFor="website">Leave this field empty</label>
+                    <input
+                      id="website"
+                      type="text"
+                      name="website"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={website}
+                      onChange={(e) => setWebsite(e.target.value)}
+                    />
+                  </div>
+
+                  {error && (
+                    <p className={styles.error} role="alert">
+                      <AlertCircle size={18} />
+                      <span>{error}</span>
+                    </p>
+                  )}
+
                   <button
                     type="submit"
                     className={`btn btn--primary btn--large btn--block ${styles.submit}`}
@@ -277,7 +364,7 @@ const Booking = () => {
                   </li>
                   <li>
                     <MapPin size={18} />
-                    <span>Within 30 minutes of SO31 — further afield may incur a small travel fee</span>
+                    <span>Within 30 minutes of SO31. Further afield may incur a small travel fee</span>
                   </li>
                 </ul>
               </div>

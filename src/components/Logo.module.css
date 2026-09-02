@@ -34,7 +34,7 @@
   background-position: calc(var(--word-h) * -111 / 183) calc(var(--word-h) * -677 / 183);
 }
 
-/* Icon only — used where the full lockup would be too wide */
+/* Icon only, used where the full lockup would be too wide */
 .iconOnly .word {
   display: none;
 }

@@ -61,6 +61,37 @@
   color: var(--gold);
 }
 
+/* ---------- sister brand ---------- */
+.family {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--black-border);
+}
+
+.familyLabel {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gray);
+}
+
+.familyBrand {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--white);
+  transition: color 0.3s ease;
+}
+
+a.familyBrand:hover {
+  color: var(--gold);
+}
+
 .bottom {
   display: flex;
   justify-content: space-between;
@@ -69,9 +100,31 @@
   padding-top: var(--space-md);
 }
 
+.credits {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+/* separates the two credit lines without a literal divider character */
+.credits p + p {
+  padding-left: var(--space-sm);
+  border-left: 1px solid var(--black-border);
+}
+
 .bottom p {
   font-size: 0.85rem;
   color: var(--gray);
+}
+
+.credits a {
+  color: var(--gray-light);
+  transition: color 0.3s ease;
+}
+
+.credits a:hover {
+  color: var(--gold);
 }
 
 .social {
@@ -125,5 +178,16 @@
     align-items: center;
     gap: var(--space-md);
     text-align: center;
+  }
+
+  .credits {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  /* stacked, so the vertical rule between the two lines makes no sense */
+  .credits p + p {
+    padding-left: 0;
+    border-left: none;
   }
 }

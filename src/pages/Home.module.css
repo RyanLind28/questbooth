@@ -44,7 +44,7 @@
   object-position: center;
 }
 
-/* The headline is gold and so is the sequin wall behind it — this keeps the
+/* The headline is gold and so is the sequin wall behind it, so this keeps the
    text side dark enough for the type to hold its contrast. */
 .heroMedia::after {
   content: '';
@@ -118,32 +118,7 @@
   margin-top: var(--space-lg);
 }
 
-/* Stats moved into the hero — they used to be a near-empty band of their own */
-.heroStats {
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-  justify-content: start;
-  gap: var(--space-xl);
-  padding-top: var(--space-lg);
-  border-top: 1px solid rgba(250, 250, 250, 0.14);
-}
-
-.heroStats dt {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
-  color: var(--gold);
-  line-height: 1;
-}
-
-.heroStats dd {
-  font-size: clamp(11px, 1.4vw, 13px);
-  color: var(--gray-light);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-top: 6px;
-}
-
+/* Hero actions sit directly under the lede */
 /* ========== GALLERY (Marquee) ========== */
 .gallery {
   overflow: hidden;
@@ -307,70 +282,21 @@
   grid-row: span 1;
 }
 
-/* ========== SERVICES ========== */
+/* ========== PACKAGES ========== */
 .services {
   padding: var(--space-2xl) 0;
 }
 
-.servicesGrid {
+.packagesGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  /* two cards would stretch uncomfortably wide on a large desktop */
+  max-width: 900px;
+  margin-inline: auto;
   gap: var(--space-md);
+  /* room for the badge that overhangs the card's top edge */
+  padding-top: 14px;
   align-items: stretch;
-}
-
-.service {
-  padding: var(--space-lg);
-  border: 1px solid var(--black-border);
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  transition: border-color 0.4s var(--ease-out), transform 0.4s var(--ease-out);
-  position: relative;
-  background: var(--black-soft);
-}
-
-.service:hover {
-  border-color: var(--gold);
-  transform: translateY(-4px);
-}
-
-.serviceFeatured {
-  background: linear-gradient(180deg, rgba(215, 180, 88, 0.08) 0%, var(--black-soft) 50%);
-  border-color: var(--gold);
-}
-
-.featuredBadge {
-  position: absolute;
-  top: var(--space-md);
-  right: var(--space-md);
-  background: var(--gold);
-  color: var(--black);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 6px 14px;
-  border-radius: 100px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.service h3 {
-  font-size: clamp(1.25rem, 2vw, 1.5rem);
-  margin-bottom: var(--space-xs);
-}
-
-.serviceFeatured h3 {
-  padding-right: 84px;
-}
-
-.service > p {
-  color: var(--gray-light);
-  line-height: 1.7;
-  /* the price block used to draw this divider above the button */
-  padding-bottom: var(--space-md);
-  margin-bottom: var(--space-md);
-  border-bottom: 1px solid var(--black-border);
-  flex-grow: 1;
 }
 
 /* ========== PROCESS ========== */
@@ -379,7 +305,7 @@
   background: var(--black-rich);
 }
 
-/* Three across on desktop — this was a narrow stacked list in a wide section */
+/* Three across on desktop. This was a narrow stacked list in a wide section */
 .processSteps {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -551,7 +477,7 @@
   }
 
   /* No room for a left-dark / right-light split at this width, so the
-     overlay becomes uniform — keeps the lede above 4.5:1 where it crosses
+     overlay becomes uniform, keeping the lede above 4.5:1 where it crosses
      the bright sequins while still letting the photo read. */
   .heroMedia::after {
     background: linear-gradient(
@@ -573,11 +499,6 @@
     width: 100%;
   }
 
-  .heroStats {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-sm);
-  }
-
   .bento {
     grid-auto-rows: clamp(120px, 30vw, 180px);
   }
@@ -586,7 +507,11 @@
     grid-column: span 2;
   }
 
-  .servicesGrid,
+  .packagesGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
   .testimonialsGrid,
   .processSteps {
     grid-template-columns: 1fr;
@@ -595,16 +520,6 @@
   .testimonialsGrid .testimonial:last-child,
   .processSteps .step:last-child {
     grid-column: span 1;
-  }
-
-  .serviceFeatured h3 {
-    padding-right: 0;
-  }
-
-  .featuredBadge {
-    position: static;
-    align-self: flex-start;
-    margin-bottom: var(--space-sm);
   }
 
   .step {

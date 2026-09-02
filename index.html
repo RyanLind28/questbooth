@@ -1,20 +1,86 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#090909" />
-    <meta name="description" content="QuestBooth - Premium photo booth hire for weddings, parties, and corporate events. Family-run business serving the UK with high-quality equipment and props." />
-    <meta name="keywords" content="photo booth hire, wedding photo booth, party photo booth, corporate events, UK photo booth" />
-    <meta property="og:title" content="QuestBooth - Premium Photo Booth Hire" />
-    <meta property="og:description" content="Create unforgettable memories at your event with our premium photo booth experiences." />
+
+    <!--
+      Defaults only. Each page overwrites the title, description, canonical and
+      og:* tags at runtime via src/hooks/useSeo.ts. Crawlers that do not run
+      JavaScript see what is below, so it describes the business rather than
+      any one page.
+    -->
+    <title>Photo Booth Hire Southampton &amp; Hampshire | QuestBooth</title>
+    <meta name="description" content="Family-run photo booth hire across Southampton, Fareham, Portsmouth and Hampshire. Manned digital booths and instant prints, with props, backdrops and professional lighting." />
+
+    <meta property="og:site_name" content="QuestBooth" />
+    <meta property="og:title" content="Photo Booth Hire Southampton &amp; Hampshire | QuestBooth" />
+    <meta property="og:description" content="Family-run photo booth hire across Southampton, Fareham, Portsmouth and Hampshire. Manned digital booths and instant prints." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://questbooth.co.uk" />
+    <meta property="og:url" content="https://questbooth.co.uk/" />
+    <meta property="og:image" content="https://questbooth.co.uk/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="A QuestBooth photo booth set up beside a gold sequin backdrop with a table of props" />
+    <meta property="og:locale" content="en_GB" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Photo Booth Hire Southampton &amp; Hampshire | QuestBooth" />
+    <meta name="twitter:description" content="Family-run photo booth hire across Southampton, Fareham, Portsmouth and Hampshire." />
+    <meta name="twitter:image" content="https://questbooth.co.uk/og-image.jpg" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <title>QuestBooth | Premium Photo Booth Hire UK</title>
+
+    <!--
+      Deliberately omits `telephone` and the Instagram profile: both are still
+      placeholders in the site, and handing Google structured data we cannot
+      stand behind is worse than handing it less. Add them here once confirmed.
+    -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://questbooth.co.uk/#business",
+        "name": "QuestBooth",
+        "description": "Family-run photo booth hire for weddings, parties and corporate events across Hampshire.",
+        "url": "https://questbooth.co.uk/",
+        "image": "https://questbooth.co.uk/og-image.jpg",
+        "address": {
+          "@type": "PostalAddress",
+          "addressRegion": "Hampshire",
+          "addressCountry": "GB"
+        },
+        "areaServed": [
+          { "@type": "City", "name": "Southampton" },
+          { "@type": "City", "name": "Fareham" },
+          { "@type": "City", "name": "Portsmouth" },
+          { "@type": "AdministrativeArea", "name": "Hampshire" }
+        ],
+        "sameAs": ["https://www.facebook.com/share/1DXfcrfxt3/"],
+        "makesOffer": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Manned Digital photo booth hire",
+              "description": "A staffed digital photo booth with props, professional lighting, customised templates and instant digital sharing."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Manned Digital + Instant Prints photo booth hire",
+              "description": "A staffed photo booth with instant prints in as little as 8 seconds, plus digital sharing, props and professional lighting."
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

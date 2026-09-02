@@ -1,0 +1,140 @@
+.package {
+  /* the media block bleeds to the card edge by negating this */
+  --card-pad: var(--space-lg);
+  background: var(--black-soft);
+  border: 1px solid var(--black-border);
+  border-radius: 20px;
+  padding: var(--card-pad);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: border-color 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+}
+
+.package:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+}
+
+.featured {
+  background: linear-gradient(180deg, rgba(215, 180, 88, 0.06) 0%, var(--black-soft) 40%);
+  border-color: rgba(215, 180, 88, 0.4);
+}
+
+.badge {
+  position: absolute;
+  z-index: 2;
+  top: -14px;
+  left: var(--space-lg);
+  background: var(--gold);
+  color: var(--black);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.media {
+  position: relative;
+  margin: calc(var(--card-pad) * -1) calc(var(--card-pad) * -1) var(--space-md);
+  height: 200px;
+  overflow: hidden;
+  /* 1px inside the card's own border */
+  border-radius: 19px 19px 0 0;
+}
+
+.media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* several of the source photos are portrait, so bias the crop off centre */
+  object-position: center 42%;
+  display: block;
+}
+
+/* keeps the gold badge legible wherever it lands on the photo */
+.media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(9, 9, 9, 0.5) 0%,
+    rgba(9, 9, 9, 0) 45%,
+    rgba(9, 9, 9, 0.55) 100%
+  );
+}
+
+.header {
+  margin-bottom: var(--space-md);
+}
+
+.tag {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.header h2,
+.header h3 {
+  font-size: clamp(1.5rem, 2.5vw, 1.75rem);
+  margin-bottom: 12px;
+}
+
+.header p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.features {
+  flex-grow: 1;
+  margin-bottom: var(--space-md);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--black-border);
+}
+
+.features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--black-border);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--gray-light);
+}
+
+.features li:last-child {
+  border-bottom: none;
+}
+
+.features svg {
+  color: var(--gold);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+@media (max-width: 700px) {
+  .package {
+    --card-pad: var(--space-md);
+  }
+
+  .media {
+    height: 170px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .package,
+  .package:hover {
+    transition: none;
+    transform: none;
+  }
+}

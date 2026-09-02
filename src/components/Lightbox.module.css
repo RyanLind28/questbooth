@@ -1,7 +1,7 @@
 .overlay {
   position: fixed;
   inset: 0;
-  /* above the sticky navbar (1000-1002), below the skip link (2000) —
+  /* above the sticky navbar (1000-1002), below the skip link (2000),
      otherwise the header covers the close button */
   z-index: 1500;
   display: flex;

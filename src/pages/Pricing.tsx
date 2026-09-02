@@ -1,72 +1,58 @@
 import { Link } from 'react-router-dom';
-import { Check, ArrowRight } from 'lucide-react';
-import { photoByName } from '../data/photos';
+import { ArrowRight } from 'lucide-react';
+import PackageCard from '../components/PackageCard';
+import { packages } from '../data/packages';
+import { useSeo, useJsonLd } from '../hooks/useSeo';
 import styles from './Pricing.module.css';
 
-const Pricing = () => {
-  const packages = [
-    {
-      id: 'manned-digital',
-      name: 'Manned Digital',
-      tagline: 'Full Service',
-      image: photoByName('QuestBooth_15').src,
-      imageAlt: photoByName('QuestBooth_15').alt,
-      description: 'Our team runs the booth from start to finish while your guests share their photos straight to their phones.',
-      features: [
-        'Digital booth — photos sent straight to guests by text, WhatsApp, QR code or email',
-        'Customised photo templates to match your event and colour scheme',
-        'Props — a vast array of hats, masks, glasses and more',
-        'Professional overhead LED lighting for a better look with no glare',
-        'A member of staff on hand to help with props and anything else',
-        'A link after the event to download every picture from the night',
-      ],
-    },
-    {
-      id: 'manned-prints',
-      name: 'Manned Digital + Instant Prints',
-      tagline: 'Complete Experience',
-      image: photoByName('QuestBooth_8').src,
-      imageAlt: photoByName('QuestBooth_8').alt,
-      featured: true,
-      description: 'Everything in our manned digital package, plus instant prints your guests take home as keepsakes.',
-      features: [
-        'Instant prints — the latest technology gets pictures in guests\u2019 hands in as little as 8 seconds',
-        'Digital booth — photos sent straight to guests by text, WhatsApp, QR code or email',
-        'Customised photo templates to match your event and colour scheme',
-        'Props — a vast array of hats, masks, glasses and more',
-        'Professional overhead LED lighting for a better look with no glare',
-        'A member of staff on hand to help with props and anything else',
-        'A link after the event to download every picture from the night',
-      ],
-    },
-  ];
+const faqs = [
+  {
+    q: 'How far do you travel?',
+    a: 'We cover a 30 minute drive of SO31 as standard, which takes in Southampton, Fareham, Portsmouth and the surrounding area. Anywhere further afield may incur a small travel fee, so just ask.',
+  },
+  {
+    q: 'How much space is needed?',
+    a: 'Approximately 8ft x 8ft for the complete setup. We can work with your venue to find the perfect spot.',
+  },
+  {
+    q: 'Can photos be customised?',
+    a: 'Yes. Custom branding, names, dates, and colour schemes are included at no extra cost.',
+  },
+  {
+    q: 'How do guests get their photos?',
+    a: 'Instantly via text, WhatsApp, QR code, or email. Plus a link to download every photo after the event.',
+  },
+  {
+    q: 'What deposit is required?',
+    a: '25% to secure your date, with the balance due one week before your event.',
+  },
+  {
+    q: 'What if my plans change?',
+    a: 'We understand life happens. Get in touch and we will work with you to find a solution.',
+  },
+];
+/** Marks the FAQs up so search engines and assistants can quote them directly. */
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+};
 
-  const faqs = [
-    {
-      q: 'How far do you travel?',
-      a: 'We cover a 30 minute drive of SO31 as standard, which takes in Southampton, Fareham, Portsmouth and the surrounding area. Anywhere further afield may incur a small travel fee — just ask.',
-    },
-    {
-      q: 'How much space is needed?',
-      a: 'Approximately 8ft x 8ft for the complete setup. We can work with your venue to find the perfect spot.',
-    },
-    {
-      q: 'Can photos be customised?',
-      a: 'Yes. Custom branding, names, dates, and colour schemes are included at no extra cost.',
-    },
-    {
-      q: 'How do guests get their photos?',
-      a: 'Instantly via text, WhatsApp, QR code, or email. Plus a link to download every photo after the event.',
-    },
-    {
-      q: 'What deposit is required?',
-      a: '25% to secure your date, with the balance due one week before your event.',
-    },
-    {
-      q: 'What if my plans change?',
-      a: 'We understand life happens. Get in touch and we will work with you to find a solution.',
-    },
-  ];
+const Pricing = () => {
+  useSeo({
+    title: 'Photo Booth Packages & Prices | QuestBooth Hampshire',
+    description:
+      'Two photo booth packages: manned digital, or manned digital with instant prints in as little as 8 seconds. Props, custom templates and professional lighting included.',
+    path: '/pricing',
+  });
+
+  useJsonLd('faq-schema', faqSchema);
+
+
 
   return (
     <main className={styles.main} id="main">
@@ -86,42 +72,7 @@ const Pricing = () => {
         <div className="container">
           <div className={styles.packagesGrid}>
             {packages.map((pkg) => (
-              <article
-                key={pkg.id}
-                id={pkg.id}
-                className={`${styles.package} ${pkg.featured ? styles.featured : ''}`}
-              >
-                {pkg.featured && <div className={styles.badge}>Most Popular</div>}
-
-                <div className={styles.packageMedia}>
-                  <img src={pkg.image} alt={pkg.imageAlt} loading="lazy" />
-                </div>
-
-                <div className={styles.packageHeader}>
-                  <span className={styles.packageTag}>{pkg.tagline}</span>
-                  <h2>{pkg.name}</h2>
-                  <p>{pkg.description}</p>
-                </div>
-
-                <ul className={styles.features}>
-                  {pkg.features.map((feature, idx) => (
-                    <li key={idx}>
-                      <Check size={18} />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <Link
-                  to={`/booking?package=${pkg.id}`}
-                  className={`btn btn--block ${
-                    pkg.featured ? 'btn--primary' : 'btn--secondary'
-                  }`}
-                >
-                  Select Package
-                  <ArrowRight size={18} />
-                </Link>
-              </article>
+              <PackageCard key={pkg.id} pkg={pkg} />
             ))}
           </div>
         </div>
