@@ -27,9 +27,6 @@
 .packagesGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  /* two cards would stretch uncomfortably wide on a large desktop */
-  max-width: 900px;
-  margin-inline: auto;
   gap: var(--space-md);
   /* room for the badge that overhangs the card's top edge */
   padding-top: 14px;

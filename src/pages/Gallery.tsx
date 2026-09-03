@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import Lightbox from '../components/Lightbox';
 import { photos } from '../data/photos';
+import { strips } from '../data/strips';
 import { useSeo } from '../hooks/useSeo';
 import styles from './Gallery.module.css';
 
@@ -15,6 +16,7 @@ const Gallery = () => {
   });
 
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openStrip, setOpenStrip] = useState<number | null>(null);
 
   return (
     <main className={styles.main} id="main">
@@ -63,6 +65,30 @@ const Gallery = () => {
         </div>
       </section>
 
+      <section className={styles.strips}>
+        <div className="container">
+          <h2>Strips from the booth</h2>
+          <p className={styles.stripsLede}>
+            What guests walk away with. Every layout is built to match the event.
+          </p>
+
+          <ul className={styles.stripGrid}>
+            {strips.map((strip, idx) => (
+              <li key={strip.name}>
+                <button
+                  type="button"
+                  className={styles.strip}
+                  onClick={() => setOpenStrip(idx)}
+                  aria-label={`Open print strip ${idx + 1} of ${strips.length}`}
+                >
+                  <img src={strip.src} alt={strip.alt} loading="lazy" />
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       <section className={styles.cta}>
         <div className="container">
           <div className={styles.ctaContent}>
@@ -81,6 +107,14 @@ const Gallery = () => {
         index={openIndex}
         onClose={() => setOpenIndex(null)}
         onIndexChange={setOpenIndex}
+      />
+
+      <Lightbox
+        photos={strips}
+        index={openStrip}
+        onClose={() => setOpenStrip(null)}
+        onIndexChange={setOpenStrip}
+        itemLabel="Print strip"
       />
     </main>
   );

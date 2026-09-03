@@ -9,6 +9,8 @@ type Props = {
   index: number | null;
   onClose: () => void;
   onIndexChange: (index: number) => void;
+  /** what one item is called, for screen readers: "Photo 4 of 17" */
+  itemLabel?: string;
 };
 
 /** how many photos either side of the open one to warm the browser cache with */
@@ -24,7 +26,7 @@ const SWIPE_THRESHOLD = 50;
  * Navigation wraps at both ends, so there is no dead "next" button on the last
  * photo. Arrow keys and swipes do the same thing as the on-screen chevrons.
  */
-const Lightbox = ({ photos, index, onClose, onIndexChange }: Props) => {
+const Lightbox = ({ photos, index, onClose, onIndexChange, itemLabel = 'Photo' }: Props) => {
   const isOpen = index !== null;
   const overlay = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
@@ -124,7 +126,7 @@ const Lightbox = ({ photos, index, onClose, onIndexChange }: Props) => {
       className={styles.overlay}
       role="dialog"
       aria-modal="true"
-      aria-label={`Photo ${index + 1} of ${photos.length}`}
+      aria-label={`${itemLabel} ${index + 1} of ${photos.length}`}
       tabIndex={-1}
       // a click that lands on the overlay itself, not on the figure or a
       // control inside it, is a click on the backdrop

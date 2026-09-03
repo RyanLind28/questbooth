@@ -2,25 +2,14 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useParallax } from '../hooks/useParallax';
+import { useInView } from '../hooks/useInView';
 import { useSeo } from '../hooks/useSeo';
 import Lightbox from '../components/Lightbox';
 import PackageCard from '../components/PackageCard';
 import { packages } from '../data/packages';
 import { photos, photoByName } from '../data/photos';
+import { strips, stripByName } from '../data/strips';
 import styles from './Home.module.css';
-
-/**
- * Tile sizes are chosen so the bento tiles perfectly at every breakpoint,
- * see the grid rules in Home.module.css. Order matters.
- */
-const featured = [
-  { photo: photoByName('QuestBooth_14'), size: 'feature' },
-  { photo: photoByName('QuestBooth_12'), size: 'wide' },
-  { photo: photoByName('QuestBooth_13'), size: 'small' },
-  { photo: photoByName('QuestBooth_17'), size: 'small' },
-  { photo: photoByName('QuestBooth_7'), size: 'wide' },
-  { photo: photoByName('QuestBooth_10'), size: 'wide' },
-] as const;
 
 const steps = [
   {
@@ -46,6 +35,14 @@ const steps = [
 const testimonials: { quote: string; name: string; event: string }[] = [];
 
 
+/** One strip per event design, fanned out in the about section. */
+const stackStrips = [
+  'QuestBooth_Booth_Photo_1',
+  'QuestBooth_Booth_Photo_6',
+  'QuestBooth_Booth_Photo_9',
+  'QuestBooth_Booth_Photo_14',
+].map(stripByName);
+
 const Home = () => {
   useSeo({
     title: 'Photo Booth Hire Southampton & Hampshire | QuestBooth',
@@ -55,8 +52,9 @@ const Home = () => {
   });
 
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openStrip, setOpenStrip] = useState<number | null>(null);
   const heroBg = useParallax<HTMLDivElement>(0.18);
-  const aboutImg = useParallax<HTMLImageElement>(0.06);
+  const [stackRef, stackInView] = useInView<HTMLDivElement>();
 
   return (
     <main className={styles.main} id="main">
@@ -125,13 +123,21 @@ const Home = () => {
       <section className={styles.about}>
         <div className="container">
           <div className={styles.aboutGrid}>
-            <div className={styles.aboutMedia}>
-              <img
-                ref={aboutImg}
-                src={photoByName('QuestBooth_9').src}
-                alt="A QuestBooth photo booth set up on a red carpet at a venue"
-                loading="lazy"
-              />
+            <div
+              ref={stackRef}
+              className={`${styles.stack} ${stackInView ? styles.stackIn : ''}`}
+            >
+              {stackStrips.map((strip, idx) => (
+                <img
+                  key={strip.name}
+                  className={styles.stackStrip}
+                  style={{ '--i': idx } as React.CSSProperties}
+                  src={strip.src}
+                  alt={idx === 0 ? strip.alt : ''}
+                  aria-hidden={idx === 0 ? undefined : true}
+                  loading="lazy"
+                />
+              ))}
             </div>
             <div className={styles.aboutBody}>
               <h2>A family business that genuinely cares about your event</h2>
@@ -153,27 +159,24 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Featured Photos Grid */}
-      <section className={styles.featured}>
+      {/* Print strips */}
+      <section className={styles.strips}>
         <div className="container">
-          <h2 className={styles.sectionTitle}>Moments we've captured</h2>
-          <div className={styles.bento}>
-            {featured.map((tile) => (
-              <button
-                type="button"
-                key={tile.photo.name}
-                className={`${styles.tile} ${styles[tile.size]}`}
-                /* index into the whole set, so opening a bento tile lets you
-                   browse every photo rather than just these six */
-                onClick={() =>
-                  setOpenIndex(photos.findIndex((p) => p.name === tile.photo.name))
-                }
-                aria-label={`Open photo: ${tile.photo.alt}`}
-              >
-                <img src={tile.photo.src} alt={tile.photo.alt} loading="lazy" />
-              </button>
-            ))}
-          </div>
+          <h2 className={styles.sectionTitle}>Making memories</h2>
+        </div>
+
+        <div className={styles.stripsRow}>
+          {strips.map((strip, idx) => (
+            <button
+              type="button"
+              key={strip.name}
+              className={styles.strip}
+              onClick={() => setOpenStrip(idx)}
+              aria-label={`Open print strip ${idx + 1} of ${strips.length}`}
+            >
+              <img src={strip.src} alt={strip.alt} loading="lazy" />
+            </button>
+          ))}
         </div>
       </section>
 
@@ -253,6 +256,14 @@ const Home = () => {
         index={openIndex}
         onClose={() => setOpenIndex(null)}
         onIndexChange={setOpenIndex}
+      />
+
+      <Lightbox
+        photos={strips}
+        index={openStrip}
+        onClose={() => setOpenStrip(null)}
+        onIndexChange={setOpenStrip}
+        itemLabel="Print strip"
       />
     </main>
   );
